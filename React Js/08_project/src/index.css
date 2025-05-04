@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* To use dark mode in classes */
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+    background: linear-gradient(#9a3fae, #3f79a9);
+    background: linear-gradient(#3f79a9, #66a93f);
+    background: linear-gradient(#516092, #0a183f);
+}
