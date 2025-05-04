@@ -46,7 +46,7 @@ function App() {
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       
       if (data.response === 'false') {
         setErrorMessage(data.Error || 'Failed to fetch movies'); //If an API error is detected, set the error message

@@ -8,7 +8,6 @@ function Card({ movie:
     const navigate = useNavigate();
     
     const handleClick = () => {
-        console.log(`Clicked on movie: ${title} (ID: ${id}), navigating to details...`);
         navigate(`/card-info/${id}`, {
             state: { 
                 title,
