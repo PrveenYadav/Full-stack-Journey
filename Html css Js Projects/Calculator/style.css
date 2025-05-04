@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #212121;
+    color: #fff;
+}
+
+.card {
+    display: inline-block;
+    position: absolute;
+    top: 20%;
+    left: 38vw;
+    border: 1px solid #c6c6c6;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px #bdbdbd;
+}
+
+input {
+    padding: 5px;
+    width: fit-content;
+    width: 290px;
+    margin-bottom: 25px;
+    border: none;
+    background: transparent;
+    text-align: right;
+    font-size: 40px;
+    color: #fff;
+}
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    height: 60px;
+    width: 60px;
+    margin: 5px;
+    cursor: pointer;
+    box-shadow: 0 -1px 4px #bdbdbd;
+    font-weight: 700;
+    font-size: 25px;
+    transition: all 1s ease;
+}
+button:hover {
+    background-color: #fb7c14;
+    box-shadow: 0 -1px 4px #fb7c14;
+}
+
+#equalBtn {
+    background-color: #fb7c14;
+    box-shadow: 0 -1px 4px #fb7c14;
+}
