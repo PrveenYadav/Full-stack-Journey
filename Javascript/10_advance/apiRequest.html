@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request | XML Http Request</title>
+</head>
+<body style="background-color: #212121; color: aliceblue;">
+    <img src="image.png" alt="">
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/PrveenYadav';
+    const xhr = new XMLHttpRequest();
+    xhr.open('Get', requestUrl);
+    
+    xhr.onreadystatechange = function() {
+        console.log(xhr.readyState);
+        if(xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText); //response comes in string formate so we are converting into JSON(in object) and now we can access values using dot(.)
+            console.log(typeof data)
+            console.log(data.followers)
+        }
+    }
+    xhr.send();
+</script>
+</html>

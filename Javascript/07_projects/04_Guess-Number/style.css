@@ -1,0 +1,52 @@
+body {
+    background-color: #212121;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+    padding: 35px;
+    background-color: #333333;
+    /* background: linear-gradient(11deg, rgb(76, 142, 142), rgb(135, 91, 135), rgb(153, 144, 90)); */
+    width: fit-content;
+    margin-left: 35vw;
+    margin-top: 17vh;
+    text-align: center;
+    border-radius: 15px;
+}
+form {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+input {
+    margin-top: 15px;
+}
+#guess {
+    font-size: 30px;
+    font-weight: bold;
+}
+#subt{
+    cursor: pointer;
+    height: 35px;
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid  #1a1a1a;
+}
+input {
+    height: 25px;
+    border-radius: 5px;
+    border: 2px solid white;
+}
+button{
+    cursor: pointer;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid  white;
+}
+
+#btn2 {
+    display: none;
+    margin-left: 35%;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h1>Closure and lexical scoping</h1>
+    <button id="green">Green</button>
+    <button id="orange">Orange</button>
+</body>
+<script>
+    // this is Lexical Scoping: inner function has access of outer function
+    function outer() {
+        let name = "Mozilla";
+        function inner() {
+            console.log("Inner", name);
+        }
+        inner();
+    }
+    outer();
+    console.log('Outer', name)
+
+    // Closure : full lexical scope returns
+    function makeFunc() {
+        const name  = "FireFox"
+        function displayName() {
+            console.log(name)
+        }
+        return displayName;
+    }
+    const myFunc = makeFunc();
+    myFunc();
+
+</script>
+
+<script>
+    // document.getElementById('green').onclick = function() {
+    //     document.body.style.backgroundColor = `green`
+    // }
+    // document.getElementById('orange').onclick = function() {
+    //     document.body.style.backgroundColor = `orange`
+    // }
+
+    //suppose we have 500 buttons then ---
+    //Practical Closure/lexical scoping usecase
+    function clickHandler(color) {
+        return function(){
+            document.body.style.backgroundColor = `${color}`
+        }
+    }
+
+    document.getElementById('green').onclick = clickHandler('green')
+    document.getElementById('orange').onclick = clickHandler('orange')
+</script>
+</html>

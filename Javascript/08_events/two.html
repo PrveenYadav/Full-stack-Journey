@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h1>Hello What's Up !</h1>
+    <button style="cursor: pointer;" id="btn">Stop</button>
+</body>
+<script>
+    setTimeout(()=> {
+        console.log("Hello World")
+    }, 2000)
+    
+    //or
+    const changeText = function() {
+        document.querySelector('h1').innerHTML = "JavaScript Learning Journey"
+    }
+    const stopMe = setTimeout(changeText, 3000)
+
+    //To stop we have clearTimeout
+    const btn = document.querySelector('#btn')
+    btn.addEventListener('click', () => {
+        clearTimeout(stopMe)
+        btn.innerHTML = 'Stopped'
+    })
+</script>
+</html>

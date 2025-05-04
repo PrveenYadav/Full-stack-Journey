@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    text-align: center;
+    background-color: #927b7b;
+}
+
+.container {
+    margin-top: 25vh;
+}
+
+.button{
+    padding: 45px;
+    /* border: 2px solid black; */
+    margin-left: 20px;
+}
+.button:hover {
+    cursor: pointer;
+}
+
+h1 {
+    margin-bottom: 80px;
+}
+
+#black {
+    background-color: #212121;
+}
+
+#blue {
+    background-color: blue;
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#red {
+    background-color: red;
+}

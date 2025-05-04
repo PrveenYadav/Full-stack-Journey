@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Number</title>
+    <style>
+        body {
+            background-color: #212121;
+            color: #fff;
+        }
+
+        .result > p {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="forms">
+            <p>
+                <label for="num">Enter the number</label>
+                <input type="text" id="num">
+            </p>
+            <button style="cursor: pointer;">Submit</button>
+        </form>
+        <div class="result">
+            <p id="wrong">Wrong guess</p>
+            <p id="right">Right guess</p>
+        </div>
+    </div>
+
+    <script>
+        // console.log(parseInt(Math.random()*100+1));
+        const randomNumber = parseInt(Math.random()*100+1);
+        const form = document.querySelector('form');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const result = document.querySelector('.result')
+            const numberIs = parseInt(document.querySelector('#num').value);
+            // console.log(number);
+            if(numberIs == '' || numberIs == 0 || isNaN(numberIs)) {
+                const invalidThrow = document.createElement('span');
+                invalidThrow.innerHTML = `Please enter valid number`;
+                result.appendChild(invalidThrow)
+            }
+            else {
+                const wrong = document.querySelector('#wrong')
+                const right = document.querySelector('#right')
+                if(numberIs == randomNumber) {
+                    right.style.display = "block"
+                }
+                else {
+                    wrong.style.display = "block"
+                }
+            }
+        })
+        const container = document.querySelector('.container');
+        const resetBtn = document.createElement('button')
+        resetBtn.innerHTML = "Reset Game"
+        container.appendChild(resetBtn);
+        resetBtn.style.cursor = "pointer"
+
+        resetBtn.addEventListener('click', () => {
+            console.log("Hello you click reset btn")
+        })
+    </script>
+</body>
+</html>

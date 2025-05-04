@@ -1,0 +1,36 @@
+body {
+    background-color: #212121;
+    color: #fff;
+}
+
+.container {
+    border: 2px solid white;
+    width: fit-content;
+    padding: 30px;
+    border-radius: 15px;
+    margin-left: 40%;
+    margin-top: 10%;
+}
+
+input {
+    padding: 8px;
+    border-radius: 5px;
+    border: transparent;
+}
+input:hover {
+    cursor: pointer;
+}
+button {
+    padding:  8px;
+    border-radius: 5px;
+    border: transparent;
+}
+button:hover {
+    cursor: pointer;
+}
+
+.bmi-guide > p {
+    /* visibility: hidden; */
+    display: none;
+    /* display: block; */
+}

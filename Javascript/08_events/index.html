@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html events</title>
+    <style>
+        body{
+            background-color: #414141;
+            color: aliceblue;
+        }
+        li>img{
+            cursor: pointer;
+        }
+        li > a{
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Amazing Images</h1>
+    <ul id="images">
+        <li><img width="200px" id="img1" src="pexels-1.jpg" alt=""></li>
+        <li><img width="200px" id="img2" src="pexels-2.jpg" alt=""></li>
+        <li><img width="200px" id="img3" src="pexels-3.jpg" alt=""></li>
+        <li><img width="200px" id="img4" src="pexels-4.jpg" alt=""></li>
+        <li><a id="eraser" href="https://app.eraser.io/workspace/xjjx5a6YTsRPWqdFS0br">Eraser Link</a></li>
+    </ul>
+</body>
+<script>
+    let img1 = document.getElementById('img1')
+    // img1.onclick = () => {
+    //     alert("Nature Photo")
+    // }
+
+    img1.addEventListener('click', (e) => {
+        //console.log(e) //e = object; which have many events
+    })
+
+
+    /* Some Common Events:
+        time, timeStamp, defaulPrevented
+        target, toElement, srcElement, currentTarget
+        clientX, clientY, screenX, screenY, 
+        altKey, ctrlKey, shiftKey, keyCode
+    */
+
+    //Event Propogation: 
+    // default val(if you write false or not) = False = it goes buttom to up
+    // if true = top to bottom
+    /*
+    document.getElementById('images').addEventListener('click', (e) => {
+        console.log('Clicked inside the ul')
+    }, true) //false = default event propogation
+
+    document.getElementById('img2').addEventListener('click', (e) => {
+        console.log('Car clicked')
+        e.stopPropagation() //to stop propogation, only this will work
+    }, true) //false = default event propogation
+
+    document.getElementById('eraser').addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation() 
+        console.log("Eraser Clicked");
+    })
+    */
+
+    //Doing small project to understand all: if you click the image image will remove
+    document.querySelector('#images').addEventListener('click', (e) => {
+        console.log(e.target.parentNode);
+        console.log(e.target.tagName)
+        if(e.target.tagName === 'IMG') {
+            console.log(e.target.id)
+            let list = e.target.parentNode
+            // list.remove()
+            list.parentNode.removeChild(list)
+        }
+    })
+
+</script>
+</html>
