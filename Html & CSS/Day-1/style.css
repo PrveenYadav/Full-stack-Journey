@@ -1,0 +1,67 @@
+*{
+    margin: 10ppx;
+    padding: 10px;
+}
+
+body {
+    background-color: #414141;
+    color: white;
+}
+
+h2 {
+    text-decoration: blue dashed underline;
+}
+
+a {
+    /* text-decoration: unset; */
+    color: rgb(109, 109, 241);
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#one {
+    line-height: 40px; 
+    text-transform: lowercase;
+}
+
+.header {
+    background-color:rgb(15, 47, 67);
+}
+
+#first {
+    background-color: brown;
+    font-weight: bolder;
+    font-size: 22px;
+    text-transform: capitalize;
+}
+
+.box1 {
+    height: 50px;
+    width: 50px;
+    background-image: url("./image_10.jpg");
+    background-size: contain;
+    border: solid 2px red;
+    border-radius: 8px;
+}
+
+.box2 {
+    margin-top: 10px;
+    height: 30px;
+    width: 30px;
+    border: 3px dotted yellow;
+}
+
+.box3 {
+    padding: 25px 25px 25px 25px;
+    margin-top: 10px;
+    height: 60px;
+    width: 80px;
+    border: 5px solid green;
+    background-color: rgb(10, 40, 83);
+}
+
+
+/* flecbox, possition property and display property, box model and visibility hidden and display none */
