@@ -11,6 +11,7 @@ const Home = () => {
           <a className='text-blue-500 underline decoration-solid' href="https://youtu.be/4mOkFXyxfsU?si=7OzdN3t0VYaaTyEc">Full Stack ECommerce React App with Stripe</a>
           <a className='text-blue-500 underline decoration-solid' href="https://youtu.be/_oO4Qi5aVZs?si=bTYyhaPnVlLq1tr_">Modern website</a>
           <a className='text-blue-500 underline decoration-solid' href="https://youtu.be/FHTbsZEJspU?si=xK__xCzzyRckBpas">youtube clone fully functional</a>
+          <a className='text-blue-500 underline decoration-solid' href="https://youtu.be/I1cpb0tYV74?si=aN-Vy5luUkl4cR_b">spotify clone Redux-toolkit and Rapid Api</a>
         </div>
         <h1 className='text-2xl mt-8 font-semibold flex items-center justify-center'>Build Tic Toe Game By Using React By Yourself from scratch don't take help of anything</h1>
         <p className='mt-5 flex items-center justify-center'>Create and Learn : Project Based Learning</p>
