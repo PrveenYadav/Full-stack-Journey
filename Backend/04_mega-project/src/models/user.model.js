@@ -47,10 +47,10 @@ const userSchema = new Schema({
 }, {timestamps: true})
 
 //we shouldn't write arrow function here
-userSchema.pre("save", async function (mext) {
+userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = bcrypt.hash(this.password, 10);
     next()
 })
 
@@ -61,7 +61,7 @@ userSchema.methods.isPasswordCorrect = async function(password) {
 
 //generating acessToken and refreshToken
 userSchema.methods.generateAccessToken = function(){
-    return jwt.sigh(
+    return jwt.sign(
         {
             _id: this._id,
             email: this.email,
@@ -75,7 +75,7 @@ userSchema.methods.generateAccessToken = function(){
     )
 }
 userSchema.methods.generateRefereshToken = function(){
-    return jwt.sigh(
+    return jwt.sign(
         {
             _id: this._id,
         },
