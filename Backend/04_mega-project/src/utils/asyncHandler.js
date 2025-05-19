@@ -1,7 +1,7 @@
 // We will use async function multiple times so we are puting it in utils
 //asyncHandler using Promises
 const asyncHandler = (requestHandler) => {
-    (req, res, next) => {
+    return (req, res, next) => {
         Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err))
     }
 }
