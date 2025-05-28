@@ -1,9 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs" //fs=filesystem, it is by default in node.js to manage files
 
-import { v2 as cloudinary } from 'cloudinary';
-
-
 // Configuration
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
