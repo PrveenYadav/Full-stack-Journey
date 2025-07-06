@@ -290,7 +290,6 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
     .json(new ApiResponse(200, user, "avatar updated successfully"))
 })
 
-
 const updateUserCoverImage = asyncHandler(async(req, res) => {
     const coverImageLocalPath = req.file?.path
 
@@ -318,7 +317,75 @@ const updateUserCoverImage = asyncHandler(async(req, res) => {
     .json(new ApiResponse(200, user, "Cover image updated successfully"))
 })
 
+const getUserChannelProfile = asyncHandler(async(req, res) => {
+    const {username} = req.params
 
+    if(!username?.trim()) {
+        throw new ApiError(400, "username is missing");
+    }
+
+    //Aggregation pipeline: The aggregation pipeline in MongoDB is a framework for data aggregation that processes documents through a series of stages(like: $match, $lookup, etc) to return computed results.
+    //Mostly Aggregation pipelines returns data in Array
+    const channel = await User.aggregate([
+        {
+            $match: {
+                username: username?.toLowerCase()
+            }
+        },
+        {
+            $lookup: {
+                from: "subscriptions", //everything in database from model become in lower case and plural, so we used 'subscriptions' instead of "Subscription"
+                localField: "_id",
+                foreignField: "channel",
+                as: "subscribers"
+            }
+        },
+        {
+            $lookup: {
+                from: "subscriptions",
+                localField: "_id",
+                foreignField: "subscriber",
+                as: "subscribedTo"
+            }
+        },
+        {
+            $addFields: {
+                subscribersCount: {
+                    $size: "$subscribers"
+                },
+                channelSubscribedToCount: {
+                    $size: "$subscribedTo"
+                },
+                isSubscribed: {
+                    $cond: { //condition in mongoDB
+                        if: {$in: [req.user?._id, "$subscribers.subscriber"]},
+                        then: true,
+                        else: false
+                    }
+                }
+            }
+        },
+        {
+            $projet: {
+                fullname: 1,
+                username: 1,
+                subscribersCount: 1,
+                channelSubscribedToCount: 1,
+                isSubscribed: 1,
+                avatar: 1,
+                coverImage: 1,
+                email: 1,
+            }
+        }
+    ])
+
+    if(!channel?.length) {
+        throw new ApiError(404, "channel does not exist")
+    }
+
+    return res.status(200)
+    .json(new ApiResponse(200, channel[0], "User channel fetched successfully"))
+})
 
 export {
     registerUser,
@@ -330,4 +397,5 @@ export {
     updateAccountDetails,
     updateUserAvatar,
     updateUserCoverImage,
+    getUserChannelProfile,
 }
