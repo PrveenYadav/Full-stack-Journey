@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { assestData } from '../assets/assets'
+import { assestData } from '../assets/assets.js'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../context/CartContext.js'
 

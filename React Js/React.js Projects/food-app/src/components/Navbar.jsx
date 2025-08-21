@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"
 import { Moon, Sun, User, ShoppingCart, Search } from "lucide-react";
-import Cart from "./Cart";
+import Cart from "./Cart.jsx";
 import { CartContext } from "../context/CartContext.js";
 
 const Navbar = () => {

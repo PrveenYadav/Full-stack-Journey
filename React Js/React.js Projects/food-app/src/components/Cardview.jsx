@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { assestData } from '../assets/assets'
+import { assestData } from '../assets/assets.js'
 import { useNavigate, useParams } from 'react-router-dom'
-import { CartContext } from '../context/CartContext'
+import { CartContext } from '../context/CartContext.js'
 
 const Cardview = () => {
   const { id } = useParams(); // get id from URL

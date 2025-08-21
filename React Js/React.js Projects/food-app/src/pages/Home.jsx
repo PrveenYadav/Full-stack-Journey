@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
-import Card from '../components/Card'
-import Footer from '../components/Footer'
+import Card from '../components/Card.jsx'
+import Footer from '../components/Footer.jsx'
 
 const Home = () => {
 
