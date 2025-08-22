@@ -7,7 +7,7 @@ import Cardview from './components/Cardview.jsx'
 const App = () => {
 
   return (
-    <div className='dark:bg-gray-900 h-full sm:max-w-screen'>
+    <div className={`dark:bg-gray-900 min-h-[100vh]`}>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>} />

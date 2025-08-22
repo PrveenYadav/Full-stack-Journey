@@ -1,4 +1,5 @@
 import React from 'react'
+import { Mail } from 'lucide-react';
 
 const Footer = () => {
     
@@ -7,13 +8,13 @@ const Footer = () => {
         <p className='border-1 opacity-10 px-30 mb-5'></p>
         <div className='w-[93%] sm:flex sm:justify-between gap-5 sm:pb-5 flex-wrap'>
 
-            <div className='md:w-[20%] flex flex-col gap-2 mb-7 sm:mb-auto'>
+            <div className='lg:w-[20%] flex flex-col gap-2 mb-7 sm:mb-auto'>
                 <a href='/' className='text-xl font-bold'>FoodieGo</a>
                 <p className='opacity-65 text-sm'>The most trusted fast food resturant. Get what you wish, eat what you need and order what you see.</p>
                 <div className='flex gap-4 mt-2'>
-                    <a className='h-6 w-6' href="#"><img className='h-5 hover:h-6 transition-all duration-500' src="src/assets/facebook1.png" alt="" /></a>
-                    <a className='h-6 w-6' href="#"><img className='h-5 hover:h-6 transition-all duration-500' src="src/assets/twitter1.png" alt="" /></a>
-                    <a className='h-6 w-6' href="#"><img className='h-5 hover:h-6 transition-all duration-500' src="src/assets/instagram.png" alt="" /></a>
+                    <a className='h-6 w-6' href="#"><img className='h-5 hover:h-6 transition-all duration-500' src="facebook1.png" alt="" /></a>
+                    <a className='h-6 w-6' href="#"><img className='h-5 hover:h-6 transition-all duration-500' src="twitter1.png" alt="" /></a>
+                    <a className='h-6 w-6' href="#"><img className='h-5 hover:h-6 transition-all duration-500' src="instagram.png" alt="" /></a>
                 </div>
             </div>
 
@@ -39,10 +40,10 @@ const Footer = () => {
 
             <div className='flex flex-col gap-2'>
                 <h1 className='text-xl font-bold'>Connect with us</h1>
-                <p>Subscribe to get updates of new products <br />with great offers.</p>
+                <p className='opacity-75'>Subscribe to get updates of new products with great offers.</p>
                 <form className='flex'>
                     <input className='outline-none bg-gray-100 dark:text-black rounded-l-lg px-3 py-2' type="text" placeholder='Enter your email...' />
-                    <button className='bg-gray-100 rounded-r-lg py-1 px-1 cursor-pointer'><img className='h-8' src="src/assets/mail.png" alt="" /></button>
+                    <button className='bg-gray-100 border-none rounded-r-lg py-1 px-2 cursor-pointer'><Mail className='h-8 text-black' /></button>
                 </form>
             </div>
         </div>

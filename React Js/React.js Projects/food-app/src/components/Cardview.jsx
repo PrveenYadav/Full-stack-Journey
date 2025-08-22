@@ -18,9 +18,9 @@ const Cardview = () => {
 
 
   return (
-    <div className='h-[100vh] 2xl:h-[90vh] '>
+    <div>
       <button onClick={() => navigate(-1)} className='dark:text-white absolute left-[10.5%] text-5xl font-bold mt-2 mb-2 cursor-pointer'>←</button>
-      <div className="dark:text-white flex lg:flex-row flex-col md:h-[90vh] max-w-screen p-10 pb-0 items-center justify-around">
+      <div className="dark:text-white flex lg:flex-row flex-col max-w-screen p-10 pb-0 items-center justify-around">
         {/* Product images */}
         <div className="p-6 flex flex-col items-center">
           {/* Main Image */}

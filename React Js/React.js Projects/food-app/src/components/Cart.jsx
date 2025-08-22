@@ -6,7 +6,7 @@ const Cart = ({isCartOpen, setIsCartOpen}) => {
   const {cartItems} = useContext(CartContext);
 
   return (
-    <div className={`fixed top-0 right-0 sm:w-[40%] lg:w-[25%] w-[100vw] h-[100%] bg-white overflow-auto scrollbar-hide dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ${ isCartOpen ? "translate-x-0" : "translate-x-full" }`} >
+    <div className={`fixed top-0 right-0 sm:w-[40%] lg:w-[25%] w-[75vw] h-[100%] bg-white overflow-auto scrollbar-hide dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ${ isCartOpen ? "translate-x-0" : "translate-x-full" }`} >
 
         <div className="flex justify-between items-center p-4 border-b dark:border-gray-700">
           <button onClick={() => setIsCartOpen(false)}>

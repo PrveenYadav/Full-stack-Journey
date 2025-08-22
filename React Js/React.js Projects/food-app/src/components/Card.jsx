@@ -6,11 +6,11 @@ import { CartContext } from '../context/CartContext.js'
 const Card = ({category, handleCategory}) => {
 
     const images = [
-        "src/assets/sandwich.png",
-        "src/assets/newPizza.png",
-        "src/assets/burger.png",
-        // "src/assets/pizza.png",
-        // "src/assets/pizzaNew.png",
+        "sandwich.png",
+        "newPizza.png",
+        "burger.png",
+        // "pizza.png",
+        // "pizzaNew.png",
     ]
     const duplicatedImages = [...images, ...images]
      
@@ -55,7 +55,7 @@ const Card = ({category, handleCategory}) => {
             </div>
         </div>
 
-        <div className='flex flex-wrap justify-center items-center text-left px-10 py-5 gap-5'>
+        <div className='flex flex-wrap justify-center items-center text-left max-w-[95%] sm:max-w-none sm:px-10 py-5 gap-5'>
             {filteredData.map((item) => (
                 <div 
                     key={item.id}
