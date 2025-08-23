@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Bloglist from '../components/Bloglist'
 import Card from '../components/Card'
 import NewsLetter from '../components/NewsLetter'
+import Footer from '../components/Footer'
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
         <Header/>
         <Bloglist/>
         <NewsLetter/>
+        <Footer/>
     </>
   )
 }
