@@ -34,6 +34,7 @@ const Card = ({category, handleCategory}) => {
                     <div key={index} className="flex px-2 lg:px-4">
                         <img
                         src={img}
+                        loading='lazy'
                         alt={`Slide ${index}`}
                         className="object-contain rounded-lg"
                         />
@@ -60,7 +61,7 @@ const Card = ({category, handleCategory}) => {
                 <div 
                     key={item.id}
                     // onClick={() => gotoCardview(item.id)} 
-                    className='max-h-110 w-80 bg-lime-200 dark:bg-green-200 rounded-2xl hover:shadow-md transition-transform duration-500 hover:scale-101'
+                    className='max-h-110 w-80 bg-gray-100 dark:bg-black/20 dark:text-white rounded-2xl hover:shadow-md transition-transform duration-500 hover:scale-101'
                 >
                     <img 
                         src={item.image} alt="pizza-1" 
@@ -72,9 +73,9 @@ const Card = ({category, handleCategory}) => {
                         <h1 className='text-xl font-bold'>{item.title}</h1>
                         <p>{item.ratings}<span> {item.ratingUsers} </span></p>
                         <p className='font-bold text-2xl'>{item.price}</p>
-                        <p className='bg-yellow-200 px-3 border-white rounded-xl w-fit'>{item.tag}</p>
+                        <p className='bg-yellow-200 px-3 dark:bg-green-400 dark:text-black rounded-xl w-fit'>{item.tag}</p>
                     </div>
-                    <button onClick={() => addToCart(item)} className='bg-black text-white ml-3 mb-5 rounded-xl font-semibold cursor-pointer px-2 py-1 w-[90%]'>+<span className='ml-5'>Add to cart</span></button>
+                    <button onClick={() => addToCart(item)} className='bg-black dark:bg-white text-white dark:text-black ml-3 mb-5 rounded-xl font-semibold cursor-pointer px-2 py-1 w-[90%]'>+<span className='ml-5'>Add to cart</span></button>
                 </div>
             ))}
         </div>
