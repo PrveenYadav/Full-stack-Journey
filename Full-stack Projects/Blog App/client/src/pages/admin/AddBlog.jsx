@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { assets, blogCategories } from '../../assets/assets'
 import Quill from 'quill';
+import { useAppContext } from '../../context/AppContext';
+import toast from 'react-hot-toast';
 
 const AddBlog = () => {
+
+  const {axios} = useAppContext();
+  const [isAdding, setIsAdding] = useState(false);
 
   const editorRef = useRef(null)
   const quillRef = useRef(null)
@@ -14,7 +19,37 @@ const AddBlog = () => {
   const [isPublished, setIsPublished] = useState(false);
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      setIsAdding(true);
+
+      const blog = {
+        title, subTitle, 
+        description: quillRef.current.root.innerHTML,
+        category, isPublished
+      }
+
+      const formData = new FormData();
+      formData.append('blog', JSON.stringify(blog));
+      formData.append('image', image);
+
+      const {data} = await axios.post('/api/blog/add', formData);
+
+      if (data.success) {
+        toast.success(data.success);
+        setImage(false);
+        setSubTitle('');
+        quillRef.current.root.innerHTML = '';
+        setCategory('Startup');
+      } else {
+        toast.error(data.message);
+      }
+
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsAdding(false);
+    }
   }
 
   const generateContent = async () => {
@@ -80,7 +115,7 @@ const AddBlog = () => {
         </div>
 
         <p className='mt-4'>Blog category</p>
-        <select onChange={() => setCategory(e.target.value)} name="category" className='mt-2 px-3 py-2 border text-gray-500 border-gray-300 outline-none rounded'>
+        <select onChange={(e) => setCategory(e.target.value)} name="category" className='mt-2 px-3 py-2 border text-gray-500 border-gray-300 outline-none rounded'>
           <option value="">Select category</option>
           {blogCategories.map((item, index) => {
             return <option key={index} value={item}>{item}</option>
@@ -97,7 +132,7 @@ const AddBlog = () => {
           />
         </div>
 
-        <button type='submit' className='mt-8 w-40 h-10 bg-primary text-white rounded cursor-pointer text-sm'>Add Blog</button>
+        <button disabled={isAdding} type='submit' className='mt-8 w-40 h-10 bg-primary text-white rounded cursor-pointer text-sm'>{isAdding ? 'Adding...' : 'Add Blog'}</button>
 
       </div>
     </form>

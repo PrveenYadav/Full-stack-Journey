@@ -52,7 +52,6 @@ export const getAllBlogs = async (req, res) => {
     }
 }
 
-
 export const getBlogById = async (req, res) => {
     try {
         const { blogId } = req.params;
@@ -86,7 +85,7 @@ export const togglePublish = async (req, res) => {
         const blog = await Blog.findById(id);
         blog.isPublished = !blog.isPublished;
         await blog.save();
-        res.json({success: true, message: "Blog status updated"})
+        res.json({success: true, message: "Blog status updated"});
     } catch (error) {
         res.json({success: false, message: error.message})
     }
