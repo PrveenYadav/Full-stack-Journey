@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 *{
   font-family: "Outfit", sans-serif;
@@ -15,6 +16,7 @@
 }
 
 
+/* Light mode */
 .rich-text { font-size: 15px;  }
 
 .rich-text p { margin-bottom: 16px; color: #292929; }
@@ -40,3 +42,48 @@
 .rich-text li { margin-bottom: 8px; }
 
 .rich-text a { color: #007AFF }
+
+
+/* ===================== */
+/* 🌙 Dark Mode Styling  */
+/* ===================== */
+
+.dark .rich-text p {
+  color: #d1d5db; /* gray-300 */
+}
+
+.dark .rich-text h1 {
+  color: #ffffff !important; /* white */
+}
+
+.dark .rich-text h2 {
+  color: #f3f4f6 !important; /* gray-100 */
+}
+
+.dark .rich-text h3 {
+  color: #e5e7eb !important; /* gray-200 */
+}
+
+.dark .rich-text h4 {
+  color: #d1d5db !important; /* gray-300 */
+}
+
+.dark .rich-text h5 {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+.dark .rich-text h6 {
+  color: #6b7280 !important; /* gray-500 */
+}
+
+.dark .rich-text li {
+  color: #d1d5db; /* same as paragraph */
+}
+
+.dark .rich-text a {
+  color: #60a5fa; /* blue-400 */
+}
+
+.dark .rich-text strong {
+  color: #f9fafb; /* near white for bold text */
+}
