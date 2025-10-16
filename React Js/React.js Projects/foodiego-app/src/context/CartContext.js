@@ -1,13 +1,29 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  // const [cartItems, setCartItems] = useState([]);
 
+  // saving cartItems into local storage
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  // Whenever cartItems change, update localStorage
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  
   // const addToCart = (item) => {
   //   setCartItems((prev) => [...prev, item]);
   // };
+
+  // adding items into cart with quantity
   const addToCart = (item) => {
     setCartItems(prevCart => {
       // Checking if item is already in the cart
@@ -33,7 +49,7 @@ export function CartProvider({ children }) {
 
   return React.createElement(
     CartContext.Provider,
-    { value: { cartItems, setCartItems, addToCart, handleRemoveItem } },
+    { value: { cartItems, setCartItems, addToCart, handleRemoveItem, isCartOpen, setIsCartOpen, searchQuery, setSearchQuery } },
     children
   );
 }
