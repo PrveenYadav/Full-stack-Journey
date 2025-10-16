@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react'
 import { assestData } from '../assets/assets.js'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../context/CartContext.js'
+import { Search } from 'lucide-react'
 
 const Card = ({category, handleCategory}) => {
 
@@ -19,7 +20,7 @@ const Card = ({category, handleCategory}) => {
 
     // const filteredData = category === "all" ? assestData : assestData.filter((item) => item.tag === category);
 
-    const { addToCart, searchQuery } = useContext(CartContext);
+    const { addToCart, searchQuery, setSearchQuery } = useContext(CartContext);
 
     // Final filtered data using useMemo
     const filteredData = useMemo(() => {
@@ -61,9 +62,24 @@ const Card = ({category, handleCategory}) => {
             </div>
         </div>
         
-        <div className='flex items-center justify-around w-[87%]'>
+        {/* Searchbar component */}
+        <div className='flex md:justify-between md:items-center md:hidden mt-10'>
+            <input 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              type="text" 
+              placeholder='Search here...' 
+              className='outline-none p-2 rounded-l-lg bg-gray-100 dark:bg-gray-800 dark:text-white' 
+            />
+            <button className='py-2.5 px-3 cursor-pointer rounded-r-lg bg-gray-100 dark:bg-gray-800'>
+              <Search className="w-6 h-5 text-gray-700 dark:text-gray-200 hover:scale-105" />
+            </button>
+        </div>
+
+
+        <div className='flex items-center justify-around sm:w-[87%]'>
             <h1 className='dark:text-white text-2xl hidden md:inline-block font-semibold'>Menu</h1>
-            {/* <p>Filter your category</p> */}
+            
             <div className="flex gap-4 mt-10 mb-10">
                 <button onClick={() => handleCategory("all")} className={`font-semibold rounded-2xl cursor-pointer px-3 py-1 shadow-md hover:scale-105 ${category === "all" ? "bg-yellow-500" : "bg-gray-100 dark:bg-gray-700 dark:text-white"}`}>all</button>
                 <button onClick={() => handleCategory("pizza")} className={`font-semibold rounded-2xl cursor-pointer px-3 py-1 shadow-md hover:scale-105 ${category === "pizza" ? "bg-yellow-500" : "bg-gray-100 dark:bg-gray-700 dark:text-white"}`}>pizza</button>
@@ -74,7 +90,8 @@ const Card = ({category, handleCategory}) => {
         </div>
 
         <div className='flex flex-wrap justify-center items-center text-left max-w-[95%] sm:max-w-none sm:px-10 py-5 gap-5'>
-            {filteredData.map((item) => (
+           
+            {filteredData.length < 1 ? <h1 className='text-2xl font-semibold dark:text-white'>Product not found</h1> : filteredData.map((item) => (
                 <div 
                     key={item.id}
                     // onClick={() => gotoCardview(item.id)} 

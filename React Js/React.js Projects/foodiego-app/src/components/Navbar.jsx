@@ -41,8 +41,8 @@ const Navbar = () => {
         <div className="flex gap-3 items-center">
           <button onClick={() => setIsMenubarOpen(true)}><Menu className="h-7 w-7 lg:hidden"/></button>
           <Link to="/" className="group text-2xl font-bold transition-all duration-300 hover:scale-105 ease-in-out">
-            <span className="text-white group-hover:text-yellow-500 transition-all duration-300 hover:scale-105 ease-in-out">Foodie</span>
-            <span className="text-yellow-500 group-hover:text-white transition-all duration-300 hover:scale-105 ease-in-out">Go</span>
+            <span className="text-black dark:text-white group-hover:text-yellow-500 transition-all duration-300 hover:scale-105 ease-in-out">Foodie</span>
+            <span className="text-yellow-500 group-hover:text-black dark:group-hover:text-white transition-all duration-300 hover:scale-105 ease-in-out">Go</span>
           </Link>
         </div>
       
@@ -72,6 +72,7 @@ const Navbar = () => {
           <NavLink to='/about' className={({ isActive }) => isActive ? 'text-yellow-500 font-semibold' : 'text-black dark:text-white font-semibold hover:text-yellow-500'}>About</NavLink>
           <NavLink to='/contact-us' className={({ isActive }) => isActive ? 'text-yellow-500 font-semibold' : 'text-black dark:text-white font-semibold hover:text-yellow-500'}>Contact Us</NavLink>
         </div>
+        
         <div className='md:flex md:justify-between md:items-center hidden'>
             <input 
               value={searchQuery}
@@ -84,6 +85,7 @@ const Navbar = () => {
               <Search className="w-6 h-5 text-gray-700 dark:text-gray-200 hover:scale-105" />
             </button>
         </div>
+        
         <div className='flex justify-between items-center gap-10'>
             <Link to='contact-us'><User className="w-6 h-6 text-gray-700 dark:text-gray-200 cursor-pointer md:inline-block hidden hover:scale-105" /></Link>
             <button className="relative" onClick={() => setIsCartOpen(true)}>
