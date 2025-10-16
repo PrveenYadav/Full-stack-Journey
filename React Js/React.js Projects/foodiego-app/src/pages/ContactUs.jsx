@@ -1,7 +1,33 @@
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const ContactUs = () => {
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [subject, setSubject] = useState('')
+    const [message, setMessage] = useState('')
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!name || !email || !subject || !message) {
+            toast.error("All fields are required!");
+            return 
+        }
+
+        const submittedData = { name, email, subject, message };
+        console.log("Form submitted:", submittedData);
+
+        // Resetting the form
+        setName('');
+        setEmail('');
+        setSubject('');
+        setMessage('');
+
+        toast.success("Message sent Successfully!");
+    }
+
   return (
     <div className='text-black dark:text-white w-[100%] h-full px-10 flex flex-col items-center bg-gradient-to-t from-white dark:from-gray-900 via-white dark:via-gray-900 to-yellow-700/15'>
         <div className='flex flex-col items-center lg:w-[45%] text-center gap-5 mt-20 mb-20'>
@@ -54,28 +80,28 @@ const ContactUs = () => {
             <div className='w-full lg:w-[47%]'>
                 <h1 className='font-bold text-3xl'>Send a Message</h1>
                 <div className='mt-5 bg-gray-50 shadow-md dark:bg-gray-800 p-5 rounded-xl'>
-                    <form className='flex flex-col gap-5'>
+                    <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="name" className='font-semibold'>Name</label>
-                            <input type="text" id='name' placeholder='Your Name' className='p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-900'/>
+                            <input value={name} onChange={e => setName(e.target.value)} type="text" id='name' placeholder='Your Name' className='p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-900'/>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="email" className='font-semibold'>Email</label>
-                            <input type="email" id='email' placeholder='your@gmail.com'className='p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-900'/>
+                            <input value={email} onChange={e => setEmail(e.target.value)} type="email" id='email' placeholder='your@gmail.com'className='p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-900'/>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="subject" className='font-semibold'>Subject</label>
-                             <input type="text" id='subject' placeholder='How can we help?' className='p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-900'/>
+                             <input value={subject} onChange={e => setSubject(e.target.value)} type="text" id='subject' placeholder='How can we help?' className='p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-900'/>
                         </div>
 
                         <div className='flex flex-col gap-2'>
                             <label htmlFor="message" className='font-semibold'>Message</label>
-                            <textarea name="message" id="message" placeholder='Tell us about your inquiry?' className='p-2 border border-gray-600 outline-yellow-500 rounded h-30 bg-gray-100 dark:bg-gray-900'></textarea>
+                            <textarea value={message} onChange={e => setMessage(e.target.value)} name="message" id="message" placeholder='Tell us about your inquiry?' className='p-2 border border-gray-600 outline-yellow-500 rounded h-30 bg-gray-100 dark:bg-gray-900'></textarea>
                         </div>
 
-                        <button className='bg-yellow-500 text-black font-semibold cursor-pointer rounded p-2'>Send Message</button>
+                        <button type='submit' className='bg-yellow-500 text-black font-semibold cursor-pointer rounded p-2'>Send Message</button>
                     </form>
                 </div>
             </div>

@@ -8,6 +8,9 @@ import ContactUs from './pages/ContactUs.jsx'
 import Footer from './components/Footer.jsx'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cart from './components/Cart.jsx'
+import PlaceOrder from './components/PlaceOrder.jsx'
+import NotFound from './components/NotFound.jsx'
 
 const App = () => {
 
@@ -20,6 +23,7 @@ const App = () => {
         <Route path='/about' element={<About/>} />
         <Route path='/contact-us' element={<ContactUs/>} />
         <Route path='/cardview/:id' element={<Cardview/>} />
+        <Route path='/*' element={<NotFound/>} />
       </Routes>
       <Footer/>
     </div>

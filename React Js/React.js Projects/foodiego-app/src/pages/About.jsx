@@ -69,7 +69,7 @@ const About = () => {
                     <p className='text-black dark:text-white opacity-75'>Your satisfaction is our top priority, always and forever.</p>
                 </div>
                 <div className='w-70'>
-                    <h2 className='font-semibold text-2xl'>Inovation</h2>
+                    <h2 className='font-semibold text-2xl'>Innovation</h2>
                     <p className='text-black dark:text-white opacity-75'>We continuously improve our service to serve you better.</p>
                 </div>
             </div>

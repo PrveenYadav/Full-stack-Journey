@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { assestData } from '../assets/assets.js'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from '../context/CartContext.js'
@@ -9,8 +9,6 @@ const Card = ({category, handleCategory}) => {
         "sandwich.png",
         "newPizza.png",
         "burger.png",
-        // "pizza.png",
-        // "pizzaNew.png",
     ]
     const duplicatedImages = [...images, ...images]
      
@@ -19,8 +17,28 @@ const Card = ({category, handleCategory}) => {
         navigate(`/cardview/${id}`)
     }
 
-    const filteredData = category === "all" ? assestData : assestData.filter((item) => item.tag === category);
-    const {addToCart} = useContext(CartContext);
+    // const filteredData = category === "all" ? assestData : assestData.filter((item) => item.tag === category);
+
+    const { addToCart, searchQuery } = useContext(CartContext);
+
+    // Final filtered data using useMemo
+    const filteredData = useMemo(() => {
+        // 1. Filter by Category
+        const categoryFiltered = category === "all"
+        ? assestData
+        : assestData.filter((item) => item.tag === category);
+        
+        // converting the searchquery into lowercase
+        const lowerCaseSearchQuery = searchQuery.toLowerCase().trim();
+
+        // 2. Filter by Search Query
+        const finalFiltered = categoryFiltered.filter((item) => 
+            item.title.toLowerCase().includes(lowerCaseSearchQuery)
+        );
+        
+        return finalFiltered;
+        
+    }, [category, searchQuery, assestData]); // Recalculate only when these dependencies change
 
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -63,7 +81,8 @@ const Card = ({category, handleCategory}) => {
                     className='max-h-110 w-80 bg-gray-100 dark:bg-black/20 dark:text-white rounded-2xl hover:shadow-md transition-transform duration-500 hover:scale-101'
                 >
                     <img 
-                        src={item.image} alt="pizza-1" 
+                        src={item.image} 
+                        alt={`${item.title}`} 
                         key={item.id}
                         onClick={() => gotoCardview(item.id)} 
                         className='rounded-t-lg max-h-[50%] cursor-pointer' 

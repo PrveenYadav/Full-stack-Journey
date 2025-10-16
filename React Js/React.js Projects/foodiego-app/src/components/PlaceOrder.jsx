@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { CartContext } from '../context/CartContext.js';
 import { X } from 'lucide-react'
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const PlaceOrder = ({setIsPlaceOrderOpen, total}) => {
 
@@ -16,7 +15,7 @@ const PlaceOrder = ({setIsPlaceOrderOpen, total}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!name || !email || !phoneNumber || !address) {
-            toast.error("Fill all fields!");
+            toast.error("All fields are required!");
             return 
         }
 

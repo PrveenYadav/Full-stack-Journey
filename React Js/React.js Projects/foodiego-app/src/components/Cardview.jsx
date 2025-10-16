@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { assestData } from '../assets/assets.js'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CartContext } from '../context/CartContext.js'
+import { ArrowLeft } from 'lucide-react'
 
 const Cardview = () => {
   const { id } = useParams(); // get id from URL
@@ -9,18 +10,19 @@ const Cardview = () => {
 
   // set first image as default
   const [selectedImage, setSelectedImage] = useState(product.imagesList[0]);
-  if (!product) return <h2>Product not found</h2>;
+  if (!product) return <h2>Product not found</h2>
 
   const navigate = useNavigate()
-
+  
   const {addToCart} = useContext(CartContext);
   // console.log(product.image)
 
-
   return (
     <div>
-      <div className='h-5'>
-        <button onClick={() => navigate(-1)} className='dark:text-white hover:text-yellow-500 absolute left-[10.5%] text-5xl font-bold mt-2 cursor-pointer'>←</button>
+      <div className='mt-10'>
+        <button onClick={() => navigate(-1)} className='dark:text-white hover:text-yellow-500 absolute left-[10.5%] cursor-pointer'>
+          <ArrowLeft className='w-8 h-6'/>
+        </button>
       </div>
 
       <div className="dark:text-white flex lg:flex-row flex-col max-w-screen p-10 pb-0 justify-around items-center">
