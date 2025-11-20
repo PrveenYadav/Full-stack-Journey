@@ -7,9 +7,9 @@ import { Search } from 'lucide-react'
 const Card = ({category, handleCategory}) => {
 
     const images = [
-        "sandwich.png",
-        "newPizza.png",
-        "burger.png",
+        "sandwich.webp",
+        "newPizza.webp",
+        "burger.webp",
     ]
     const duplicatedImages = [...images, ...images]
      
