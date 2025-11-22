@@ -1,0 +1,73 @@
+# -------------------------
+# Node.js
+# -------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+
+# Environment files
+.env
+.env.*.local
+
+# -------------------------
+# Build output
+# -------------------------
+dist/
+build/
+.cache/
+.next/
+out/
+tmp/
+temp/
+
+# -------------------------
+# Logs
+# -------------------------
+logs
+*.log
+*.log.*
+*.out
+*.pid
+*.seed
+*.pid.lock
+
+# -------------------------
+# Frontend (React/Vite/CRA)
+# -------------------------
+client/node_modules/
+client/build/
+client/.env
+client/.env.local
+client/.env.*.local
+
+# -------------------------
+# Backend (Express/Node)
+# -------------------------
+server/node_modules/
+server/dist/
+server/.env
+server/.env.local
+
+# -------------------------
+# IDEs and Editors
+# -------------------------
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.DS_Store
+Thumbs.db
+
+# -------------------------
+# Misc
+# -------------------------
+.DS_Store
+*.pem
