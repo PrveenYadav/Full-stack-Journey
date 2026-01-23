@@ -8,7 +8,7 @@ export const AdminContext = createContext();
 
 export const AdminContextProvider = ({children}) => {
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const backendUrl = "https://backend-foodiego.onrender.com"
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [adminAuthLoading, setAdminAuthLoading] = useState(true);
 
@@ -114,4 +114,5 @@ export const AdminContextProvider = ({children}) => {
             {children}
         </AdminContext.Provider>
     )
+
 }
