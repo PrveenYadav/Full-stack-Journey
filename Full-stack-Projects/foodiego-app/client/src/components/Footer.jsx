@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mail } from 'lucide-react';
+import { Facebook, Instagram, Mail, Twitter } from 'lucide-react';
 
 const Footer = () => {
 
@@ -17,9 +17,9 @@ const Footer = () => {
                 <a href='#' className='text-2xl font-bold'>Foodie<span className="text-yellow-500">Go</span></a>
                 <p className='opacity-65 text-sm'>The most trusted fast food resturant. Get what you wish, eat what you need and order what you see.</p>
                 <div className='flex gap-4 mt-2'>
-                    <a className='h-6 w-6' href="https://www.facebook.com"><img className='h-5 hover:h-6 transition-all duration-200 ease-in-out' src="facebook1.png" alt="" /></a>
-                    <a className='h-6 w-6' href="https://x.com"><img className='h-5 hover:h-6 transition-all duration-200 ease-in-out' src="twitter1.png" alt="" /></a>
-                    <a className='h-6 w-6' href="https://www.instagram.com"><img className='h-5 hover:h-6 transition-all duration-200 ease-in-out' src="instagram.png" alt="" /></a>
+                                        <a className='h-6 w-6' href="https://www.facebook.com"><Facebook className='h-5 w-5 hover:h-6 transition-all duration-200 ease-in-out' /></a>
+                    <a className='h-6 w-6' href="https://x.com"><Twitter className='h-5 w-5 hover:h-6 transition-all duration-200 ease-in-out'/></a>
+                    <a className='h-6 w-6' href="https://www.instagram.com"><Instagram className='h-5 w-5 hover:h-6 transition-all duration-200 ease-in-out'/></a>
                 </div>
             </div>
 
@@ -66,5 +66,6 @@ const Footer = () => {
     </div>
   )
 }
+
 
 export default Footer
