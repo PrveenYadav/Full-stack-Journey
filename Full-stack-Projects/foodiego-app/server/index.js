@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 // app.use(cors());
-app.use(cors({origin: ['http://localhost:5173'], credentials: true}))
+app.use(cors({origin: "https://foodiegoin.onrender.com", credentials: true}))
 
 // Database function call
 connectDB(); 
@@ -30,4 +30,5 @@ app.use('/api/product', productRouter);
 app.use('/api/order', orderRouter);
 
 const port = process.env.PORT || 3000
+
 app.listen(port, () => console.log(`Your app is running on port ${port}`));
