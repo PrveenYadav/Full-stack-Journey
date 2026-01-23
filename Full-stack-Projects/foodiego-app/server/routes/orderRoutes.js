@@ -1,6 +1,6 @@
 import express from 'express';
 import userAuth from '../middlewares/userAuth.js';
-import { cancelOrderByUser, createOrder, getMyOrders, getOrderByOrderId, getOrderDetails, myOrders, newOrder } from '../controllers/orderController.js';
+import { cancelOrderByUser, createOrder, getMyOrders, getOrderByOrderId } from '../controllers/orderController.js';
 
 const orderRouter = express.Router();
 

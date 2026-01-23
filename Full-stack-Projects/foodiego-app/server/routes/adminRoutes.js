@@ -1,17 +1,9 @@
 import express from 'express';
 import adminAuth from '../middlewares/adminAuth.js';
-import { createAdmin, deleteAdmin, deleteOrder, deleteReview, deleteUser, getAdminMe, getAllAdmins, getAllCustomers, getAllOrders, getAllProductReviews, getAllProducts, getAllUsers, login, logout, updateAdmin, updateOrderStatus, uploadProfileImage } from '../controllers/adminController.js';
+import { deleteOrder, deleteReview, deleteUser, getAdminMe, getAllCustomers, getAllOrders, getAllProductReviews, getAllProducts, getAllUsers, login, logout, updateOrderStatus, uploadProfileImage } from '../controllers/adminController.js';
 import upload from '../middlewares/multer.js';
 
 const adminRouter = express.Router();
-
-// ------------------------------ only for test ---------------------
-adminRouter.post('/create', createAdmin);
-adminRouter.get('/all-admins', getAllAdmins);
-adminRouter.delete('/delete/:id', deleteAdmin);
-adminRouter.put('/update/:id', updateAdmin);
-// ------------------------------------------------------------------
-
 
 adminRouter.post('/login', login);
 adminRouter.post('/logout', adminAuth, logout);
