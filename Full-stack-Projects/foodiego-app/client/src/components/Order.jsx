@@ -16,7 +16,7 @@ import {
   Loader2,
   ArrowRight
 } from 'lucide-react';
-import OrderPreview from './orderPreview.jsx';
+import OrderPreview from './OrderPreview.jsx';
 import axios from 'axios';
 import { AppContext } from '../context/AppContext.jsx';
 import { toast } from 'react-toastify';
@@ -281,4 +281,5 @@ export default function Order() {
       </div>
     </div>
   );
+
 }
