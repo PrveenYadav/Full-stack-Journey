@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 // app.use(cors());
 app.use(cors({origin: "https://foodiegoin.onrender.com", credentials: true}))
+// app.use(cors({origin: process.env.CLIENT_URL, credentials: true}))
 
 // Database function call
 connectDB(); 
