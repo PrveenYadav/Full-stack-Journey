@@ -1,9 +1,9 @@
 import { User } from "../models/userModel.js";
 import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken";
-import { transporter } from "../config/nodemailer.js";
 import { emailTemplates } from "../utils/emailTemplates.js";
 import imagekit from "../config/imagekit.js";
+import apiInstance from "../config/brevo.js";
 
 
 export const uploadProfileImage = async (req, res) => {
@@ -136,26 +136,21 @@ export const register = async (req, res) => {
 
         
         // sending welcome email
-        const welcomeTemplate = emailTemplates.welcome(name, email)
+        const sendEmail = async () => {
+            const welcomeTemplate = emailTemplates.welcome(name, email);
+            
+            const smtpEmail = {
+                sender: { name: "FoodieGo", email: process.env.SENDER_EMAIL },
+                to: [{ email: email, name: name }],
+                subject: welcomeTemplate.subject,
+                htmlContent: welcomeTemplate.html, // Note: Use htmlContent instead of html
+                textContent: welcomeTemplate.text  // Note: Use textContent instead of text
+            };
 
-        const mailOptions = {
-            from: {
-                name: "FoodieGo",
-                address: process.env.SENDER_EMAIL
-            },
-            to: email,
-            subject: welcomeTemplate.subject,
-            html: welcomeTemplate.html,
-            text: welcomeTemplate.text
+            await apiInstance.sendTransacEmail(smtpEmail);
         };
 
-        await transporter.sendMail(mailOptions);
-        // try {
-        //     const info = await transporter.sendMail(mailOptions);
-        //     console.log("Email sent:", info);
-        // } catch (emailError) {
-        //     console.error("Email error:", emailError);
-        // }
+        await sendEmail();
 
         return res.status(201).json({ success: true, message: "Registration successful" });
 
@@ -235,15 +230,11 @@ export const sendVerifyOtp = async (req, res) => {
 
         await user.save();
 
-        const mailOptions = {
-            from: {
-                name: "FoodieGo",
-                address: process.env.SENDER_EMAIL
-            },
-            to: user.email,
+        await apiInstance.sendTransacEmail({
+            sender: { name: "FoodieGo", email: process.env.SENDER_EMAIL },
+            to: [{ email: user.email, name: user.name }],
             subject: "Account Verification OTP",
-            // text: `Your OTP is ${otp}. Verify your account using this OTP.`
-            html: `
+            htmlContent: `
                 <div>
                     <h2>Your OTP Code</h2>
                     <p>Use the following OTP to verify your account:</p>
@@ -251,9 +242,7 @@ export const sendVerifyOtp = async (req, res) => {
                     <p>This OTP will expire in 10 minutes.</p>
                 </div>
             `
-        }
-
-        await transporter.sendMail(mailOptions);
+        });
 
         res.status(200).json({success: true, message: "Verification OTP sent on Email"})
 
@@ -337,14 +326,11 @@ export const sendResetOtp = async (req, res) => {
 
         await user.save(); // saving the resetOtp and resetOtpExpiredAt in database
 
-        const mailOptions = {
-            from: {
-                name: "FoodieGo",
-                address: process.env.SENDER_EMAIL
-            },
-            to: user.email,
+        await apiInstance.sendTransacEmail({
+            sender: { name: "FoodieGo", email: process.env.SENDER_EMAIL },
+            to: [{ email: user.email, name: user.name }],
             subject: "Password Reset OTP",
-            html: `
+            htmlContent: `
                 <div>
                     <h2>Your OTP Code</h2>
                     <p>Use the following OTP to reset your password:</p>
@@ -352,9 +338,7 @@ export const sendResetOtp = async (req, res) => {
                     <p>This OTP will expire in 10 minutes.</p>
                 </div>
             `
-        }
-
-        await transporter.sendMail(mailOptions);
+        });
 
         return res.status(200).json({success: true, message: "Reset OTP sent on your Email"})
 

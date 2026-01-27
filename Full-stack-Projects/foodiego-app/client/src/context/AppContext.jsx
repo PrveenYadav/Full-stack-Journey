@@ -8,7 +8,7 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
 
-    const backendUrl = "https://backend-foodiego.onrender.com"
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userData, setUserData] = useState(false)
     const [authLoading, setAuthLoading] = useState(true);
