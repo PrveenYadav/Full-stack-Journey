@@ -58,7 +58,7 @@ export const ProductView = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       {/* Mobile header Nav */}
-      <nav className="flex items-center justify-between p-4 lg:hidden sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50">
+      <nav className="flex items-center justify-between p-4 lg:hidden sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-30">
         <button onClick={() => navigate(-1)} className="p-2 rounded-full bg-white dark:bg-slate-800 shadow-sm">
           <ChevronLeft className="w-6 h-6" />
         </button>
