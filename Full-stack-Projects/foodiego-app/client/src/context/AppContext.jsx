@@ -94,21 +94,25 @@ export const AppContextProvider = ({children}) => {
     }, [])
 
     // auth finished → then extra 3s loader
-    const [showLoader, setShowLoader] = useState(true);
-    useEffect(() => {
-        let timer;
+    // const [showLoader, setShowLoader] = useState(true);
+    // useEffect(() => {
+    //     let timer;
 
-        if (!authLoading) {
-            timer = setTimeout(() => {
-            setShowLoader(false);
-            }, 2000);
-        }
+    //     if (!authLoading) {
+    //         timer = setTimeout(() => {
+    //         setShowLoader(false);
+    //         }, 2000);
+    //     }
 
-        return () => clearTimeout(timer);
-    }, [authLoading]);
+    //     return () => clearTimeout(timer);
+    // }, [authLoading]);
 
 
-    if (authLoading || showLoader) {
+    // if (authLoading || showLoader) {
+    //     return <Loader/>
+    // }
+
+    if (authLoading) {
         return <Loader/>
     }
 
