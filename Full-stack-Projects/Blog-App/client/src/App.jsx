@@ -17,7 +17,7 @@ const App = () => {
   const {token} = useAppContext();
 
   return (
-    <div className='dark:bg-gradient-to-tr from-black via-[#0a0a23] to-[#1e3a8a]'>
+    <div className='dark:bg-slate-950 dark:text-white'>
       <Toaster/>
       <Routes>
         <Route path='/' element={<Home/>}/>

@@ -25,7 +25,7 @@ const Comments = () => {
   }, [])
 
   return (
-    <div className='flex-1 pt-5 sm:pt-12 sm:pl-16 bg-blue-50/50 dark:bg-gradient-to-tr from-black via-[#0a0a23] to-[#1e3a8a]'>
+    <div className='flex-1 pt-5 sm:pt-12 sm:pl-16 bg-blue-50/50 dark:bg-slate-950'>
 
       <div className='flex justify-between items-center max-w-3xl'>
         <h1>Comments</h1>
@@ -36,7 +36,7 @@ const Comments = () => {
         </div>
       </div>
 
-      <div className='relative h-4/5 max-w-3xl overflow-x-auto mt-4 bg-white dark:bg-gradient-to-bl from-black via-[#0a0a23] to-[#1e3a8a] shadow rounded-lg scrollbar-hide'>
+      <div className='relative h-4/5 max-w-3xl overflow-x-auto mt-4 bg-white dark:bg-slate-900 shadow rounded-lg scrollbar-hide'>
         <table className='w-full text-sm text-gray-500 dark:text-gray-300'>
           <thead className='text-xs text-gray-700 dark:text-gray-200 text-left uppercase'>
             <tr>

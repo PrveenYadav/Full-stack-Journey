@@ -82,8 +82,8 @@ const AddBlog = () => {
   }, [])
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex-1 bg-blue-50/50 text-gray-600 dark:text-gray-200 h-full overflow-scroll dark:bg-gradient-to-tr from-black via-[#0a0a23] to-[#1e3a8a]'>
-      <div className='bg-white dark:bg-gradient-to-bl from-black via-[#0a0a23] to-[#1e3a8a] w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded'>
+    <form onSubmit={onSubmitHandler} className='flex-1 bg-blue-50/50 text-gray-600 dark:text-gray-200 h-full overflow-scroll dark:bg-slate-950'>
+      <div className='bg-white dark:text-white dark:bg-slate-900 w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded'>
         <p>Upload thumbnail</p>
         <label htmlFor='image'>
           <img 

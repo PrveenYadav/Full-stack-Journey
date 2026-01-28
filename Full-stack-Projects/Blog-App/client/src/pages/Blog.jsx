@@ -63,7 +63,7 @@ const Blog = () => {
   }, [])
 
   return data ? (
-    <div className='relative dark:bg-gradient-to-tl from-black via-[#0a0b1a] to-[#15203d] dark:text-white'>
+    <div className='relative dark:bg-slate-950 dark:text-white'>
         <img src={assets.gradientBackground} alt="" className='absolute -top-50 -z-1 opacity-50' />
 
         {/* Navbar component */}

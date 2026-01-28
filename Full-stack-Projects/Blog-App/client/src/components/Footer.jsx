@@ -6,7 +6,8 @@ const Footer = () => {
     <div className='px-6 md:px-16 lg:px-24 xl:px-32 bg-primary/3'>
         <div className='flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-500/30 text-gray-500'>
             <div>
-                <img src={assets.logo} alt="logo" className='w-32 sm:w-44' />
+                {/* <img src={assets.logo} alt="logo" className='w-32 sm:w-44' /> */}
+                <h1 onClick={() => navigate('/')} className='cursor-pointer text-3xl sm:text-4xl dark:text-white font-sans font-semibold'>Blog<span>Jot</span></h1>
                 <p className='max-w-[410px] mt-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam tempore quidem aliquam veniam tenetur saepe ipsam in labore.</p>
             </div>
 
