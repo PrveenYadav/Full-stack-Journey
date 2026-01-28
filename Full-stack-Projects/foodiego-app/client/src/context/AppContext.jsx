@@ -112,9 +112,9 @@ export const AppContextProvider = ({children}) => {
     //     return <Loader/>
     // }
 
-    if (authLoading) {
-        return <Loader/>
-    }
+    // if (authLoading) {
+    //     return <Loader/>
+    // }
 
     const contextValue = {
         backendUrl,

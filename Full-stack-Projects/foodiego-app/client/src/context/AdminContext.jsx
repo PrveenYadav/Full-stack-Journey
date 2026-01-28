@@ -94,9 +94,9 @@ export const AdminContextProvider = ({children}) => {
 
 
     // always in the last or after useEffects
-    if (adminAuthLoading) {
-        return <Loader/>
-    }
+    // if (adminAuthLoading) {
+    //     return <Loader/>
+    // }
 
     const contextValue = {
         backendUrl,
