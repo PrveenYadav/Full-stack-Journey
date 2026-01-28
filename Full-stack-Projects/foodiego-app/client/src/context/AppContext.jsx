@@ -93,29 +93,6 @@ export const AppContextProvider = ({children}) => {
         getProductData(); 
     }, [])
 
-    // auth finished → then extra 3s loader
-    // const [showLoader, setShowLoader] = useState(true);
-    // useEffect(() => {
-    //     let timer;
-
-    //     if (!authLoading) {
-    //         timer = setTimeout(() => {
-    //         setShowLoader(false);
-    //         }, 2000);
-    //     }
-
-    //     return () => clearTimeout(timer);
-    // }, [authLoading]);
-
-
-    // if (authLoading || showLoader) {
-    //     return <Loader/>
-    // }
-
-    // if (authLoading) {
-    //     return <Loader/>
-    // }
-
     const contextValue = {
         backendUrl,
         isLoggedIn,
@@ -127,7 +104,8 @@ export const AppContextProvider = ({children}) => {
         setProductData,
         loading,
         ordersLength,
-        setOrdersLength
+        setOrdersLength,
+        authLoading
     }
 
     return (

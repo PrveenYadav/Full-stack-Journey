@@ -17,25 +17,6 @@ export const AdminContextProvider = ({children}) => {
 
     axios.defaults.withCredentials = true;
 
-    // const checkAdminAuth = async () => {
-    //     setAdminAuthLoading(true)
-    //     try {
-    //         const { data } = await axios.get(backendUrl + '/api/admin/isAuthAdmin', { withCredentials: true });
-    //         return data; // { success: true, admin: {...} }
-    //     } catch (error) {
-    //         return { success: false };
-    //     } finally {
-    //         setAdminAuthLoading(false)
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     checkAdminAuth()
-    //     .then(() => setIsAuthenticated(true))
-    //     .catch(() => setIsAuthenticated(false));
-    // }, []);
-
-
     const checkAdminAuth = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/admin/isAuthAdmin', { withCredentials: true });
@@ -92,12 +73,6 @@ export const AdminContextProvider = ({children}) => {
         }
     };
 
-
-    // always in the last or after useEffects
-    // if (adminAuthLoading) {
-    //     return <Loader/>
-    // }
-
     const contextValue = {
         backendUrl,
         checkAdminAuth, 
@@ -107,6 +82,7 @@ export const AdminContextProvider = ({children}) => {
         setOrders,
         loading,
         updateOrderStatus,
+        adminAuthLoading
     }
 
     return (

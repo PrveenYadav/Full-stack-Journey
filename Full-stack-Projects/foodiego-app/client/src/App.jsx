@@ -22,17 +22,8 @@ import { UserLogin, VerifyEmail } from './pages/LoginUser.jsx'
 
 const App = () => {
 
-  const [loading, setLoading] = useState(false);
-  const location = useLocation();
-  const { isLoggedIn, setIsLoggedIn, userData } = useContext(AppContext)
-  const { isAuthenticated } = useContext(AdminContext)
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const timeout = setTimeout(() => setLoading(false), 700); // short delay
-  //   return () => clearTimeout(timeout);
-  // }, [location]);
-
+  const { isLoggedIn, userData, authLoading } = useContext(AppContext)
+  const { isAuthenticated, adminAuthLoading } = useContext(AdminContext)
 
   const PublicLayout = () => (
     <>
@@ -50,15 +41,34 @@ const App = () => {
   );
 
   const MyAccountGuard = () => {
+    if (authLoading) {
+      return (
+        <div className="flex h-screen w-full items-center justify-center">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-amber-500 border-t-transparent"></div>
+        </div>
+      );
+    }
+
     if (!isLoggedIn) return <UserLogin />;
     if (!userData?.isAccountVerified) return <VerifyEmail />;
     return <MyAccount />;
   };
 
+  const MyDashboardGuard = () => {
+    if (adminAuthLoading) {
+      return (
+        <div className="flex h-screen w-full items-center justify-center">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-amber-500 border-t-transparent"></div>
+        </div>
+      );
+    }
+
+    if (isAuthenticated) return <Dashboard />;
+    return <LoginPage/>;
+  };
+
   return (
     <>
-      {/* {loading && <Loader/>} */}
-      
       <div className={`dark:bg-gray-950 min-h-[100vh]`}>
         <ToastContainer position='bottom-left'/>
         
@@ -76,7 +86,8 @@ const App = () => {
           </Route>
 
           <Route element={<DashboardLayout />}>
-            <Route path='/admin/dashboard' element={isAuthenticated ? <Dashboard /> : <LoginPage/>} />
+            {/* <Route path='/admin/dashboard' element={isAuthenticated ? <Dashboard /> : <LoginPage/>} /> */}
+            <Route path='/admin/dashboard' element={<MyDashboardGuard/>} />
           </Route>
 
           <Route path='/*' element={<NotFound />} />
