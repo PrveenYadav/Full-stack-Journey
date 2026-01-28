@@ -93,7 +93,6 @@ export default function CheckoutPage({total, subtotal}) {
       if (data.success) {
         toast.success(data.success)
         setOrderData(data)
-        console.log("This is backedn ord data: ", data)
       } else {
         toast.error(data.messsage)
       }

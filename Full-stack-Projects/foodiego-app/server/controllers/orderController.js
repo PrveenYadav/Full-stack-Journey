@@ -8,8 +8,6 @@ export const createOrder = async (req, res) => {
   try {
     const { items, orderInfo, paymentInfo, totals } = req.body;
 
-    console.log(req.body)
-
     if (!items || items.length === 0) {
       return res.status(400).json({ message: "Order items missing" });
     }

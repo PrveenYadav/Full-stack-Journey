@@ -20,7 +20,7 @@ const PlaceOrder = ({setIsPlaceOrderOpen, total}) => {
         }
 
         const submittedData = { name, email, phoneNumber, address };
-        console.log("Form submitted:", submittedData);
+        // console.log("Form submitted:", submittedData);
 
         // Resetting the form
         setName('');

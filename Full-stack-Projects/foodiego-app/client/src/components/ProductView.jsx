@@ -36,9 +36,6 @@ export const ProductView = () => {
   
   const recommendedProducts = productItems?.filter((item) => item?.category.toLowerCase() === product.category.toLowerCase());
 
-  console.log("This product : ", product)
-  console.log("recommendedProducts: ", recommendedProducts)
-
   const navigate = useNavigate()
 
   

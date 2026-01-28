@@ -322,9 +322,6 @@ export const getAllProductReviews = async (req, res) => {
 
     let allReviews = [];
 
-    
-    console.log("Products : ", products)
-
     products.forEach((product) => {
       product.reviews.forEach((review) => {
         allReviews.push({
@@ -340,8 +337,6 @@ export const getAllProductReviews = async (req, res) => {
         });
       });
     });
-
-    console.log("All Reviews: ", allReviews)
 
     // Optional filter by rating
     if (rating) {

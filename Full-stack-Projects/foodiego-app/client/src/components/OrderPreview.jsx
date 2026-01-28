@@ -139,7 +139,6 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
       const { data } = await axios.put(`${backendUrl}/api/order/${orderId}/cancel`);
 
       if (data.success) {
-        console.log("cacel order data: ", data)
         setCancelled(true)
         toast.success(data.message)
         // fetchOrderData(); // fetch order data
