@@ -123,7 +123,10 @@ const Card = () => {
                     <div key={index} className="flex px-2 lg:px-4">
                         <img
                         src={img}
-                        loading='lazy'
+                        // loading='lazy'
+                        width="400"
+                        height="300"
+                        fetchPriority="high"
                         alt={`Slide ${index}`}
                         className="object-contain rounded-lg"
                         />
