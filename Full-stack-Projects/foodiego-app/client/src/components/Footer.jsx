@@ -56,7 +56,7 @@ const Footer = () => {
         <p className='border-1 opacity-10 mt-5 md:mt-auto'></p>
 
         <div className='md:flex flex-wrap md:justify-between w-full pt-5 pb-5'>
-            <p>© 2025 FoodieGo. All rights reserved.</p>
+            <p>© 2026 FoodieGo. All rights reserved.</p>
             <div className='flex flex-col sm:flex-row sm:gap-5'>
                 <p className='opacity-65 hover:opacity-100 transition-all duration-100 cursor-pointer'>Privacy Policy</p>
                 <p className='opacity-65 hover:opacity-100 transition-all duration-100 cursor-pointer'>Terms of Service</p>

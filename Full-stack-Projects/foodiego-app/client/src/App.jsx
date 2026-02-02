@@ -70,7 +70,17 @@ const App = () => {
   return (
     <>
       <div className={`dark:bg-gray-950 min-h-[100vh]`}>
-        <ToastContainer position='bottom-left'/>
+        {/* <ToastContainer position='bottom-left'/> */}
+        <ToastContainer
+          position="top-center"
+          autoClose={1500}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          draggable
+          limit={3}
+        />
         
         {/* To prevent the borwser to storing the scrolled state and when navigating to any page it starts from top and don't auto scroll */}
         <ScrollManager/>

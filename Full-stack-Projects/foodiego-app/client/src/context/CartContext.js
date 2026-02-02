@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { toast } from 'react-toastify';
 
 export const CartContext = createContext();
 
@@ -41,6 +42,8 @@ export function CartProvider({ children }) {
         return [...prevCart, { ...item, quantity: 1 }];
       }
     });
+    
+    toast.success("Added to cart 🛒")
   };
 
   // console.log("cart items  :: ", cartItems)
