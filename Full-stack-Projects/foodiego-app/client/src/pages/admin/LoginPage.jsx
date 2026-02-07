@@ -27,22 +27,22 @@ export default function LoginPage() {
     try {
       const { data } = await axios.post(backendUrl + '/api/admin/login', {email, password})
       
-      setTimeout(() => {
-        if (data.success) {
-          toast.success(data.message)
-          setIsLoading(false);
-          setIsAuthenticated(true)
-          navigate('/admin/dashboard')
-            
-        } else {
-          setError('Invalid administrative credentials. Please try again.');
-          setIsLoading(false);
-          toast.error(data.message)
-        }
-      }, 1500);
+      if (data.success) {
+        toast.success(data.message)
+        setIsLoading(false);
+        setIsAuthenticated(true)
+        navigate('/admin/dashboard')
+          
+      } else {
+        setError('Invalid administrative credentials. Please try again.');
+        setIsLoading(false);
+        toast.error(data.message)
+      }
 
     } catch (error) {
-        console.log("Error in Login the Admin", error.message)
+      setIsLoading(false);
+      console.log("Error in Login the Admin", error.message)
+      toast.error(error?.response?.data?.message)
     }
   };
 
