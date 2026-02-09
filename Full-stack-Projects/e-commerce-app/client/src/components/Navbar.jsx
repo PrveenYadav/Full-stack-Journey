@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import { ShoppingBag, Menu, X, Search, User, Sun, Moon } from 'lucide-react';
 import { CartContext } from '../context/CartContext.js';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { AppContext } from '../context/AppContext.jsx';
@@ -13,7 +13,6 @@ export const Navbar = ({ cartCount }) => {
   const menuRef = useRef(null); // mobile munu work - close on click outside or on scrolling
 
   const { 
-    activePage,
     searchQuery,
     setSearchQuery,
     categoryFilter,
@@ -21,6 +20,9 @@ export const Navbar = ({ cartCount }) => {
     setIsSearchOpen,
     setCategoryFilter
   } = useContext(CartContext);
+
+  const location = useLocation();
+  const isShopPage = location.pathname === "/shop";
 
   const handleCategoryClick = (cat) => {
     navigate('/shop');
@@ -106,26 +108,30 @@ export const Navbar = ({ cartCount }) => {
           </div>
 
           <div className="flex items-center space-x-1 sm:space-x-4">
-            <div
-              className={`relative flex items-center transition-all duration-500 ${isSearchOpen ? "w-48 sm:w-64" : "w-10"}`}
-            >
-              <Search
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                size={20}
-                className="absolute left-3 text-zinc-400 cursor-pointer"
-              />
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                autoFocus
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  if (activePage !== "shop") navigate("/shop");
-                }}
-                className={`pl-10 pr-4 py-2 bg-zinc-100 dark:bg-zinc-900 rounded-full text-[10px] font-bold outline-none transition-all dark:text-white w-full ${isSearchOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-              />
-            </div>
+            {isShopPage && (
+              <div
+                className={`relative flex items-center transition-all duration-500 ${
+                  isSearchOpen ? "w-48 sm:w-64" : "w-10"
+                }`}
+              >
+                <Search
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                  size={20}
+                  className="absolute left-3 text-zinc-400 cursor-pointer"
+                />
+
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus={isSearchOpen}   // 🔥 IMPORTANT
+                  className={`pl-10 pr-4 py-2 bg-zinc-100 dark:bg-zinc-900 rounded-full text-[10px] font-bold outline-none transition-all dark:text-white w-full ${
+                    isSearchOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
+                />
+              </div>
+            )}
 
             <button
               onClick={toggleDarkMode}
