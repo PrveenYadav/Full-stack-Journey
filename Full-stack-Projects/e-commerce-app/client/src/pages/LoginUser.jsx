@@ -114,7 +114,7 @@ export const VerifyEmail = () => {
       toast.success("Email verified!");
 
       await getUserData(); // refresh user data
-      navigate("/my-account");
+      navigate("/account");
 
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid OTP");
