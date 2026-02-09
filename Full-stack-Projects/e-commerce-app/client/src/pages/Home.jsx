@@ -52,7 +52,7 @@ const Home = () => {
           <span className="inline-block px-4 py-1.5 border border-white/30 backdrop-blur-md rounded-full text-[9px] font-black tracking-[0.3em] uppercase mb-8">
             Collection 2026
           </span>
-          <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight tracking-tighter">
+          <h1 className="text-5xl md:text-8xl font-black mb-6 leading-tight tracking-tighter">
             ELEVATE <br />
             <span className="text-zinc-400">YOUR STYLE.</span>
           </h1>
