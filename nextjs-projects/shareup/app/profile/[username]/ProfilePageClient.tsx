@@ -94,188 +94,257 @@ function ProfilePageClient({
   const formattedDate = format(new Date(user.createdAt), "MMMM yyyy");
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="grid grid-cols-1 gap-6">
-        <div className="w-full max-w-lg mx-auto">
-          <Card className="bg-card">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center">
-                <Avatar className="w-24 h-24">
-                  <AvatarImage src={user.image ?? "/avatar.png"} />
-                </Avatar>
-                <h1 className="mt-4 text-2xl font-bold">{user.name ?? user.username}</h1>
+    <div className="max-w-4xl mx-auto px-4">
+
+      <div className="relative w-full h-40 rounded-xl bg-gradient-to-r from-zinc-800 to-zinc-900 mb-16">
+        
+        {/* Avatar */}
+        <Avatar className="absolute -bottom-12 left-6 w-28 h-28 border-4 border-background shadow-lg">
+          <AvatarImage src={user.image ?? "/avatar.png"} />
+        </Avatar>
+
+      </div>
+
+      <Card className="border-none bg-transparent shadow-none">
+        <CardContent className="pt-0">
+
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+
+            <div className="space-y-3">
+
+              <div>
+                <h1 className="text-2xl font-bold">
+                  {user.name ?? user.username}
+                </h1>
                 <p className="text-muted-foreground">@{user.username}</p>
-                <p className="mt-2 text-sm">{user.bio}</p>
+              </div>
 
-                {/* PROFILE STATS */}
-                <div className="w-full mt-6">
-                  <div className="flex justify-between mb-4">
-                    <div>
-                      <div className="font-semibold">{user._count.following.toLocaleString()}</div>
-                      <div className="text-sm text-muted-foreground">Following</div>
-                    </div>
-                    <Separator orientation="vertical" />
-                    <div>
-                      <div className="font-semibold">{user._count.followers.toLocaleString()}</div>
-                      <div className="text-sm text-muted-foreground">Followers</div>
-                    </div>
-                    <Separator orientation="vertical" />
-                    <div>
-                      <div className="font-semibold">{user._count.posts.toLocaleString()}</div>
-                      <div className="text-sm text-muted-foreground">Posts</div>
-                    </div>
+              {user.bio && (
+                <p className="text-sm max-w-lg leading-relaxed">
+                  {user.bio}
+                </p>
+              )}
+
+              {/* META */}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+
+                {user.location && (
+                  <div className="flex items-center gap-1">
+                    <MapPinIcon className="size-4" />
+                    {user.location}
                   </div>
-                </div>
-
-                {/* "FOLLOW & EDIT PROFILE" BUTTONS */}
-                {!currentUser ? (
-                  <SignInButton mode="modal">
-                    <Button className="w-full mt-4">Follow</Button>
-                  </SignInButton>
-                ) : isOwnProfile ? (
-                  <Button className="w-full mt-4" onClick={() => setShowEditDialog(true)}>
-                    <EditIcon className="size-4 mr-2" />
-                    Edit Profile
-                  </Button>
-                ) : (
-                  <Button
-                    className="w-full mt-4"
-                    onClick={handleFollow}
-                    disabled={isUpdatingFollow}
-                    variant={isFollowing ? "outline" : "default"}
-                  >
-                    {isFollowing ? "Unfollow" : "Follow"}
-                  </Button>
                 )}
 
-                {/* LOCATION & WEBSITE */}
-                <div className="w-full mt-6 space-y-2 text-sm">
-                  {user.location && (
-                    <div className="flex items-center text-muted-foreground">
-                      <MapPinIcon className="size-4 mr-2" />
-                      {user.location}
-                    </div>
-                  )}
-                  {user.website && (
-                    <div className="flex items-center text-muted-foreground">
-                      <LinkIcon className="size-4 mr-2" />
-                      <a
-                        href={
-                          user.website.startsWith("http") ? user.website : `https://${user.website}`
-                        }
-                        className="hover:underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {user.website}
-                      </a>
-                    </div>
-                  )}
-                  <div className="flex items-center text-muted-foreground">
-                    <CalendarIcon className="size-4 mr-2" />
-                    Joined {formattedDate}
-                  </div>
+                {user.website && (
+                  <a
+                    href={
+                      user.website.startsWith("http")
+                        ? user.website
+                        : `https://${user.website}`
+                    }
+                    target="_blank"
+                    className="flex items-center gap-1 hover:underline"
+                  >
+                    <LinkIcon className="size-4" />
+                    {user.website}
+                  </a>
+                )}
+
+                <div className="flex items-center gap-1">
+                  <CalendarIcon className="size-4" />
+                  Joined {formattedDate}
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </div>
 
-        <Tabs defaultValue="posts" className="w-full">
-          <TabsList className="w-full justify-start border-b rounded-none h-auto p-0 bg-transparent">
-            <TabsTrigger
-              value="posts"
-              className="flex items-center gap-2 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary
-               data-[state=active]:bg-transparent px-6 font-semibold"
-            >
-              <FileTextIcon className="size-4" />
-              Posts
-            </TabsTrigger>
-            <TabsTrigger
-              value="likes"
-              className="flex items-center gap-2 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary
-               data-[state=active]:bg-transparent px-6 font-semibold"
-            >
-              <HeartIcon className="size-4" />
-              Likes
-            </TabsTrigger>
-          </TabsList>
+              {/* STATS */}
+              <div className="flex items-center gap-6 pt-2">
 
-          <TabsContent value="posts" className="mt-6">
-            <div className="space-y-6">
-              {posts.length > 0 ? (
-                posts.map((post) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
+                <div className="flex items-center gap-1">
+                  <span className="font-semibold">
+                    {user._count.following.toLocaleString()}
+                  </span>
+                  <span className="text-muted-foreground text-sm">
+                    Following
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <span className="font-semibold">
+                    {user._count.followers.toLocaleString()}
+                  </span>
+                  <span className="text-muted-foreground text-sm">
+                    Followers
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <span className="font-semibold">
+                    {user._count.posts.toLocaleString()}
+                  </span>
+                  <span className="text-muted-foreground text-sm">
+                    Posts
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div className="flex items-start">
+
+              {!currentUser ? (
+                <SignInButton mode="modal">
+                  <Button className="cursor-pointer">Follow</Button>
+                </SignInButton>
+
+              ) : isOwnProfile ? (
+
+                <Button onClick={() => setShowEditDialog(true)} className="cursor-pointer">
+                  <EditIcon className="size-4 mr-2" />
+                  Edit Profile
+                </Button>
+
               ) : (
-                <div className="text-center py-8 text-muted-foreground">No posts yet</div>
-              )}
-            </div>
-          </TabsContent>
 
-          <TabsContent value="likes" className="mt-6">
-            <div className="space-y-6">
-              {likedPosts.length > 0 ? (
-                likedPosts.map((post) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
-              ) : (
-                <div className="text-center py-8 text-muted-foreground">No liked posts to show</div>
-              )}
-            </div>
-          </TabsContent>
-        </Tabs>
+                <Button
+                  onClick={handleFollow}
+                  disabled={isUpdatingFollow}
+                  variant={isFollowing ? "outline" : "default"}
+                  className="cursor-pointer"
+                >
+                  {isFollowing ? "Unfollow" : "Follow"}
+                </Button>
 
-        <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
-          <DialogContent className="sm:max-w-[500px]">
-            <DialogHeader>
-              <DialogTitle>Edit Profile</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4 py-4">
-              <div className="space-y-2">
-                <Label>Name</Label>
-                <Input
-                  name="name"
-                  value={editForm.name}
-                  onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                  placeholder="Your name"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Bio</Label>
-                <Textarea
-                  name="bio"
-                  value={editForm.bio}
-                  onChange={(e) => setEditForm({ ...editForm, bio: e.target.value })}
-                  className="min-h-[100px]"
-                  placeholder="Tell us about yourself"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Location</Label>
-                <Input
-                  name="location"
-                  value={editForm.location}
-                  onChange={(e) => setEditForm({ ...editForm, location: e.target.value })}
-                  placeholder="Where are you based?"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Website</Label>
-                <Input
-                  name="website"
-                  value={editForm.website}
-                  onChange={(e) => setEditForm({ ...editForm, website: e.target.value })}
-                  placeholder="Your personal website"
-                />
-              </div>
+              )}
+
             </div>
-            <div className="flex justify-end gap-3">
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button onClick={handleEditSubmit}>Save Changes</Button>
+
+          </div>
+
+        </CardContent>
+      </Card>
+
+
+      <Tabs defaultValue="posts" className="w-full mt-8">
+
+        <TabsList className="w-full justify-start border-b rounded-none bg-transparent p-0">
+
+          <TabsTrigger
+            value="posts"
+            className="flex items-center gap-2 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary px-6 cursor-pointer"
+          >
+            <FileTextIcon className="size-4" />
+            Posts
+          </TabsTrigger>
+
+          <TabsTrigger
+            value="likes"
+            className="flex items-center gap-2 rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary px-6 cursor-pointer"
+          >
+            <HeartIcon className="size-4" />
+            Likes
+          </TabsTrigger>
+
+        </TabsList>
+
+
+        <TabsContent value="posts" className="mt-6 space-y-6">
+
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <PostCard key={post.id} post={post} dbUserId={user.id} />
+            ))
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              No posts yet
             </div>
-          </DialogContent>
-        </Dialog>
-      </div>
+          )}
+
+        </TabsContent>
+
+
+        <TabsContent value="likes" className="mt-6 space-y-6">
+
+          {likedPosts.length > 0 ? (
+            likedPosts.map((post) => (
+              <PostCard key={post.id} post={post} dbUserId={user.id} />
+            ))
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              No liked posts
+            </div>
+          )}
+
+        </TabsContent>
+
+      </Tabs>
+
+      <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-4 py-4">
+
+            <div className="space-y-2">
+              <Label>Name</Label>
+              <Input
+                value={editForm.name}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, name: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Bio</Label>
+              <Textarea
+                value={editForm.bio}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, bio: e.target.value })
+                }
+                className="min-h-[100px]"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Location</Label>
+              <Input
+                value={editForm.location}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, location: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>Website</Label>
+              <Input
+                value={editForm.website}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, website: e.target.value })
+                }
+              />
+            </div>
+
+          </div>
+
+          <div className="flex justify-end gap-3">
+            <DialogClose asChild>
+              <Button variant="outline" className="cursor-pointer">Cancel</Button>
+            </DialogClose>
+
+            <Button onClick={handleEditSubmit} className="cursor-pointer">
+              Save Changes
+            </Button>
+          </div>
+
+        </DialogContent>
+      </Dialog>
+
     </div>
   );
+
 }
 export default ProfilePageClient;
