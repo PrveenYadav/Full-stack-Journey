@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Twitter Clone (Next.js Full Stack)
 
-## Getting Started
+A full-stack Twitter-like social media application built with **Next.js**. Users can create posts with a rich text editor, upload images, interact with other users, and manage their profiles. The project demonstrates modern full-stack development using a scalable tech stack. This is my **First Next.js Project**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+* 🔐 Authentication with **Clerk**
+* ✍️ Create posts using **Tiptap Rich Text Editor**
+* 🖼️ Image upload with **Cloudinary**
+* ❤️ Like and 💬 comment on posts
+* 🗑️ Delete your own posts
+* 👤 User profile page
+* ✏️ Edit profile information
+* 🔔 Notification page
+* ➕ Follow / Unfollow users
+* 📱 Responsive UI using **ShadCN UI**
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend**
+
+* Next.js
+* React
+* Tailwind CSS
+* ShadCN UI
+* Tiptap Editor
+
+**Backend**
+
+* Next.js Server Actions / API Routes
+* Prisma ORM
+* Neon PostgreSQL
+
+**Authentication**
+
+* Clerk
+
+**Media Storage**
+
+* Cloudinary
+
+---
+
+## 📂 Project Structure
+
+```
+/app        → Next.js app router pages
+/components → Reusable UI components
+/lib        → Utility functions and configs
+/prisma     → Prisma schema and database setup
+/actions    → Server actions for posts, likes, comments
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env` file in the root and add the following:
 
-## Learn More
+```
+DATABASE_URL=
 
-To learn more about Next.js, take a look at the following resources:
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📦 Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Clone the repository:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+git clone https://github.com/PrveenYadav/Full-stack-Journey.git
+```
+
+Go to the project directory:
+
+```
+cd nextjs-projects/shareup
+```
+
+Install dependencies:
+
+```
+npm install
+```
+
+Run the development server:
+
+```
+npm run dev
+```
+
+---
+
+## 🌐 Live Demo
+
+Deployed project link:
+
+```
+https://shareupin.vercel.app/
+```
+
+---
+
+## 📸 Screenshots
+
+These are screenshots of:
+
+### Home Feed
+<img src="public/screenshots/home.png" width="800" />
+
+### Profile Page
+<img src="public/screenshots/profile.png" width="800" />
+
+---
+
+## 👨‍💻 Author
+
+Built by **Praveen Yadav**
+
+If you like this project, consider giving it a ⭐ on GitHub!
