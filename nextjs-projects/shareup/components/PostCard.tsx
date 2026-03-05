@@ -12,6 +12,7 @@ import { DeleteAlertDialog } from "./DeleteAlertDialog"
 import { Button } from "./ui/button";
 import { HeartIcon, LogInIcon, MessageCircleIcon, SendIcon } from "lucide-react";
 import { Textarea } from "./ui/textarea";
+import { formatPostContent } from "@/lib/formatPostContent";
 
 // Type of the awaited result returned by getPosts()
 type Posts = Awaited<ReturnType<typeof getPosts>>;
@@ -75,71 +76,105 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
   };
 
   return (
-    <Card className="overflow-hidden">
-      <CardContent className="p-4 sm:p-6">
+    <Card className="overflow-hidden border border-border/60 shadow-sm hover:shadow-md transition-shadow">
+      <CardContent className="p-5">
         <div className="space-y-4">
-          <div className="flex space-x-3 sm:space-x-4">
+
+          <div className="flex gap-3">
             <Link href={`/profile/${post.author.username}`}>
-              <Avatar className="size-8 sm:w-10 sm:h-10">
+              <Avatar className="size-10">
                 <AvatarImage src={post.author.image ?? "/avatar.png"} />
               </Avatar>
             </Link>
 
-            {/* POST HEADER & TEXT CONTENT */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1">
               <div className="flex items-start justify-between">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2 truncate">
+                <div>
                   <Link
                     href={`/profile/${post.author.username}`}
-                    className="font-semibold truncate"
+                    className="font-semibold text-sm hover:underline"
                   >
                     {post.author.name}
                   </Link>
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                    <Link href={`/profile/${post.author.username}`}>@{post.author.username}</Link>
+
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <Link
+                      href={`/profile/${post.author.username}`}
+                      className="hover:underline"
+                    >
+                      @{post.author.username}
+                    </Link>
                     <span>•</span>
-                    <span>{formatDistanceToNow(new Date(post.createdAt))} ago</span>
+                    <span>
+                      {formatDistanceToNow(new Date(post.createdAt))} ago
+                    </span>
                   </div>
                 </div>
-                {/* Check if current user is the post author */}
+
                 {dbUserId === post.author.id && (
-                  <DeleteAlertDialog isDeleting={isDeleting} onDelete={handleDeletePost} />
+                  <DeleteAlertDialog
+                    isDeleting={isDeleting}
+                    onDelete={handleDeletePost}
+                  />
                 )}
               </div>
-              <p className="mt-2 text-sm text-foreground break-words">{post.content}</p>
+
+              {/* POST CONTENT */}
+              {/* <div
+                className="mt-3 text-sm prose prose-sm dark:prose-invert max-w-none break-words"
+                dangerouslySetInnerHTML={{
+                  __html: formatPostContent(post.content ?? ""),
+                }}
+              /> */}
+
+              <div
+                className="mt-3 text-sm prose prose-sm dark:prose-invert max-w-none break-words prose-p:my-3 prose-a:text-blue-500 prose-a:underline hover:prose-a:text-blue-600"
+                dangerouslySetInnerHTML={{
+                  __html: formatPostContent(post.content ?? ""),
+                }}
+              />
+
             </div>
           </div>
 
-          {/* POST IMAGE */}
           {post.image && (
-            <div className="rounded-lg overflow-hidden">
-              <img src={post.image} alt="Post content" className="w-full h-auto object-cover" />
+            <div className="rounded-xl overflow-hidden border mt-2">
+              <img
+                src={post.image}
+                alt="Post content"
+                className="w-full max-h-[500px] object-cover hover:scale-[1.02] transition-transform"
+              />
             </div>
           )}
 
-          {/* LIKE & COMMENT BUTTONS */}
-          <div className="flex items-center pt-2 space-x-4">
+          <div className="flex items-center gap-6 pt-2 text-muted-foreground">
             {user ? (
               <Button
                 variant="ghost"
                 size="sm"
-                className={`text-muted-foreground gap-2 ${
-                  hasLiked ? "text-red-500 hover:text-red-600" : "hover:text-red-500"
+                className={`gap-2 transition-colors cursor-pointer ${
+                  hasLiked
+                    ? "text-red-500 hover:text-red-600"
+                    : "hover:text-red-500"
                 }`}
                 onClick={handleLike}
               >
-                {hasLiked ? (
-                  <HeartIcon className="size-5 fill-current" />
-                ) : (
-                  <HeartIcon className="size-5" />
-                )}
-                <span>{optimisticLikes}</span>
+                <HeartIcon
+                  className={`size-5 transition ${
+                    hasLiked ? "fill-current scale-110" : ""
+                  }`}
+                />
+                <span className="text-sm">{optimisticLikes}</span>
               </Button>
             ) : (
               <SignInButton mode="modal">
-                <Button variant="ghost" size="sm" className="text-muted-foreground gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="gap-2 hover:text-red-500 cursor-pointer"
+                >
                   <HeartIcon className="size-5" />
-                  <span>{optimisticLikes}</span>
+                  <span className="text-sm">{optimisticLikes}</span>
                 </Button>
               </SignInButton>
             )}
@@ -147,60 +182,77 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
             <Button
               variant="ghost"
               size="sm"
-              className="text-muted-foreground gap-2 hover:text-blue-500"
+              className="gap-2 hover:text-blue-500 cursor-pointer"
               onClick={() => setShowComments((prev) => !prev)}
             >
               <MessageCircleIcon
-                className={`size-5 ${showComments ? "fill-blue-500 text-blue-500" : ""}`}
+                className={`size-5 transition ${
+                  showComments ? "text-blue-500 fill-blue-500" : ""
+                }`}
               />
-              <span>{post.comments.length}</span>
+              <span className="text-sm">{post.comments.length}</span>
             </Button>
           </div>
 
-          {/* COMMENTS SECTION */}
           {showComments && (
-            <div className="space-y-4 pt-4 border-t">
+            <div className="space-y-5 pt-5 border-t border-border/60">
+
               <div className="space-y-4">
-                {/* DISPLAY COMMENTS */}
                 {post.comments.map((comment) => (
-                  <div key={comment.id} className="flex space-x-3">
-                    <Avatar className="size-8 flex-shrink-0">
-                      <AvatarImage src={comment.author.image ?? "/avatar.png"} />
+                  <div key={comment.id} className="flex gap-3">
+                    <Avatar className="size-8">
+                      <AvatarImage
+                        src={comment.author.image ?? "/avatar.png"}
+                      />
                     </Avatar>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <span className="font-medium text-sm">{comment.author.name}</span>
-                        <span className="text-sm text-muted-foreground">
+
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2 text-sm">
+                        <span className="font-medium">
+                          {comment.author.name}
+                        </span>
+
+                        <span className="text-muted-foreground text-xs">
                           @{comment.author.username}
                         </span>
-                        <span className="text-sm text-muted-foreground">·</span>
-                        <span className="text-sm text-muted-foreground">
-                          {formatDistanceToNow(new Date(comment.createdAt))} ago
+
+                        <span className="text-muted-foreground text-xs">•</span>
+
+                        <span className="text-muted-foreground text-xs">
+                          {formatDistanceToNow(
+                            new Date(comment.createdAt)
+                          )}{" "}
+                          ago
                         </span>
                       </div>
-                      <p className="text-sm break-words">{comment.content}</p>
+
+                      <p className="text-sm text-muted-foreground break-words">
+                        {comment.content}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
 
               {user ? (
-                <div className="flex space-x-3">
-                  <Avatar className="size-8 flex-shrink-0">
-                    <AvatarImage src={user?.imageUrl || "/avatar.png"} />
+                <div className="flex gap-3">
+                  <Avatar className="size-8">
+                    <AvatarImage src={user.imageUrl || "/avatar.png"} />
                   </Avatar>
+
                   <div className="flex-1">
                     <Textarea
                       placeholder="Write a comment..."
                       value={newComment}
                       onChange={(e) => setNewComment(e.target.value)}
-                      className="min-h-[80px] resize-none"
+                      className="min-h-[70px] resize-none"
                     />
+
                     <div className="flex justify-end mt-2">
                       <Button
                         size="sm"
                         onClick={handleAddComment}
-                        className="flex items-center gap-2"
+                        className="flex items-center gap-2 cursor-pointer"
                         disabled={!newComment.trim() || isCommenting}
                       >
                         {isCommenting ? (
@@ -216,9 +268,9 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
                   </div>
                 </div>
               ) : (
-                <div className="flex justify-center p-4 border rounded-lg bg-muted/50">
+                <div className="flex justify-center p-5 border rounded-xl bg-muted/40">
                   <SignInButton mode="modal">
-                    <Button variant="outline" className="gap-2">
+                    <Button variant="outline" className="gap-2 cursor-pointer">
                       <LogInIcon className="size-4" />
                       Sign in to comment
                     </Button>
@@ -231,5 +283,6 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
       </CardContent>
     </Card>
   );
+
 }
 export default PostCard;

@@ -32,30 +32,43 @@ export default function ImageUpload({ onChange, value }: ImageUploadProps) {
     }
   };
 
-  // Image preview
   if (value) {
     return (
-      <div className="relative size-40">
+      <div className="relative w-full max-w-sm rounded-xl overflow-hidden border bg-muted/20">
+
         <img
           src={value}
-          className="rounded-md size-40 object-cover"
+          className="w-full h-60 object-cover"
         />
 
+        {/* Remove button */}
         <button
           onClick={() => onChange("")}
-          className="absolute top-0 right-0 p-1 bg-red-500 rounded-full"
+          className="
+            absolute top-2 right-2
+            bg-black/70 hover:bg-black
+            p-2 rounded-full cursor-pointer
+            transition
+          "
         >
           <XIcon className="h-4 w-4 text-white" />
         </button>
+
       </div>
     );
   }
 
-  // Uploading state
   if (isUploading) {
     return (
-      <div className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-10">
-        <Loader2 className="size-6 animate-spin mb-2 text-muted-foreground" />
+      <div className="
+        flex flex-col items-center justify-center
+        border-2 border-dashed
+        rounded-xl
+        p-12
+        bg-muted/20
+      ">
+        <Loader2 className="size-7 animate-spin mb-3 text-muted-foreground" />
+
         <span className="text-sm text-muted-foreground">
           Uploading image...
         </span>
@@ -63,12 +76,30 @@ export default function ImageUpload({ onChange, value }: ImageUploadProps) {
     );
   }
 
-  // Upload button
   return (
-    <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-10 cursor-pointer hover:border-primary">
-      <UploadCloud className="size-6 mb-2" />
-      <span className="text-sm text-muted-foreground">
-        Click to upload image
+    <label
+      className="
+        flex flex-col items-center justify-center
+        border-2 border-dashed
+        rounded-xl
+        p-12
+        cursor-pointer
+        bg-muted/10
+        hover:bg-muted/20
+        hover:border-primary
+        transition
+        text-center
+      "
+    >
+
+      <UploadCloud className="size-7 mb-3 text-muted-foreground" />
+
+      <span className="text-sm font-medium">
+        Upload Image
+      </span>
+
+      <span className="text-xs text-muted-foreground mt-1">
+        Click to select an image
       </span>
 
       <input
@@ -80,6 +111,7 @@ export default function ImageUpload({ onChange, value }: ImageUploadProps) {
           if (file) uploadImage(file);
         }}
       />
+
     </label>
   );
 }
