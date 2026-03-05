@@ -27,7 +27,6 @@ function MobileNavbar() {
   if (!isLoaded) return null
 
   const profileUsername = user?.username ?? user?.emailAddresses[0]?.emailAddress.split("@")[0]
-  console.log("user is: ", user)
 
   return (
     <div className="flex md:hidden items-center space-x-2">
