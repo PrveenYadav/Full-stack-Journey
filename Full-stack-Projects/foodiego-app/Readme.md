@@ -6,6 +6,12 @@ It combines a **modern React user experience** with a **scalable Node.js backend
 The platform focuses on **real-time insights, seamless food browsing, and efficient order management**, making it a complete production-ready food platform.
 
 ---
+## 🔗 Live Demo
+
+**Live App:**
+[FoodieGo](https://foodiegoin.onrender.com)
+
+---
 
 ## 🚀 Project Overview
 
