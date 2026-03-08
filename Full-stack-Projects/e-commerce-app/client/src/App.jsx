@@ -19,6 +19,7 @@ import { ProductDetailComponent } from './components/ProductDetailComponent.jsx'
 import { CartContext } from './context/CartContext.js'
 import AdminHome from './pages/admin/AdminHome.jsx'
 import Loader from './components/Loader.jsx'
+import 'react-loading-skeleton/dist/skeleton.css' // for loading skeleton
 
 const App = () => {
 
