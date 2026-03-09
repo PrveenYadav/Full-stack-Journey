@@ -101,7 +101,7 @@ export const ShopPage = () => {
           </div>
 
           {loading && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 md:p-10 bg-white dark:bg-[#050505]">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 md:p-10">
               {[...Array(6)].map((_, i) => (
                 <ProductSkeleton key={i} />
               ))}

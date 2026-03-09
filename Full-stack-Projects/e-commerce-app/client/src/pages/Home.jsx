@@ -99,7 +99,7 @@ const Home = () => {
           </div>
 
           {loading && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 md:p-10 bg-white dark:bg-[#050505]">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 md:p-10">
               {[...Array(3)].map((_, i) => (
                 <ProductSkeleton key={i} />
               ))}
@@ -190,29 +190,15 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-24 sm:py-32 bg-white dark:bg-zinc-950">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tight dark:text-white mb-10">
-            The Outfytly Standard
-          </h2>
-          <p className="text-zinc-600 dark:text-zinc-400 leading-loose text-sm sm:text-base font-medium">
-            At Outfytly, we design timeless essentials with obsessive attention
-            to fabric, structure, and silhouette. Every piece is crafted to
-            outlast trends and become part of your everyday uniform. Minimal
-            design. Maximum intent.
-          </p>
-        </div>
-      </section>
-
       {/* Best Sellers */}
-      <section className="py-24 sm:py-32 bg-zinc-100 dark:bg-zinc-900">
+      <section className="py-24 sm:py-32 bg-white dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-black uppercase tracking-tight dark:text-white mb-16">
             Best Sellers
           </h2>
 
           {loading && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 md:p-10 bg-white dark:bg-[#050505]">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 md:p-10 ">
               {[...Array(3)].map((_, i) => (
                 <ProductSkeleton key={i} />
               ))}
@@ -265,6 +251,20 @@ const Home = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-24 sm:py-32 bg-zinc-100 dark:bg-zinc-900">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tight dark:text-white mb-10">
+            The Outfytly Standard
+          </h2>
+          <p className="text-zinc-600 dark:text-zinc-400 leading-loose text-sm sm:text-base font-medium">
+            At Outfytly, we design timeless essentials with obsessive attention
+            to fabric, structure, and silhouette. Every piece is crafted to
+            outlast trends and become part of your everyday uniform. Minimal
+            design. Maximum intent.
+          </p>
         </div>
       </section>
 
