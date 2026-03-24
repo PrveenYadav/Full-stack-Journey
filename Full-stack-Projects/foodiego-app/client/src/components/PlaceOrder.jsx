@@ -43,7 +43,7 @@ const PlaceOrder = ({setIsPlaceOrderOpen, total}) => {
                 <div className='flex justify-between mb-5'>
                     <h1 className='font-bold text-2xl'>CheckOut</h1>
                     <button onClick={() => setIsPlaceOrderOpen(false)}>
-                        <X className="w-6 h-6 text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-500 transition-all ease-in duration-200" />
+                        <X className="w-6 h-6 text-gray-600 dark:text-gray-300 cursor-pointer hover:text-orange-500 transition-all ease-in duration-200" />
                     </button>
                 </div>
 
@@ -71,7 +71,7 @@ const PlaceOrder = ({setIsPlaceOrderOpen, total}) => {
                     <p className='border opacity-10 w-full'></p>
                     <div className='flex justify-between'>
                       <h1 className='font-bold text-xl'>Total Amount</h1>
-                      <p className='font-bold text-2xl text-amber-500'>₹{total.toFixed(2)}</p>
+                      <p className='font-bold text-2xl text-orange-500'>₹{total.toFixed(2)}</p>
                     </div>
 
                     <button type='submit' className='bg-yellow-500 text-black font-semibold cursor-pointer rounded p-2'>Place Order</button>

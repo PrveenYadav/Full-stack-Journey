@@ -39,14 +39,14 @@ const StarRating = ({ rating, size = 16, className = "", onRatingChange, hoverRa
 
 const RatingBar = ({ label, percentage, count }) => (
   <div className="flex items-center gap-4 text-sm">
-    <span className="w-12 font-medium text-slate-600 dark:text-slate-400 whitespace-nowrap">{label}</span>
-    <div className="flex-1 h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+    <span className="w-12 font-medium text-zinc-600 dark:text-zinc-400 whitespace-nowrap">{label}</span>
+    <div className="flex-1 h-2.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
       <div 
         className="h-full bg-yellow-400 rounded-full transition-all duration-500" 
         style={{ width: `${percentage}%` }}
       />
     </div>
-    <span className="w-8 text-right text-slate-500">{count}</span>
+    <span className="w-8 text-right text-zinc-500">{count}</span>
   </div>
 );
 
@@ -58,7 +58,7 @@ const ReviewCard = ({ review }) => {
   });
 
   return (
-    <div className="py-8 border-b border-slate-100 dark:border-slate-800 last:border-0 animate-in fade-in slide-in-from-bottom-2 duration-300">
+    <div className="py-8 border-b border-zinc-100 dark:border-zinc-800 last:border-0 animate-in fade-in slide-in-from-bottom-2 duration-300">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold border border-indigo-200 dark:border-indigo-800">
@@ -66,26 +66,26 @@ const ReviewCard = ({ review }) => {
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <h4 className="font-semibold text-slate-900 dark:text-white leading-tight">
+              <h4 className="font-semibold text-zinc-900 dark:text-white leading-tight">
                 {review.name || "Anonymous"}
               </h4>
               {review.name && <BadgeCheck className="h-4 w-4 text-blue-500" />}
             </div>
             <div className="flex items-center gap-2 mt-1">
               <StarRating rating={review.rating} size={14} />
-              <span className="text-[10px] uppercase tracking-wider text-slate-400 flex items-center gap-1">
+              <span className="text-[10px] uppercase tracking-wider text-zinc-400 flex items-center gap-1">
                 <Calendar size={10} />
                 {formattedDate}
               </span>
             </div>
           </div>
         </div>
-        <button className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+        <button className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors">
           <MoreVertical size={18} />
         </button>
       </div>
 
-      <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm md:text-base mb-4">
+      <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-sm md:text-base mb-4">
         {review.comment}
       </p>
 
@@ -94,17 +94,17 @@ const ReviewCard = ({ review }) => {
           <img 
             src={review.image} 
             alt="Review attachment" 
-            className="max-w-[200px] h-auto rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:scale-[1.02] transition-transform cursor-zoom-in"
+            className="max-w-[200px] h-auto rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:scale-[1.02] transition-transform cursor-zoom-in"
           />
         </div>
       )}
 
       <div className="flex items-center gap-6 mt-2">
-        <button className="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+        <button className="flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
           <ThumbsUp size={14} />
           Helpful
         </button>
-        <button className="flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+        <button className="flex items-center gap-1.5 text-xs font-medium text-zinc-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
           <MessageSquare size={14} />
           Reply
         </button>
@@ -230,27 +230,27 @@ export const CustomerReview = ({ productId = "default_id" }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-200 font-sans">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-200 font-sans">
 
       <div className="max-w-7xl mx-auto">
         
         <div className="mb-10 text-center md:text-left">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Customer Reviews</h2>
-          <p className="text-slate-500 dark:text-slate-400">Honest feedback from our customers.</p>
+          <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2">Customer Reviews</h2>
+          <p className="text-zinc-500 dark:text-zinc-400">Honest feedback from our customers.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           <div className="lg:col-span-4 space-y-8">
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 sticky top-24">
+            <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 sticky top-24">
               <div className="text-center mb-8">
-                <div className="text-5xl font-black text-slate-900 dark:text-white mb-2">
+                <div className="text-5xl font-black text-zinc-900 dark:text-white mb-2">
                   {stats.avg.toFixed(1)}
                 </div>
                 <div className="flex justify-center mb-2">
                   <StarRating rating={stats.avg} size={24} />
                 </div>
-                <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">
                   Based on {stats.total} reviews
                 </p>
               </div>
@@ -284,13 +284,13 @@ export const CustomerReview = ({ productId = "default_id" }) => {
           <div className="lg:col-span-8 space-y-6">
             
             {isFormOpen && (
-              <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-8 shadow-xl border-2 border-indigo-500/20 animate-in zoom-in-95 duration-200">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Share your experience</h3>
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 md:p-8 shadow-xl border-2 border-indigo-500/20 animate-in zoom-in-95 duration-200">
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-6">Share your experience</h3>
                 
                 <div className="space-y-6">
                   {/* Star Picker */}
-                  <div className="flex flex-col items-center p-6 bg-slate-50 dark:bg-slate-950/50 rounded-xl border border-slate-100 dark:border-slate-800">
-                    <p className="text-sm font-medium text-slate-500 mb-3 uppercase tracking-wider">Overall Rating</p>
+                  <div className="flex flex-col items-center p-6 bg-zinc-50 dark:bg-zinc-950/50 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                    <p className="text-sm font-medium text-zinc-500 mb-3 uppercase tracking-wider">Overall Rating</p>
                     <StarRating 
                       rating={rating} 
                       hoverRating={hover}
@@ -300,32 +300,32 @@ export const CustomerReview = ({ productId = "default_id" }) => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Posting as</label>
-                    <div className="w-full p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 text-sm border border-slate-100 dark:border-slate-800">
+                    <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Posting as</label>
+                    <div className="w-full p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-300 text-sm border border-zinc-100 dark:border-zinc-800">
                       {userData?.name || "Guest User"}
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Comment</label>
+                    <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Comment</label>
                     <textarea
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                       placeholder="What did you like or dislike?"
                       rows={4}
-                      className="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                      className="w-full p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
                       <ImageIcon size={14} /> Add Product Photo
                     </label>
                     
                     {!previewUrl ? (
                       <div 
                         onClick={() => fileInputRef.current?.click()}
-                        className="cursor-pointer group w-full h-32 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center justify-center gap-2 text-slate-400 hover:border-indigo-400 hover:text-indigo-400 transition-all"
+                        className="cursor-pointer group w-full h-32 border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl flex flex-col items-center justify-center gap-2 text-zinc-400 hover:border-indigo-400 hover:text-indigo-400 transition-all"
                       >
                         <Plus size={24} className="group-hover:scale-110 transition-transform" />
                         <span className="text-xs font-medium">Click to upload (Max 2MB)</span>
@@ -356,7 +356,7 @@ export const CustomerReview = ({ productId = "default_id" }) => {
                     className={`w-full py-4 rounded-xl font-bold text-white transition-all shadow-lg flex items-center justify-center gap-2 ${
                       rating > 0 && !isSubmitting
                         ? "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-500/25"
-                        : "bg-slate-300 dark:bg-slate-800 cursor-not-allowed shadow-none"
+                        : "bg-zinc-300 dark:bg-zinc-800 cursor-not-allowed shadow-none"
                     }`}
                   >
                     {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : "Post Review"}
@@ -366,23 +366,23 @@ export const CustomerReview = ({ productId = "default_id" }) => {
             )}
 
             {/* Reviews List section */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 md:p-10 shadow-sm border border-slate-100 dark:border-slate-800">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100 dark:border-slate-800">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+            <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 md:p-10 shadow-sm border border-zinc-100 dark:border-zinc-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-zinc-100 dark:border-zinc-800">
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
                   Latest Reviews
                 </h3>
                 <div className="flex items-center gap-3">
-                  <span className="text-sm text-slate-500">Sort:</span>
-                  <select className="bg-slate-50 dark:bg-slate-800 text-sm font-medium py-1.5 px-3 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 outline-none text-slate-700 dark:text-slate-300">
+                  <span className="text-sm text-zinc-500">Sort:</span>
+                  <select className="bg-zinc-50 dark:bg-zinc-800 text-sm font-medium py-1.5 px-3 rounded-lg border-0 focus:ring-2 focus:ring-indigo-500 outline-none text-zinc-700 dark:text-zinc-300">
                     <option>Newest First</option>
                     <option>Highest Rated</option>
                   </select>
                 </div>
               </div>
 
-              <div className="divide-y divide-slate-100 dark:divide-slate-800">
+              <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
                 {loadingReviews ? (
-                  <div className="py-20 flex flex-col items-center justify-center text-slate-400 gap-4">
+                  <div className="py-20 flex flex-col items-center justify-center text-zinc-400 gap-4">
                     <Loader2 className="animate-spin" size={32} />
                     <p className="text-sm font-medium">Fetching community feedback...</p>
                   </div>
@@ -392,8 +392,8 @@ export const CustomerReview = ({ productId = "default_id" }) => {
                   ))
                 ) : (
                   <div className="py-20 text-center">
-                    <MessageSquare size={48} className="mx-auto text-slate-200 dark:text-slate-800 mb-4" />
-                    <p className="text-slate-500 dark:text-slate-400">No reviews yet. Be the first to share your thoughts!</p>
+                    <MessageSquare size={48} className="mx-auto text-zinc-200 dark:text-zinc-800 mb-4" />
+                    <p className="text-zinc-500 dark:text-zinc-400">No reviews yet. Be the first to share your thoughts!</p>
                   </div>
                 )}
               </div>

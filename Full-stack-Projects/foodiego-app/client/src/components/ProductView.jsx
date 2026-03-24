@@ -51,17 +51,17 @@ export const ProductView = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
       {/* Mobile header Nav */}
-      <nav className="flex items-center justify-between p-4 lg:hidden sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-30">
-        <button onClick={() => navigate(-1)} className="p-2 rounded-full bg-white dark:bg-slate-800 shadow-sm">
+      <nav className="flex items-center justify-between p-4 lg:hidden sticky top-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md z-30">
+        <button onClick={() => navigate(-1)} className="p-2 rounded-full bg-white dark:bg-zinc-800 shadow-sm">
           <ChevronLeft className="w-6 h-6" />
         </button>
         <div className="flex gap-2">
-          <button className="p-2 rounded-full bg-white dark:bg-slate-800 shadow-sm" onClick={() => setIsLiked(!isLiked)}>
+          <button className="p-2 rounded-full bg-white dark:bg-zinc-800 shadow-sm" onClick={() => setIsLiked(!isLiked)}>
             <Heart className={`w-6 h-6 ${isLiked ? 'fill-red-500 text-red-500' : ''}`} />
           </button>
-          <button className="p-2 rounded-full bg-white dark:bg-slate-800 shadow-sm">
+          <button className="p-2 rounded-full bg-white dark:bg-zinc-800 shadow-sm">
             <Share2 className="w-6 h-6" />
           </button>
         </div>
@@ -71,7 +71,7 @@ export const ProductView = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           
           <div className="space-y-4">
-            <div className="relative aspect-square overflow-hidden rounded-3xl bg-slate-200 dark:bg-slate-800 shadow-xl group">
+            <div className="relative aspect-square overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 shadow-xl group">
               <img 
                 src={product?.images?.[selectedImage]?.url} 
                 alt={product?.name}
@@ -80,7 +80,7 @@ export const ProductView = () => {
 
               <div className="absolute top-4 left-4 flex gap-2">
                 {product?.dietary?.map((tag, i) => (
-                  <span key={i} className="px-3 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm text-xs font-bold uppercase tracking-wider rounded-full shadow-sm text-orange-600 dark:text-orange-400">
+                  <span key={i} className="px-3 py-1 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm text-xs font-bold uppercase tracking-wider rounded-full shadow-sm text-orange-600 dark:text-orange-400">
                     {tag}
                   </span>
                 ) || "Unavalable")}
@@ -126,15 +126,15 @@ export const ProductView = () => {
                 <div className="flex items-center gap-1">
                   <Star className="w-5 h-5 fill-orange-400 text-orange-400" />
                   <span className="font-bold">{product?.averageRating}</span>
-                  <span className="text-slate-500 text-sm">({product?.ratingUsers} reviews)</span>
+                  <span className="text-zinc-500 text-sm">({product?.ratingUsers} reviews)</span>
                 </div>
-                <div className="h-4 w-px bg-slate-300 dark:bg-slate-700" />
-                <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                <div className="h-4 w-px bg-zinc-300 dark:bg-zinc-700" />
+                <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">
                   <Clock className="w-4 h-4" />
                   {/* <span className="text-sm font-medium">{product?.prepTime || "15-20 min"}</span> */}
                   <span className="text-sm font-medium">{product && prepTime(product)}</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">
                   <Flame className="w-4 h-4 text-orange-500" />
                   <span className="text-sm font-medium">{product?.calories || "840 kcal"}</span>
                 </div>
@@ -146,13 +146,13 @@ export const ProductView = () => {
             </div>
 
             <div className="space-y-4">
-              <div className="flex border-b border-slate-200 dark:border-slate-800 overflow-x-scroll">
+              <div className="flex border-b border-zinc-200 dark:border-zinc-800 overflow-x-scroll">
                 {['description', 'ingredients', 'nutrition'].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
                     className={`pb-4 px-4 text-sm font-bold cursor-pointer uppercase tracking-wider transition-all relative ${
-                      activeTab === tab ? 'text-orange-500' : 'text-slate-500'
+                      activeTab === tab ? 'text-orange-500' : 'text-zinc-500'
                     }`}
                   >
                     {tab}
@@ -165,14 +165,14 @@ export const ProductView = () => {
               
               <div className="min-h-[100px] animate-in fade-in slide-in-from-bottom-2 duration-300">
                 {activeTab === 'description' && (
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     {product?.description}
                   </p>
                 )}
                 {activeTab === 'ingredients' && (
                   <div className="flex flex-wrap gap-2">
                     {product.ingredients.map((item, i) => (
-                      <span key={i} className="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-sm border border-slate-200 dark:border-slate-700">
+                      <span key={i} className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 rounded-xl text-sm border border-zinc-200 dark:border-zinc-700">
                         {item}
                       </span>
                     ))}
@@ -181,8 +181,8 @@ export const ProductView = () => {
                 {activeTab === 'nutrition' && (
                   <div className="grid grid-cols-3 gap-4">
                     {product.nutrients.map((n, i) => (
-                      <div key={i} className="p-3 bg-slate-100 dark:bg-slate-800/50 rounded-2xl text-center">
-                        <div className="text-xs text-slate-500 uppercase mb-1">{n.label}</div>
+                      <div key={i} className="p-3 bg-zinc-100 dark:bg-zinc-800/50 rounded-2xl text-center">
+                        <div className="text-xs text-zinc-500 uppercase mb-1">{n.label}</div>
                         <div className="font-bold text-lg">{n.value}</div>
                       </div>
                     ))}
@@ -191,14 +191,14 @@ export const ProductView = () => {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-6">
+            <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800 space-y-6">
               
               <div className="flex items-center justify-between">
                 <span className="font-bold text-lg">Quantity</span>
-                <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 p-1 rounded-2xl border border-zinc-200 dark:border-zinc-700">
                   <button 
                     onClick={() => handleQuantity('dec')}
-                    className="p-2 hover:bg-white dark:hover:bg-slate-700 rounded-xl transition-all cursor-pointer"
+                    className="p-2 hover:bg-white dark:hover:bg-zinc-700 rounded-xl transition-all cursor-pointer"
                   >
                     <Minus className="w-5 h-5" />
                   </button>
@@ -207,7 +207,7 @@ export const ProductView = () => {
 
                   <button 
                     onClick={() => handleQuantity('inc')}
-                    className="p-2 cursor-pointer hover:bg-white dark:hover:bg-slate-700 rounded-xl transition-all"
+                    className="p-2 cursor-pointer hover:bg-white dark:hover:bg-zinc-700 rounded-xl transition-all"
                   >
                     <Plus className="w-5 h-5" />
                   </button>
@@ -219,12 +219,12 @@ export const ProductView = () => {
                   <ShoppingBag className="w-6 h-6" />
                   Add to Cart
                 </button>
-                <button onClick={() => navigate('/cart')} className="flex-1 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold py-4 px-8 rounded-2xl transition-all hover:opacity-90 cursor-pointer">
+                <button onClick={() => navigate('/cart')} className="flex-1 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-bold py-4 px-8 rounded-2xl transition-all hover:opacity-90 cursor-pointer">
                   Buy Now
                 </button>
               </div>
               
-              <p className="flex items-center gap-2 text-xs text-slate-500 justify-center">
+              <p className="flex items-center gap-2 text-xs text-zinc-500 justify-center">
                 <Info className="w-4 h-4" />
                 Free delivery on orders over ₹50
               </p>
@@ -234,17 +234,69 @@ export const ProductView = () => {
       </main>
 
       {/* Products recommendation Section */}
-      <section className="max-w-7xl mx-auto px-4 py-12">
-        <h2 className="text-2xl font-bold mb-6">Recommended Products</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="max-w-7xl mx-auto px-4 py-14">
+        
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+            Recommended for you
+          </h2>
+          <button onClick={()=>navigate('/')} className="text-sm text-orange-500 font-semibold hover:underline">
+            View All
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
           {recommendedProducts?.map((item) => (
-            <div key={item._id} className="bg-white dark:bg-slate-900 p-3 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800">
-              <div onClick={() => handleProductClick(item._id)} className="aspect-square rounded-2xl bg-slate-200 dark:bg-slate-800 mb-3 overflow-hidden cursor-pointer">
-                <img src={item.images[0].url} alt={item.name} className="w-full h-full object-cover" />
+            
+            <div
+              key={item._id}
+              className="group bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-100 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              
+              {/* Image */}
+              <div
+                onClick={() => handleProductClick(item._id)}
+                className="relative aspect-square overflow-hidden cursor-pointer"
+              >
+                <img
+                  src={item.images[0].url}
+                  alt={item.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+
+                <span className="absolute top-3 left-3 bg-white/90 dark:bg-zinc-800 text-xs px-2 py-1 rounded-full font-medium shadow">
+                  New
+                </span>
               </div>
-              <h3 className="font-bold text-sm truncate">{item.name}</h3>
-              <p className="text-orange-500 font-bold mt-1">₹{item.price}</p>
+
+              <div className="p-4 space-y-2">
+                
+                <h3 className="font-semibold text-sm md:text-base line-clamp-1">
+                  {item.name}
+                </h3>
+
+                <div className="flex items-center justify-between">
+                  <p className="text-orange-500 font-bold text-base">
+                    ₹{item.price}
+                  </p>
+
+                  <div className="flex items-center gap-1 text-orange-500 font-bold text-xs sm:text-sm shrink-0">
+                    <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-orange-500" />
+                    <span>{item.averageRating}</span>
+                  </div>                  
+                </div>
+
+                <button
+                  onClick={() => addToCart(item)}
+                  className="w-full mt-2 bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 rounded-xl transition active:scale-95 cursor-pointer"
+                >
+                  Add to Cart
+                </button>
+
+              </div>
             </div>
+
           ))}
         </div>
       </section>

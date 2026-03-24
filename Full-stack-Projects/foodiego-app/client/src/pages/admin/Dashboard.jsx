@@ -68,8 +68,8 @@ const SidebarItem = ({ icon: Icon, label, active, onClick }) => (
     onClick={onClick}
     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors cursor-pointer ${
       active 
-        ? 'bg-amber-500 text-white shadow-md' 
-        : 'text-slate-600 dark:text-slate-400 hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-amber-600'
+        ? 'bg-orange-500 text-white shadow-md' 
+        : 'text-zinc-600 dark:text-zinc-400 hover:bg-orange-50 dark:hover:bg-zinc-800 hover:text-orange-600'
     }`}
   >
     <Icon size={20} />
@@ -78,10 +78,10 @@ const SidebarItem = ({ icon: Icon, label, active, onClick }) => (
 );
 
 const Card = ({ children, title, action, className = "" }) => (
-  <div className={`bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden h-full ${className}`}>
+  <div className={`bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden h-full ${className}`}>
     {(title || action) && (
-      <div className="px-4 sm:px-6 py-4 border-b border-slate-50 dark:border-slate-800 flex justify-between items-center">
-        <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm sm:text-base">{title}</h3>
+      <div className="px-4 sm:px-6 py-4 border-b border-zinc-50 dark:border-zinc-800 flex justify-between items-center">
+        <h3 className="font-bold text-zinc-800 dark:text-zinc-100 text-sm sm:text-base">{title}</h3>
         {action}
       </div>
     )}
@@ -91,8 +91,8 @@ const Card = ({ children, title, action, className = "" }) => (
 
 const StatusBadge = ({ status }) => {
   const styles = {
-    'pending': 'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800',
-    'processing': 'bg-amber-100 text-yellow-500 border-green-200 dark:bg-yellow-800/30 dark:text-yellow-400 dark:border-lime-700',
+    'pending': 'bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400 dark:border-orange-800',
+    'processing': 'bg-orange-100 text-yellow-500 border-green-200 dark:bg-yellow-800/30 dark:text-yellow-400 dark:border-lime-700',
     // 'processing': 'bg-blue-100 text-blue-300 border-blue-200 dark:bg-blue-600/20 dark:text-blue-300 dark:border-blue-800',
     'shipped': 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800',
     'delivered': 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800',
@@ -101,7 +101,7 @@ const StatusBadge = ({ status }) => {
     'Out of Stock': 'bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-900/30 dark:text-rose-400 dark:border-rose-800',
   };
   return (
-    <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold border ${styles[status] || 'bg-slate-100 text-slate-700'}`}>
+    <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold border ${styles[status] || 'bg-zinc-100 text-zinc-700'}`}>
       {status}
     </span>
   );
@@ -112,10 +112,10 @@ const ImageSlider = ({ images }) => {
 
   if (!images || images.length === 0) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-slate-100 dark:bg-slate-800">
+      <div className="w-full h-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
         <UtensilsCrossed
           size={32}
-          className="text-slate-200 dark:text-slate-700"
+          className="text-zinc-200 dark:text-zinc-700"
         />
       </div>
     );
@@ -170,7 +170,7 @@ const ImageSlider = ({ images }) => {
                 key={i}
                 className={`h-1.5 rounded-full transition-all ${
                   i === index
-                    ? "w-4 bg-amber-500"
+                    ? "w-4 bg-orange-500"
                     : "w-1.5 bg-white/50"
                 }`}
               />
@@ -799,7 +799,7 @@ export default function Dashboard() {
 
 
   return (
-    <div className={`h-screen transition-colors duration-200 ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'} flex font-sans overflow-hidden`}>
+    <div className={`h-screen transition-colors duration-200 ${darkMode ? 'bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900'} flex font-sans overflow-hidden`}>
       
       {/* Sidebar Overlay for Mobile */}
       {isSidebarOpen && (
@@ -809,16 +809,16 @@ export default function Dashboard() {
         />
       )}
 
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-zinc-900 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
         <div className="flex flex-col p-6">
           <div className="flex items-center justify-between mb-10 px-2">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-white">
+              <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-white">
                 <UtensilsCrossed size={24} />
               </div>
               <span className="text-xl font-bold tracking-tight dark:text-white">FoodieGo</span>
             </div>
-            <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-1 text-slate-400">
+            <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-1 text-zinc-400">
               <X size={24} />
             </button>
           </div>
@@ -833,9 +833,9 @@ export default function Dashboard() {
           </nav>
 
           <div className='flex flex-col pt-6 absolute bottom-5'>
-            <div className='border border-slate-100 dark:border-slate-800 w-58'></div>
+            <div className='border border-zinc-100 dark:border-zinc-800 w-58'></div>
             <div className="pt-6">
-              <button onClick={handleLogout} className="w-full flex items-center space-x-3 px-4 py-3 text-slate-500 hover:text-orange-600 transition-colors cursor-pointer">
+              <button onClick={handleLogout} className="w-full flex items-center space-x-3 px-4 py-3 text-zinc-500 hover:text-orange-600 transition-colors cursor-pointer">
                 <LogOut size={20} />
                 <span className="font-medium">Logout</span>
               </button>
@@ -847,22 +847,22 @@ export default function Dashboard() {
 
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
         
-        <header className="h-[8%] bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 lg:px-8 shrink-0">
+        <header className="h-[8%] bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-4 lg:px-8 shrink-0">
           <div className="flex items-center space-x-3 sm:space-x-4">
-            <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md">
+            <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md">
               <Menu size={20} />
             </button>
-            <div className="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg w-64 lg:w-96">
-              <Search size={18} className="text-slate-400" />
+            <div className="hidden md:flex items-center bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-lg w-64 lg:w-96">
+              <Search size={18} className="text-zinc-400" />
               <input 
                 type="text" 
                 placeholder="Search orders, menu..." 
-                className="bg-transparent border-none focus:ring-0 text-sm ml-2 w-full dark:text-slate-200" 
+                className="bg-transparent border-none focus:ring-0 text-sm ml-2 w-full dark:text-zinc-200" 
                 value={searchQuery} 
                 onChange={(e) => setSearchQuery(e.target.value)} 
               />
             </div>
-            <div className="md:hidden flex items-center text-slate-400">
+            <div className="md:hidden flex items-center text-zinc-400">
                <Search size={20} />
             </div>
           </div>
@@ -871,22 +871,22 @@ export default function Dashboard() {
             <button 
               // onClick={() => setDarkMode(!darkMode)}
               onClick={toggleDarkMode}
-              className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer"
+              className="p-2 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full cursor-pointer"
             >
-              {darkMode ? <Sun size={20} className="text-amber-400" /> : <Moon size={20} />}
+              {darkMode ? <Sun size={20} className="text-orange-400" /> : <Moon size={20} />}
             </button>
-            <button className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full relative">
+            <button className="p-2 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full relative">
               <Bell size={20} />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-orange-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-orange-500 rounded-full border-2 border-white dark:border-zinc-900"></span>
             </button>
-            <div className="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-1 sm:mx-2"></div>
+            <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800 mx-1 sm:mx-2"></div>
             <div className="flex items-center space-x-2 sm:space-x-3 group relative">
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-bold dark:text-slate-100">{adminProfile.name}</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">{adminProfile.role}</p>
+                <p className="text-sm font-bold dark:text-zinc-100">{adminProfile.name}</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">{adminProfile.role}</p>
               </div>
               <div className="relative w-8 h-8 sm:w-10 sm:h-10">
-                <img src={adminProfile.image} alt="Profile" className="w-full h-full rounded-full object-cover bg-slate-200 border-2 border-orange-500/20" />
+                <img src={adminProfile.image} alt="Profile" className="w-full h-full rounded-full object-cover bg-zinc-200 border-2 border-orange-500/20" />
                 <label className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
                   <Camera size={12} className="text-white" />
                   <input 
@@ -915,16 +915,16 @@ export default function Dashboard() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h1 className="text-xl sm:text-2xl font-bold dark:text-white">Dashboard Overview</h1>
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Snapshot of your restaurant's performance.</p>
+                  <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">Snapshot of your restaurant's performance.</p>
                 </div>
                 <div className="flex gap-2">
 
-                  <button onClick={() => downloadDashboardPDF(orders, customers, totalRevenue, activeOrders)} className="flex-1 sm:flex-none flex items-center justify-center space-x-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-sm">
+                  <button onClick={() => downloadDashboardPDF(orders, customers, totalRevenue, activeOrders)} className="flex-1 sm:flex-none flex items-center justify-center space-x-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer">
                     <Download size={18} />
                     <span>Report</span>
                   </button>
 
-                  <button onClick={() => { setEditingItem(null); setIsMenuModalOpen(true); }} className="flex-1 sm:flex-none flex items-center justify-center space-x-2 bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-sm">
+                  <button onClick={() => { setEditingItem(null); setIsMenuModalOpen(true); }} className="flex-1 sm:flex-none flex items-center justify-center space-x-2 bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer">
                     <Plus size={20} />
                     <span>Add Dish</span>
                   </button>
@@ -932,24 +932,24 @@ export default function Dashboard() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center space-x-4">
+                <div className="bg-white dark:bg-zinc-900 p-4 sm:p-6 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex items-center space-x-4">
                   <div className="p-3 rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400"><TrendingUp size={24} /></div>
                   <div>
-                    <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">Today's Revenue</p>
+                    <p className="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-400">Today's Revenue</p>
                     <h2 className="text-lg sm:text-2xl font-bold dark:text-white">{formatRupee(totalRevenue)}</h2>
                   </div>
                 </div>
-                <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center space-x-4">
+                <div className="bg-white dark:bg-zinc-900 p-4 sm:p-6 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex items-center space-x-4">
                   <div className="p-3 rounded-lg bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"><ClipboardList size={24} /></div>
                   <div>
-                    <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">Active Orders</p>
+                    <p className="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-400">Active Orders</p>
                     <h2 className="text-lg sm:text-2xl font-bold dark:text-white">{activeOrders}</h2>
                   </div>
                 </div>
-                <div className="bg-white dark:bg-slate-900 p-4 sm:p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center space-x-4 sm:col-span-2 lg:col-span-1">
+                <div className="bg-white dark:bg-zinc-900 p-4 sm:p-6 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex items-center space-x-4 sm:col-span-2 lg:col-span-1">
                   <div className="p-3 rounded-lg bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"><Users size={24} /></div>
                   <div>
-                    <p className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">Total Customers</p>
+                    <p className="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-400">Total Customers</p>
                     <h2 className="text-lg sm:text-2xl font-bold dark:text-white">{customers.length}</h2>
                   </div>
                 </div>
@@ -964,24 +964,24 @@ export default function Dashboard() {
                     </div>) :
                  ( <div className="space-y-4">
                     {orders.filter(o => o.status !== 'delivered' && o.status !== 'cancelled').map(order => (
-                      <div key={order._id} className="flex items-center justify-between p-3 sm:p-4 border border-slate-100 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                      <div key={order._id} className="flex items-center justify-between p-3 sm:p-4 border border-zinc-100 dark:border-zinc-800 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all">
                           <div className="flex items-center space-x-3 sm:space-x-4">
-                              <div className={`w-1 sm:w-2 h-10 sm:h-12 rounded-full ${order.status === 'pending' ? 'bg-amber-400' : 'bg-blue-400'}`}></div>
+                              <div className={`w-1 sm:w-2 h-10 sm:h-12 rounded-full ${order.status === 'pending' ? 'bg-orange-400' : 'bg-blue-400'}`}></div>
                               <div>
-                                <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm">#{order.orderId} - {order.orderInfo?.name}</h4>
-                                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate max-w-[150px] sm:max-w-none">{order.items.length} Items • {formatDateTime(order.createdAt)}</p>
+                                <h4 className="font-bold text-zinc-800 dark:text-zinc-100 text-sm">#{order.orderId} - {order.orderInfo?.name}</h4>
+                                <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 truncate max-w-[150px] sm:max-w-none">{order.items.length} Items • {formatDateTime(order.createdAt)}</p>
                               </div>
                           </div>
                           <div className="flex items-center space-x-2 sm:space-x-3">
                               <StatusBadge status={order.status} />
-                              <button onClick={() => advanceOrder(order)} className="p-1.5 sm:p-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-lg hover:bg-orange-500 hover:text-white transition-all">
+                              <button onClick={() => advanceOrder(order)} className="p-1.5 sm:p-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-lg hover:bg-orange-500 hover:text-white transition-all cursor-pointer">
                                 <CheckCircle size={16} />
                               </button>
                           </div>
                       </div>
                     ))}
                     {orders.filter(o => o.status !== 'delivered' && o.status !== 'cancelled').length === 0 && (
-                      <p className="text-center text-slate-400 py-4 text-sm">No active orders right now.</p>
+                      <p className="text-center text-zinc-400 py-4 text-sm">No active orders right now.</p>
                     )}
                   </div>)
                   }
@@ -995,19 +995,19 @@ export default function Dashboard() {
                       <p className="text-gray-500 animate-pulse font-bold uppercase tracking-widest text-xs">Loading Customers...</p>
                     </div>)
                   :
-                    (<div className="divide-y divide-slate-100 dark:divide-slate-800">
+                    (<div className="divide-y divide-zinc-100 dark:divide-zinc-800">
                       {customers?.map(c => (
                         <div key={c._id} className="py-3 flex items-center justify-between">
                           <div className="flex items-center space-x-3">
-                              <img src={`https://api.dicebear.com/7.x/initials/svg?seed=${c.name}`} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-slate-200 dark:border-slate-700" alt=""/>
+                              <img src={`https://api.dicebear.com/7.x/initials/svg?seed=${c.name}`} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-zinc-200 dark:border-zinc-700" alt=""/>
                               <div>
-                                <p className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">{c.name}</p>
-                                <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">{c.totalOrders} total orders</p>
+                                <p className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100">{c.name}</p>
+                                <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400">{c.totalOrders} total orders</p>
                               </div>
                           </div>
                           <div className="text-right">
-                              <p className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">{formatRupee(c.totalSpent)}</p>
-                              <p className="text-[10px] text-slate-400 uppercase font-bold tracking-tight">Spent</p>
+                              <p className="text-xs sm:text-sm font-bold text-zinc-800 dark:text-zinc-100">{formatRupee(c.totalSpent)}</p>
+                              <p className="text-[10px] text-zinc-400 uppercase font-bold tracking-tight">Spent</p>
                           </div>
                         </div>
                       ))}
@@ -1036,7 +1036,7 @@ export default function Dashboard() {
                     setIsMenuModalOpen(true); 
 
                   }}
-                  className="bg-amber-500 hover:bg-amber-600 text-white px-3 sm:px-4 py-2 rounded-lg font-bold flex items-center gap-2 text-sm"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 rounded-lg font-bold flex items-center gap-2 text-sm cursor-pointer"
                 >
                   <Plus size={18}/> <span className="hidden sm:inline">Add New</span><span className="sm:hidden">Add</span>
                 </button>
@@ -1044,24 +1044,24 @@ export default function Dashboard() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {menuItems.map(item => (
-                  <div key={item?._id} className="bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col group">
-                    <div className="h-44 sm:h-52 bg-slate-100 dark:bg-slate-800 flex items-center justify-center relative">
+                  <div key={item?._id} className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden flex flex-col group">
+                    <div className="h-44 sm:h-52 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center relative">
                       <ImageSlider images={item?.images} />
                       <div className="absolute top-2 sm:top-3 right-2 sm:right-3"><StatusBadge status={item?.status || 'Available'}/></div>
                     </div>
                     <div className="p-4 sm:p-5 flex-1">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm sm:text-base">{item?.name}</h3>
-                        <span className="text-amber-500 font-bold text-sm">{formatRupee(item?.price)}</span>
+                        <h3 className="font-bold text-zinc-800 dark:text-zinc-100 text-sm sm:text-base">{item?.name}</h3>
+                        <span className="text-orange-500 font-bold text-sm">{formatRupee(item?.price)}</span>
                       </div>
-                      <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">{item?.description}</p>
-                      <div className="flex justify-between items-center pt-4 border-t border-slate-50 dark:border-slate-800">
-                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded">{item?.category}</span>
+                      <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 mb-4 line-clamp-2">{item?.description}</p>
+                      <div className="flex justify-between items-center pt-4 border-t border-zinc-50 dark:border-zinc-800">
+                          <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider bg-zinc-50 dark:bg-zinc-800 px-2 py-1 rounded">{item?.category}</span>
 
                           <div className="flex space-x-1">
-                            <button onClick={() => { setEditingItem(item); setProductImages(item?.images || []); setIsMenuModalOpen(true); openEditProductModal(item); }} className="p-1.5 sm:p-2 text-slate-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all"><Edit2 size={16}/></button>
+                            <button onClick={() => { setEditingItem(item); setProductImages(item?.images || []); setIsMenuModalOpen(true); openEditProductModal(item); }} className="p-1.5 sm:p-2 text-zinc-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all cursor-pointer"><Edit2 size={16}/></button>
 
-                            <button onClick={() => openDeleteModal(item._id)} className="p-1.5 sm:p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-lg transition-all"><Trash2 size={16}/></button>
+                            <button onClick={() => openDeleteModal(item._id)} className="p-1.5 sm:p-2 text-zinc-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-lg transition-all cursor-pointer"><Trash2 size={16}/></button>
                           </div>
                       </div>
                     </div>
@@ -1077,14 +1077,14 @@ export default function Dashboard() {
                
                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                   <div className="md:col-span-1">
-                     <h3 className="font-bold text-slate-800 dark:text-slate-200">Admin Profile</h3>
-                     <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Manage your personal branding and security.</p>
+                     <h3 className="font-bold text-zinc-800 dark:text-zinc-200">Admin Profile</h3>
+                     <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">Manage your personal branding and security.</p>
                   </div>
                   <div className="md:col-span-2 space-y-4">
                      <Card>
                         <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 mb-6">
                             <div className="relative group">
-                                <img src={adminProfile.image} alt="Admin" className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-4 border-white dark:border-slate-800 shadow-md" />
+                                <img src={adminProfile.image} alt="Admin" className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-4 border-white dark:border-zinc-800 shadow-md" />
                                 <label className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white text-[10px] font-bold opacity-0 group-hover:opacity-100 rounded-2xl cursor-pointer transition-opacity">
                                     <Camera size={18} className="mb-1" />
                                     CHANGE
@@ -1095,28 +1095,28 @@ export default function Dashboard() {
                             {isEditingProfile ? (
                               <div className="flex-1 space-y-3 w-full">
                                 <div className="space-y-1">
-                                  <label className="text-[10px] font-bold text-slate-400 uppercase">Full Name</label>
+                                  <label className="text-[10px] font-bold text-zinc-400 uppercase">Full Name</label>
                                   <input 
                                     type="text" 
                                     value={profileForm.name} 
                                     onChange={(e) => setProfileForm({...profileForm, name: e.target.value})}
-                                    className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
+                                    className="w-full px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
                                   />
                                 </div>
                                 <div className="space-y-1">
-                                  <label className="text-[10px] font-bold text-slate-400 uppercase">Role / Title</label>
+                                  <label className="text-[10px] font-bold text-zinc-400 uppercase">Role / Title</label>
                                   <input 
                                     type="text" 
                                     value={profileForm.role} 
                                     onChange={(e) => setProfileForm({...profileForm, role: e.target.value})}
-                                    className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
+                                    className="w-full px-3 py-1.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
                                   />
                                 </div>
                                 <div className="flex space-x-2 pt-1">
-                                  <button onClick={handleProfileSave} className="flex items-center space-x-1 px-3 py-1 bg-emerald-500 text-white rounded-md text-xs font-bold hover:bg-emerald-600">
+                                  <button onClick={handleProfileSave} className="flex items-center space-x-1 px-3 py-1 bg-emerald-500 text-white rounded-md text-xs font-bold hover:bg-emerald-600 cursor-pointer">
                                     <Check size={14}/> <span>Save</span>
                                   </button>
-                                  <button onClick={handleProfileCancel} className="flex items-center space-x-1 px-3 py-1 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-md text-xs font-bold hover:bg-slate-300 dark:hover:bg-slate-600">
+                                  <button onClick={handleProfileCancel} className="flex items-center space-x-1 px-3 py-1 bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 rounded-md text-xs font-bold hover:bg-zinc-300 dark:hover:bg-zinc-600 cursor-pointer">
                                     <X size={14}/> <span>Cancel</span>
                                   </button>
                                 </div>
@@ -1124,70 +1124,70 @@ export default function Dashboard() {
                             ) : (
                               <div className="space-y-1 text-center sm:text-left">
                                 <h4 className="text-base sm:text-lg font-bold dark:text-white">{adminProfile.name}</h4>
-                                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">{adminProfile.role}</p>
+                                <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">{adminProfile.role}</p>
                                 <button 
                                   onClick={() => setIsEditingProfile(true)}
-                                  className="text-[10px] sm:text-xs font-bold text-orange-600 hover:underline flex items-center justify-center sm:justify-start mt-2"
+                                  className="text-[10px] sm:text-xs font-bold text-orange-600 hover:underline flex items-center justify-center sm:justify-start mt-2 cursor-pointer"
                                 >
                                   <Edit2 size={12} className="mr-1" /> Edit Name/Role
                                 </button>
                               </div>
                             )}
                         </div>
-                        <div className="flex items-center justify-between p-3 sm:p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <div className="flex items-center justify-between p-3 sm:p-4 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-700">
                             <div className="flex items-center space-x-3">
                                 <div className={`p-2 rounded-lg ${darkMode ? 'bg-indigo-900/30 text-indigo-400' : 'bg-indigo-100 text-indigo-600'}`}>
                                     {darkMode ? <Moon size={18} /> : <Sun size={18} />}
                                 </div>
                                 <div>
-                                    <p className="text-xs sm:text-sm font-bold dark:text-slate-200">Dark Mode</p>
-                                    <p className="text-[10px] sm:text-xs text-slate-500">Enable dark theme for the dashboard</p>
+                                    <p className="text-xs sm:text-sm font-bold dark:text-zinc-200">Dark Mode</p>
+                                    <p className="text-[10px] sm:text-xs text-zinc-500">Enable dark theme for the dashboard</p>
                                 </div>
                             </div>
                             <button 
                                 onClick={() => setDarkMode(!darkMode)}
-                                className={`w-10 sm:w-12 h-5 sm:h-6 rounded-full relative transition-colors duration-200 ${darkMode ? 'bg-orange-500' : 'bg-slate-300'}`}
+                                className={`w-10 sm:w-12 h-5 sm:h-6 cursor-pointer rounded-full relative transition-colors duration-200 ${darkMode ? 'bg-orange-500' : 'bg-zinc-300'}`}
                             >
-                                <div className={`absolute top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${darkMode ? 'translate-x-5 sm:translate-x-7' : 'translate-x-0.5 sm:translate-x-1'}`}></div>
+                                <div className={`absolute top-0.5 sm:top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${darkMode ? 'translate-x-5 sm:traslatete-x-7' : 'trslateate-x-0.5 sm:tslatelate-x-1'}`}></div>
                             </button>
                         </div>
                      </Card>
                   </div>
 
                   <div className="md:col-span-1 pt-4 md:pt-0">
-                     <h3 className="font-bold text-slate-800 dark:text-slate-200">Restaurant Info</h3>
-                     <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Update your store details and presence.</p>
+                     <h3 className="font-bold text-zinc-800 dark:text-zinc-200">Restaurant Info</h3>
+                     <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">Update your store details and presence.</p>
                   </div>
                   <div className="md:col-span-2 space-y-4">
                      <Card>
                         <div className="space-y-4">
                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                               <div className="space-y-2">
-                                <label className="text-[10px] font-bold text-slate-500 uppercase">Restaurant Name</label>
+                                <label className="text-[10px] font-bold text-zinc-500 uppercase">Restaurant Name</label>
                                 <input 
                                   type="text" 
                                   value={restaurantInfo.name} 
                                   onChange={(e) => setRestaurantInfo({...restaurantInfo, name: e.target.value})}
-                                  className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white" 
+                                  className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white" 
                                 />
                               </div>
                               <div className="space-y-2">
-                                <label className="text-[10px] font-bold text-slate-500 uppercase">Contact Email</label>
+                                <label className="text-[10px] font-bold text-zinc-500 uppercase">Contact Email</label>
                                 <input 
                                   type="email" 
                                   value={restaurantInfo.email} 
                                   onChange={(e) => setRestaurantInfo({...restaurantInfo, email: e.target.value})}
-                                  className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white" 
+                                  className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white" 
                                 />
                               </div>
                            </div>
                            <div className="space-y-2">
-                              <label className="text-[10px] font-bold text-slate-500 uppercase">Business Address</label>
+                              <label className="text-[10px] font-bold text-zinc-500 uppercase">Business Address</label>
                               <textarea 
                                 rows="2" 
                                 value={restaurantInfo.address}
                                 onChange={(e) => setRestaurantInfo({...restaurantInfo, address: e.target.value})}
-                                className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
+                                className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
                               />
                            </div>
                         </div>
@@ -1195,20 +1195,20 @@ export default function Dashboard() {
                   </div>
                </div>
 
-               <div className="flex justify-end space-x-4 pt-6 border-t border-slate-100 dark:border-slate-800">
+               <div className="flex justify-end space-x-4 pt-6 border-t border-zinc-100 dark:border-zinc-800">
                   <button 
                     onClick={() => setRestaurantInfo({
                       name: "FoodieDash Central",
                       email: "admin@foodiedash.com",
                       address: "123 Culinary Ave, Food District, NY 10001"
                     })}
-                    className="flex items-center space-x-1 px-4 sm:px-6 py-2 text-slate-600 dark:text-slate-400 font-bold hover:text-slate-900 dark:hover:text-white text-sm"
+                    className="flex cursor-pointer items-center space-x-1 px-4 sm:px-6 py-2 text-zinc-600 dark:text-zinc-400 font-bold hover:text-zinc-900 dark:hover:text-white text-sm"
                   >
                     <RotateCcw size={14} className="mr-1"/> Reset
                   </button>
                   <button 
                     onClick={handleRestaurantInfoSave}
-                    className="px-4 sm:px-6 py-2 bg-orange-500 text-white rounded-lg font-bold shadow-lg shadow-orange-100 dark:shadow-none text-sm hover:bg-orange-600 transition-colors"
+                    className="px-4 sm:px-6 py-2 bg-orange-500 text-white rounded-lg font-bold shadow-lg shadow-orange-100 dark:shadow-none text-sm hover:bg-orange-600 transition-colors cursor-pointer"
                   >
                     Save Changes
                   </button>
@@ -1220,7 +1220,7 @@ export default function Dashboard() {
              <div className="space-y-6 animate-in slide-in-from-left-4 duration-500">
                 <div className="flex justify-between items-center">
                   <h1 className="text-xl sm:text-2xl font-bold dark:text-white">Customer Directory</h1>
-                  <button onClick={() => downloadPDF(customers)} className="flex items-center space-x-2 text-orange-600 font-bold border border-orange-200 dark:border-orange-900/30 px-3 sm:px-4 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/10 transition-all text-xs sm:text-sm">
+                  <button onClick={() => downloadPDF(customers)} className="flex items-center space-x-2 text-orange-600 font-bold border border-orange-200 dark:border-orange-900/30 px-3 sm:px-4 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-orange-900/10 transition-all text-xs sm:text-sm cursor-pointer">
                     <Download size={18}/> <span>Export CSV</span>
                   </button>
                 </div>
@@ -1228,7 +1228,7 @@ export default function Dashboard() {
                    <div className="overflow-x-auto -mx-4 sm:mx-0">
                      <table className="w-full text-left min-w-[600px] sm:min-w-0">
                        <thead>
-                         <tr className="border-b border-slate-100 dark:border-slate-800 text-[10px] sm:text-xs uppercase text-slate-400 font-bold">
+                         <tr className="border-b border-zinc-100 dark:border-zinc-800 text-[10px] sm:text-xs uppercase text-zinc-400 font-bold">
                            <th className="py-4 px-4 sm:px-6">Customer Name</th>
                            <th className="py-4 px-2">Join Date</th>
                            <th className="py-4 px-2">Orders</th>
@@ -1236,29 +1236,29 @@ export default function Dashboard() {
                            <th className="py-4 px-4 sm:px-6 text-right">Actions</th>
                          </tr>
                        </thead>
-                       <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
+                       <tbody className="divide-y divide-zinc-50 dark:divide-zinc-800">
                          {customers?.map(c => (
-                           <tr key={c._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
+                           <tr key={c._id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30">
                              
                              <td className="py-4 px-4 sm:px-6">
                                <div className="flex items-center space-x-3">
                                   <div className="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center text-xs font-bold">{c.name.charAt(0)}</div>
                                   <div>
-                                     <p className="text-xs sm:text-sm font-bold dark:text-slate-200">{c.name}</p>
-                                     <p className="text-[10px] text-slate-400">{c.email}</p>
+                                     <p className="text-xs sm:text-sm font-bold dark:text-zinc-200">{c.name}</p>
+                                     <p className="text-[10px] text-zinc-400">{c.email}</p>
                                   </div>
                                </div>
                              </td>
 
-                             <td className="py-4 px-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400">{formatDateTime(c.joinDate)}</td>
+                             <td className="py-4 px-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">{formatDateTime(c.joinDate)}</td>
 
-                             <td className="py-4 px-2 text-xs sm:text-sm font-medium dark:text-slate-200">{c.totalOrders}</td>
+                             <td className="py-4 px-2 text-xs sm:text-sm font-medium dark:text-zinc-200">{c.totalOrders}</td>
 
                              <td className="py-4 px-2 font-bold text-xs sm:text-sm text-emerald-600 dark:text-emerald-400">{formatRupee(c.totalSpent)}</td>
 
                              <td className="py-4 px-4 sm:px-6 text-right">
-                               {/* <button className="text-slate-400 hover:text-orange-500 p-2"><MoreVertical size={18}/></button> */}
-                               <button onClick={() => openDeleteModalUser(c?._id)} className="text-slate-400 hover:text-orange-500 p-2 cursor-pointer"><Trash2 size={18}/></button>
+                               {/* <button className="text-zinc-400 hover:text-orange-500 p-2"><MoreVertical size={18}/></button> */}
+                               <button onClick={() => openDeleteModalUser(c?._id)} className="text-zinc-400 hover:text-orange-500 p-2 cursor-pointer"><Trash2 size={18}/></button>
                              </td>
                            </tr>
                          ))}
@@ -1278,32 +1278,32 @@ export default function Dashboard() {
 
 
       {isMenuModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-zinc-900/60 backdrop-blur-sm animate-in fade-in duration-200">
 
-          <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in-95 duration-200 max-h-[95vh] flex flex-col pb-0">
+          <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in-95 duration-200 max-h-[95vh] flex flex-col pb-0">
              
-             <div className="sticky top-0 z-10 px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-white dark:bg-slate-900">
-                <h3 className="font-bold text-slate-800 dark:text-white text-base sm:text-lg">{editingItem ? 'Edit Menu Item' : 'Add New Menu Item'}</h3>
-                <button onClick={() => setIsMenuModalOpen(false)} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-all"><X size={20}/></button>
+             <div className="sticky top-0 z-10 px-6 py-4 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center bg-white dark:bg-zinc-900">
+                <h3 className="font-bold text-zinc-800 dark:text-white text-base sm:text-lg">{editingItem ? 'Edit Menu Item' : 'Add New Menu Item'}</h3>
+                <button onClick={() => setIsMenuModalOpen(false)} className="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-full transition-all cursor-pointer"><X size={20}/></button>
              </div>
 
              <form onSubmit={handleMenuSubmit} className="px-6 pt-6 space-y-5 overflow-y-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase">Dish Name</label>
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Dish Name</label>
                     <input 
                       name="name" 
                       required 
                       defaultValue={editingItem?.name} 
-                      className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none dark:text-white" 
+                      className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white" 
                       placeholder="e.g. Spicy Ramen" 
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase">Category</label>
-                    <select name="category" defaultValue={editingItem?.category || 'Pizza'} className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none dark:text-white">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Category</label>
+                    <select name="category" defaultValue={editingItem?.category || 'Pizza'} className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white">
                        <option>Pizza</option>
                        <option>Burger</option>
                        <option>Sandwich</option>
@@ -1317,52 +1317,52 @@ export default function Dashboard() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase">Price (₹)</label>
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Price (₹)</label>
                     <input 
                       name="price" 
                       type="number" 
                       required 
                       defaultValue={editingItem?.price} 
-                      className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none dark:text-white" 
+                      className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white" 
                       placeholder="0" 
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase">Initial Status</label>
-                    <select name="status" defaultValue={editingItem?.status || 'Available'} className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none dark:text-white">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">Initial Status</label>
+                    <select name="status" defaultValue={editingItem?.status || 'Available'} className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white">
                        <option>Available</option>
                        <option>Out of Stock</option>
                     </select>
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">
                       Calories
                     </label>
                     <input
                       name="calories"
                       defaultValue={editingItem?.calories || ""}
-                      className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none dark:text-white"
+                      className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
                       placeholder="e.g. 840 kcal"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">
                       Ingredients
                     </label>
                     <textarea
                       name="ingredients"
                       rows="2"
                       defaultValue={editingItem?.ingredients?.join(", ")}
-                      className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none dark:text-white"
+                      className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white"
                       placeholder="Black Truffle, Aged Gruyère, Brioche"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase">
+                    <label className="text-[10px] font-bold text-zinc-500 uppercase">
                       Nutrients
                     </label>
 
@@ -1376,7 +1376,7 @@ export default function Dashboard() {
                             updated[index].label = e.target.value;
                             setNutrients(updated);
                           }}
-                          className="px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm dark:text-white"
+                          className="px-3 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm dark:text-white"
                         />
 
                         <input
@@ -1387,7 +1387,7 @@ export default function Dashboard() {
                             updated[index].value = e.target.value;
                             setNutrients(updated);
                           }}
-                          className="px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm dark:text-white"
+                          className="px-3 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm dark:text-white"
                         />
                       </div>
                     ))}
@@ -1397,7 +1397,7 @@ export default function Dashboard() {
                       onClick={() =>
                         setNutrients([...nutrients, { label: "", value: "" }])
                       }
-                      className="text-xs font-bold text-amber-600 hover:underline"
+                      className="text-xs font-bold text-orange-600 hover:underline cursor-pointer"
                     >
                       + Add Nutrient
                     </button>
@@ -1406,22 +1406,22 @@ export default function Dashboard() {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase">Description</label>
-                  <textarea name="description" rows="3" defaultValue={editingItem?.description} className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none dark:text-white" placeholder="Describe the ingredients..."></textarea>
+                  <label className="text-[10px] font-bold text-zinc-500 uppercase">Description</label>
+                  <textarea name="description" rows="3" defaultValue={editingItem?.description} className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none dark:text-white" placeholder="Describe the ingredients..."></textarea>
                 </div>
 
                 {/* Multiple Images Selection */}
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase">Product Images</label>
+                  <label className="text-[10px] font-bold text-zinc-500 uppercase">Product Images</label>
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
 
                     { editingItem &&
                       existingImages?.map((img, idx) => (
-                        <div key={idx} className="relative aspect-square rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 group">
+                        <div key={idx} className="relative aspect-square rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700 group">
 
                           <img src={img.url} alt="Product" className="w-full h-full object-cover" />
 
-                          <button type="button" onClick={() => removeExistingImage(idx)} className="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button type="button" onClick={() => removeExistingImage(idx)} className="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
                             <X size={12} />
                           </button>
                         </div>
@@ -1430,7 +1430,7 @@ export default function Dashboard() {
                     { previewImages?.map((img, idx) => (
                       <div
                         key={idx}
-                        className="relative aspect-square rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 group"
+                        className="relative aspect-square rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700 group"
                       >
                         <img
                           src={img}
@@ -1440,17 +1440,17 @@ export default function Dashboard() {
                         <button
                           type="button"
                           onClick={() => removeProductImage(idx)}
-                          className="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                         >
                           <X size={12} />
                         </button>
                       </div>
                     ))}
 
-                    <label className="aspect-square flex flex-col items-center justify-center border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg cursor-pointer hover:border-amber-500 hover:bg-amber-50/50 dark:hover:bg-amber-900/10 transition-all">
+                    <label className="aspect-square flex flex-col items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg cursor-pointer hover:border-orange-500 hover:bg-orange-50/50 dark:hover:bg-orange-900/10 transition-all">
                       
-                      <UploadCloud size={20} className="text-slate-400 mb-1" />
-                      <span className="text-[10px] font-bold text-slate-400">ADD</span>
+                      <UploadCloud size={20} className="text-zinc-400 mb-1" />
+                      <span className="text-[10px] font-bold text-zinc-400">ADD</span>
 
                       <input 
                         type="file" 
@@ -1463,12 +1463,12 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div className="pt-2 pb-8 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 sticky bottom-0 bg-white dark:bg-slate-900">
+                <div className="pt-2 pb-8 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 sticky bottom-0 bg-white dark:bg-zinc-900">
                   <button 
                     type="button" 
                     disabled={isSubmitting}
                     onClick={() => setIsMenuModalOpen(false)} 
-                    className="order-2 sm:order-1 px-6 py-2.5 text-slate-500 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-all text-sm"
+                    className="order-2 sm:order-1 px-6 py-2.5 text-zinc-500 font-bold hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-lg transition-all text-sm cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -1476,7 +1476,7 @@ export default function Dashboard() {
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="order-1 sm:order-2 px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold transition-all shadow-lg shadow-orange-100 dark:shadow-none text-sm"
+                    className="order-1 sm:order-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-bold transition-all shadow-lg shadow-orange-100 dark:shadow-none text-sm cursor-pointer"
                   >
                     {/* {editingItem ? 'Save Changes' : 'Create Item'} */}
                     {isSubmitting ? (
@@ -1500,16 +1500,16 @@ export default function Dashboard() {
     {/* product delete component */}
     {isModalOpen && (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 w-80 shadow-xl transform transition-all">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Delete Item?</h3>
-          <p className="text-gray-500 dark:text-gray-400 mt-2">
+        <div className="bg-white dark:bg-zinc-800 rounded-2xl p-6 w-80 shadow-xl transform transition-all">
+          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Delete Item?</h3>
+          <p className="text-zinc-500 dark:text-zinc-400 mt-2">
             This action cannot be undone. Are you sure you want to remove this product?
           </p>
           
           <div className="flex gap-3 mt-6">
             <button 
               onClick={() => setIsModalOpen(false)}
-              className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition cursor-pointer"
+              className="flex-1 px-4 py-2 bg-zinc-100 text-zinc-700 rounded-lg hover:bg-zinc-200 transition cursor-pointer"
             >
               Cancel
             </button>
@@ -1527,16 +1527,16 @@ export default function Dashboard() {
     {/* delete Customer component */}
     {isDeleteModalOpen && (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 w-80 shadow-xl transform transition-all">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">Delete Customer?</h3>
-          <p className="text-gray-500 dark:text-gray-400 mt-2">
+        <div className="bg-white dark:bg-zinc-800 rounded-2xl p-6 w-80 shadow-xl transform transition-all">
+          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Delete Customer?</h3>
+          <p className="text-zinc-500 dark:text-zinc-400 mt-2">
             This action cannot be undone. Are you sure you want to delete this customer?
           </p>
           
           <div className="flex gap-3 mt-6">
             <button 
               onClick={() => setIsDeleteModalOpen(false)}
-              className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition cursor-pointer"
+              className="flex-1 px-4 py-2 bg-zinc-100 text-zinc-700 rounded-lg hover:bg-zinc-200 transition cursor-pointer"
             >
               Cancel
             </button>

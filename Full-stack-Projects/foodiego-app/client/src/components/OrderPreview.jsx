@@ -28,11 +28,11 @@ const StatusBadge = ({ status }) => {
     "In Transit": "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50",
     "shipped": "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50 capitalize",
 
-    "processing": "bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800/50 capitalize",
+    "processing": "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400 dark:border-orange-800/50 capitalize",
 
     "cancelled": "bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800/50 capitalize",
 
-    "pending": "bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800/50 capitalize",
+    "pending": "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-400 dark:border-orange-800/50 capitalize",
   };
 
   const icons = {
@@ -44,7 +44,7 @@ const StatusBadge = ({ status }) => {
   };
 
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${styles[status] || 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700'}`}>
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${styles[status] || 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700'}`}>
       {icons[status]}
       {status}
     </span>
@@ -103,24 +103,24 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
               {!isLast && (
                 <div 
                   className={`absolute left-[9px] top-[22px] w-[2px] h-[calc(100%+8px)] transition-colors duration-300 ${
-                    isCompleted ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-700'
+                    isCompleted ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'
                   }`} 
                 />
               )}
 
               {/* The Status Dot */}
-              <div className={`w-[20px] h-[20px] rounded-full border-4 border-white dark:border-gray-900 shadow-sm z-10 transition-colors duration-300 
-                ${isCompleted ? 'bg-blue-600' : 'bg-gray-400 dark:bg-gray-600'}`} 
+              <div className={`w-[20px] h-[20px] rounded-full border-4 border-white dark:border-zinc-900 shadow-sm z-10 transition-colors duration-300 
+                ${isCompleted ? 'bg-blue-600' : 'bg-zinc-400 dark:bg-zinc-600'}`} 
               />
 
               {/* Text Content */}
               <div className="-mt-1">
                 <p className={`text-sm font-bold transition-colors duration-300 ${
-                  isCompleted ? 'text-gray-900 dark:text-gray-100' : 'text-gray-400 dark:text-gray-600'
+                  isCompleted ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-400 dark:text-zinc-600'
                 }`}>
                   {step.label}
                 </p>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-xs text-zinc-500 mt-0.5">
                   {step.date}
                 </p>
               </div>
@@ -185,39 +185,39 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
 
   return (
     <div
-      className={`${isPanelOpen ? "inline-block" : "hidden"} w-full overflow-y-scroll bg-white dark:bg-gray-900  transform transition-transform duration-300 ease-in-out  dark:border-gray-800`}
+      className={`${isPanelOpen ? "inline-block" : "hidden"} w-full overflow-y-scroll bg-white dark:bg-zinc-900  transform transition-transform duration-300 ease-in-out  dark:border-zinc-800`}
     >
       {selectedOrder && (
         <div className="h-full flex flex-col">
-          <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between sticky top-0 bg-white dark:bg-gray-900 z-20">
+          <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between sticky top-0 bg-white dark:bg-zinc-900 z-20">
             <div>
               <button
                 onClick={closeOrder}
-                className="md:hidden flex items-center text-md cursor-pointer text-amber-500 dark:text-amber-400 mb-2 font-medium pb-2"
+                className="md:hidden flex items-center text-md cursor-pointer text-orange-500 dark:text-orange-400 mb-2 font-medium pb-2"
               >
                 <ArrowLeft className="w-6 h-6 mr-1" /> Back
               </button>
 
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
                 Order Details
               </h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-zinc-500 dark:text-zinc-400">
                 {selectedOrder?.orderId}
               </p>
             </div>
 
             <button
               onClick={closeOrder}
-              className="hidden md:flex p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors cursor-pointer"
+              className="hidden md:flex p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors cursor-pointer"
             >
-              <X className="w-6 h-6 text-gray-400 dark:text-gray-600" />
+              <X className="w-6 h-6 text-zinc-400 dark:text-zinc-600" />
             </button>
           </div>
 
           <div className="flex-1 overflow-y-auto p-6 space-y-8">
-            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-5 border border-gray-100 dark:border-gray-800">
+            <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-5 border border-zinc-100 dark:border-zinc-800">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-tight">
+                <span className="text-sm font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-tight">
                   Status
                 </span>
                 <StatusBadge status={selectedOrder?.status} />
@@ -230,27 +230,27 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
 
             <section>
               <div className="flex items-center gap-2 mb-4">
-                <ShoppingBag className="w-5 h-5 text-gray-400 dark:text-gray-600" />
-                <h3 className="font-bold text-gray-900 dark:text-white">
+                <ShoppingBag className="w-5 h-5 text-zinc-400 dark:text-zinc-600" />
+                <h3 className="font-bold text-zinc-900 dark:text-white">
                   Items Ordered
                 </h3>
               </div>
               <div className="space-y-4">
                 {selectedOrder?.items.map((item) => (
                   <div key={item?._id} className="flex gap-4">
-                    <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-2xl border dark:border-gray-700 overflow-hidden">
+                    <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center text-2xl border dark:border-zinc-700 overflow-hidden">
                       {/* {item?.image} */}
                       <img src={item?.image} alt={item?.name} />
                     </div>
 
                     <div className="flex-1">
-                      <p className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                      <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
                         {item?.name}
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400">
                         Qty: {item?.quantity} • {item?.category || ""}
                       </p>
-                      <p className="text-sm font-medium mt-1 dark:text-gray-300">
+                      <p className="text-sm font-medium mt-1 dark:text-zinc-300">
                         ₹{item?.price.toFixed(2)}
                       </p>
                     </div>
@@ -259,16 +259,16 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
               </div>
             </section>
 
-            <hr className="border-gray-100 dark:border-gray-800" />
+            <hr className="border-zinc-100 dark:border-zinc-800" />
 
             <section className="grid grid-cols-2 gap-6">
               <div>
-                <div className="flex items-center gap-2 mb-2 text-gray-400 dark:text-gray-600">
+                <div className="flex items-center gap-2 mb-2 text-zinc-400 dark:text-zinc-600">
                   <MapPin className="w-4 h-4" />
                   <h4 className="text-xs font-bold uppercase">Shipping</h4>
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  <p className="font-semibold text-gray-900 dark:text-gray-200">
+                <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="font-semibold text-zinc-900 dark:text-zinc-200">
                     {selectedOrder?.orderInfo?.name}
                   </p>
                   <p>
@@ -281,31 +281,31 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
                 </div>
               </div>
               <div>
-                <div className="flex items-center gap-2 mb-2 text-gray-400 dark:text-gray-600">
+                <div className="flex items-center gap-2 mb-2 text-zinc-400 dark:text-zinc-600">
                   <CreditCard className="w-4 h-4" />
                   <h4 className="text-xs font-bold uppercase">Payment</h4>
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  <p className="font-semibold text-gray-900 dark:text-gray-200">
+                <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="font-semibold text-zinc-900 dark:text-zinc-200">
                     {selectedOrder?.paymentInfo?.method.toUpperCase()}
                   </p>
-                  {/* <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">Billed on {selectedOrder.date}</p> */}
+                  {/* <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-1">Billed on {selectedOrder.date}</p> */}
                 </div>
               </div>
             </section>
 
-            <section className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 space-y-2">
+            <section className="bg-zinc-50 dark:bg-zinc-800/50 p-5 rounded-2xl border border-zinc-100 dark:border-zinc-800 space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">
+                <span className="text-zinc-500 dark:text-zinc-400">
                   Subtotal
                 </span>
-                {/* <span className="font-medium dark:text-gray-200">${selectedOrder?.payment.subtotal.toFixed(2)}</span> */}
-                <span className="font-medium dark:text-gray-200">
+                {/* <span className="font-medium dark:text-zinc-200">${selectedOrder?.payment.subtotal.toFixed(2)}</span> */}
+                <span className="font-medium dark:text-zinc-200">
                   ₹{selectedOrder?.totalAmount}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">
+                <span className="text-zinc-500 dark:text-zinc-400">
                   Shipping
                 </span>
                 <span className="font-medium text-green-600 dark:text-green-400">
@@ -313,17 +313,17 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">
+                <span className="text-zinc-500 dark:text-zinc-400">
                   Estimated Tax
                 </span>
-                {/* <span className="font-medium dark:text-gray-200">${selectedOrder.payment.tax.toFixed(2)}</span> */}
-                <span className="font-medium dark:text-gray-200">₹0.00</span>
+                {/* <span className="font-medium dark:text-zinc-200">${selectedOrder.payment.tax.toFixed(2)}</span> */}
+                <span className="font-medium dark:text-zinc-200">₹0.00</span>
               </div>
-              <div className="pt-2 border-t border-gray-200 dark:border-gray-700 flex justify-between">
-                <span className="font-bold text-gray-900 dark:text-white">
+              <div className="pt-2 border-t border-zinc-200 dark:border-zinc-700 flex justify-between">
+                <span className="font-bold text-zinc-900 dark:text-white">
                   Total
                 </span>
-                <span className="font-bold text-gray-900 dark:text-white text-lg">
+                <span className="font-bold text-zinc-900 dark:text-white text-lg">
                   ₹{selectedOrder?.totalAmount.toFixed(2)}
                 </span>
               </div>
@@ -343,7 +343,7 @@ export default function OrderPreview({selectedOrder, setSelectedOrder, isPanelOp
               <button
                 onClick={() => cancelOrder(selectedOrder?.orderId)}
                 disabled={cancelLoading}
-                className={`${cancelled ? 'hidden' : 'inline-block'} order-1 sm:order-2 px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold transition-all shadow-lg shadow-orange-100 dark:shadow-none text-sm cursor-pointer`}
+                className={`${cancelled ? 'hidden' : 'inline-block'} order-1 sm:order-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-bold transition-all shadow-lg shadow-orange-100 dark:shadow-none text-sm cursor-pointer`}
               >
                 {cancelLoading ? (
                   <div className="flex gap-2 items-center justify-center">

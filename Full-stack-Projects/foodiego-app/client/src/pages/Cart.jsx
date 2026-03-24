@@ -49,7 +49,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-slate-950 text-gray-900 dark:text-gray-100 transition-colors">
+    <div className="min-h-screen bg-gray-100 dark:bg-zinc-950 text-gray-900 dark:text-gray-100 transition-colors">
       <div className="max-w-6xl mx-auto px-4 py-8">
 
         <div className='flex gap-3 items-center mb-5 px-2'>
@@ -60,17 +60,17 @@ export default function Cart() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-4">
             {cartItems.length === 0 ? (
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-6 text-center flex flex-col items-center gap-2">
+              <div className="bg-white dark:bg-zinc-800 rounded-xl p-6 text-center flex flex-col items-center gap-2">
                 <ShoppingCart className="h-15 w-15" />
                 <p className='font-bold text-xl'>Your cart is empty</p>
                 <p className='opacity-60'>Add some delicious items to get started!</p>
-                <button onClick={() => navigate('/')} className='bg-yellow-400 hover:bg-amber-400/95 mt-3 p-2 rounded-md text-black font-semibold cursor-pointer'>Start Shopping</button>
+                <button onClick={() => navigate('/')} className='bg-orange-500 hover:bg-orange-500/95 mt-3 p-2 px-3 rounded-md text-white font-semibold cursor-pointer'>Start Shopping</button>
               </div>
             ) : (
               cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="flex flex-col sm:flex-row gap-4 bg-white dark:bg-slate-900 rounded-xl p-4 shadow"
+                  className="flex flex-col sm:flex-row gap-4 bg-white dark:bg-zinc-900 rounded-xl p-4 shadow"
                 >
                   <img
                     src={item.images?.[0].url}
@@ -87,7 +87,7 @@ export default function Cart() {
                     <div className="flex items-center gap-3 mt-3">
                       <button
                         onClick={() => updateQty(item._id, -1)}
-                        className="px-3 py-1 rounded bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 cursor-pointer"
+                        className="px-3 py-1 rounded bg-gray-200 dark:bg-zinc-800 hover:bg-gray-300 dark:hover:bg-zinc-700 cursor-pointer"
                       >
                         −
                       </button>
@@ -96,7 +96,7 @@ export default function Cart() {
                       </span>
                       <button
                         onClick={() => updateQty(item._id, 1)}
-                        className="px-3 py-1 rounded bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 cursor-pointer"
+                        className="px-3 py-1 rounded bg-gray-200 dark:bg-zinc-800 hover:bg-gray-300 dark:hover:bg-zinc-700 cursor-pointer"
                       >
                         +
                       </button>
@@ -119,7 +119,7 @@ export default function Cart() {
             )}
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow h-fit">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow h-fit">
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
             <div className="flex justify-between mb-2">
@@ -130,13 +130,13 @@ export default function Cart() {
               <span>Shipping</span>
               <span className="text-green-600">Free</span>
             </div>
-            <div className="border-t border-gray-200 dark:border-slate-700 my-3" />
+            <div className="border-t border-gray-200 dark:border-zinc-700 my-3" />
             <div className="flex justify-between font-bold text-lg">
               <span>Total</span>
               <span>₹{subtotal.toLocaleString()}</span>
             </div>
 
-            <button onClick={handleClick} className="w-full mt-5 py-3 rounded-lg bg-amber-400 hover:bg-amber-400/95 text-black hover:text-black/80 font-semibold cursor-pointer">
+            <button onClick={handleClick} className="w-full mt-5 py-3 rounded-lg bg-orange-500 hover:bg-orange-500/95 text-white font-semibold cursor-pointer">
               Proceed to Checkout
             </button>
           </div>

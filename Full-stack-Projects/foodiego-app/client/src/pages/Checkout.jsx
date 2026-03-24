@@ -104,15 +104,13 @@ export default function CheckoutPage({total, subtotal}) {
 
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-slate-950 text-gray-900 dark:text-gray-100 transition-colors">
+    <div className="min-h-screen bg-gray-100 dark:bg-zinc-950 text-gray-900 dark:text-gray-100 transition-colors">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Section */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Shipping Info */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow">
               <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
@@ -120,54 +118,54 @@ export default function CheckoutPage({total, subtotal}) {
                   placeholder="Full Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                  className="p-2 rounded-lg text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
                 <input
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                  className="p-2 rounded-lg text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
                 <input
                   type="tel"
                   placeholder="Phone Number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                  className="p-2 rounded-lg text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
                 <input 
                     type="text" 
                     placeholder="City" 
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white" 
+                    className="p-2 rounded-lg text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-500" 
                 />
                 <input
                   type="text"
                   placeholder="Postal Code"
                   value={pincode}
                   onChange={(e) => setPincode(e.target.value)}
-                  className="p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                  className="p-2 rounded-lg text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
                 <input
                   type="text"
                   placeholder="State"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  className="p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                  className="p-2 rounded-lg text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
                 <input
                   type="text"
                   placeholder="Address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className="sm:col-span-2 p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                  className="sm:col-span-2 p-2 rounded-lg text-zinc-800 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow">
               <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
 
               <div className="space-y-3">
@@ -201,28 +199,28 @@ export default function CheckoutPage({total, subtotal}) {
                     placeholder="Card Number"
                     value={cardNumber}
                     onChange={(e) => setCardNumber(e.target.value)}
-                    className="input sm:col-span-2 p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                    className="input sm:col-span-2 p-2 border border-gray-600 outline-orange-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
                   />
                   <input
                     type="text"
                     placeholder="MM / YY"
                     value={cardDate}
                     onChange={(e) => setCardDate(e.target.value)}
-                    className="input p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+                    className="input p-2 border border-gray-600 outline-orange-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
                   />
                   <input 
                     type="text" 
                     placeholder="CVV" 
                     value={cvvNumber}
                     onChange={(e) => setCvvNumber(e.target.value)}
-                    className="input p-2 border border-gray-600 outline-yellow-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white" 
+                    className="input p-2 border border-gray-600 outline-orange-500 rounded bg-gray-100 dark:bg-gray-800 text-black dark:text-white" 
                   /> */}
                 </div>
               )}
             </div>
           </div>
 
-          <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow h-fit">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow h-fit">
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
             <div className="space-y-2 text-sm">
@@ -240,24 +238,23 @@ export default function CheckoutPage({total, subtotal}) {
               </div>
             </div>
 
-            <div className="border-t border-gray-200 dark:border-slate-700 my-4" />
+            <div className="border-t border-gray-200 dark:border-zinc-700 my-4" />
 
             <div className="flex justify-between font-bold text-lg">
               <span>Total</span>
               <span>₹{total || 0}</span>
             </div>
 
-            <button type="submit" onClick={handleClick} className="w-full mt-5 py-3 rounded-lg bg-amber-400 hover:bg-amber-400/95 text-black hover:text-black/80 font-semibold cursor-pointer">
+            <button type="submit" onClick={handleClick} className="w-full mt-5 py-3 rounded-lg bg-orange-500 hover:bg-orange-500/95 text-white font-semibold cursor-pointer">
               Place Order
             </button>
           </div>
         </div>
       </div>
 
-      {/* Tailwind input helper */}
       <style jsx>{`
         .input {
-          @apply w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-slate-700 border border-gray-300 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+          @apply w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-zinc-700 border border-gray-300 dark:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-indigo-500;
         }
       `}</style>
     </div>

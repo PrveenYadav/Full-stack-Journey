@@ -137,7 +137,7 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
 
 
   return (
-    <div className="dark:bg-slate-900 p-4 md:p-8 transition-colors duration-300 flex flex-col items-center">
+    <div className="dark:bg-zinc-900 p-4 md:p-8 transition-colors duration-300 flex flex-col items-center">
       <div className="w-full max-w-2xl space-y-6">
         
         {orderStatus === "delivered" && reviews.length < MAX_REVIEWS && (
@@ -145,7 +145,7 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
             {!isFormOpen ? (
               <button
                 onClick={() => setIsFormOpen(true)}
-                className="w-full py-4 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl text-slate-500 dark:text-slate-400 hover:border-blue-500 hover:text-blue-500 transition-all flex items-center justify-center gap-2 font-medium cursor-pointer"
+                className="w-full py-4 border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl text-zinc-500 dark:text-zinc-400 hover:border-blue-500 hover:text-blue-500 transition-all flex items-center justify-center gap-2 font-medium cursor-pointer"
               >
                 <Plus size={20} /> Write a {reviews.length > 0 ? "another" : ""}{" "}
                 review
@@ -153,18 +153,18 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
             ) : (
               <div className="bg-white dark:bg-gray-800/50 rounded-2xl shadow-xl border border-blue-500/30 dark:border-blue-500/20 p-6 space-y-5 animate-in zoom-in-95 duration-200">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
                     New Review
                   </h3>
                   <button
                     onClick={() => setIsFormOpen(false)}
-                    className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                    className="text-zinc-400 hover:text-zinc-600 cursor-pointer"
                   >
                     <X size={20} />
                   </button>
                 </div>
 
-                <div className="flex flex-col items-center gap-2 py-4 bg-slate-50 dark:bg-slate-950/30 rounded-xl border border-slate-100 dark:border-slate-800">
+                <div className="flex flex-col items-center gap-2 py-4 bg-zinc-50 dark:bg-zinc-950/30 rounded-xl border border-zinc-100 dark:border-zinc-800">
                   <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
@@ -179,8 +179,8 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
                           size={32}
                           className={`transition-all duration-200 ${
                             (hover || rating) >= star
-                              ? "fill-amber-400 text-amber-400 scale-110"
-                              : "text-slate-200 dark:text-slate-800"
+                              ? "fill-orange-400 text-orange-400 scale-110"
+                              : "text-zinc-200 dark:text-zinc-800"
                           }`}
                         />
                       </button>
@@ -189,7 +189,7 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                  <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-2">
                     <MessageSquareText size={16} className="text-blue-500" />
                     Name
                   </label>
@@ -197,12 +197,12 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     disabled
-                    className="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/30 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
+                    className="w-full p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/30 text-zinc-900 dark:text-zinc-100 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                  <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-2">
                     <MessageSquareText size={16} className="text-blue-500" />
                     Comment
                   </label>
@@ -211,12 +211,12 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Tell us what you think..."
                     rows={3}
-                    className="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/30 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
+                    className="w-full p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/30 text-zinc-900 dark:text-zinc-100 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                  <label className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-2">
                     <ImageIcon size={16} className="text-blue-500" />
                     Add Photo
                   </label>
@@ -228,8 +228,8 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
                         flex flex-col items-center justify-center gap-2 transition-all
                         ${
                           loading
-                            ? "border-slate-300 text-slate-400 cursor-not-allowed bg-slate-100"
-                            : "border-slate-200 dark:border-slate-800 text-slate-400 hover:border-blue-400 hover:text-blue-400 bg-slate-50 dark:bg-slate-950/30"
+                            ? "border-zinc-300 text-zinc-400 cursor-not-allowed bg-zinc-100"
+                            : "border-zinc-200 dark:border-zinc-800 text-zinc-400 hover:border-blue-400 hover:text-blue-400 bg-zinc-50 dark:bg-zinc-950/30"
                         }
                     `}
                     >
@@ -285,7 +285,7 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
                   className={`w-full cursor-pointer py-4 rounded-xl font-bold text-sm transition-all duration-200 ${
                     rating > 0
                       ? "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-500/25"
-                      : "bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed"
+                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-400 cursor-not-allowed"
                   }`}
                 >
                   Post Review
@@ -296,8 +296,8 @@ export const RateUs = ({orderStatus, selectedOrder}) => {
         )}
 
         {reviews.length >= MAX_REVIEWS && (
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-900/30 p-4 rounded-xl text-center">
-            <p className="text-amber-700 dark:text-amber-400 text-sm font-medium">
+          <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-900/30 p-4 rounded-xl text-center">
+            <p className="text-orange-700 dark:text-orange-400 text-sm font-medium">
               Maximum review limit reached ({MAX_REVIEWS}). Thank you for your
               feedback!
             </p>

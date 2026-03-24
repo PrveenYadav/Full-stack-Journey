@@ -17,6 +17,20 @@ export const AppContextProvider = ({children}) => {
     const [productData, setProductData] = useState({})
     const [loading, setLoading] = useState(true)
 
+    const COOKING_TIMES = {
+        pizza: "15-20 min",
+        burger: "20-25 min",
+        pasta: "12-18 min",
+        sandwich: "10-15 min",
+        noodles: "10-12 min",
+        default: "12-15 min"
+    };
+
+    const prepTime = (dish) => {
+        const categoryKey = dish.category.toLowerCase();
+        return COOKING_TIMES[categoryKey] || COOKING_TIMES.default;
+    }
+
     axios.defaults.withCredentials = true;
 
     // function to check auth status
@@ -66,7 +80,6 @@ export const AppContextProvider = ({children}) => {
         getAuthState(); 
     }, [])
 
-
     // product data
     const getProductData = async () => {
         setLoading(true)
@@ -86,9 +99,6 @@ export const AppContextProvider = ({children}) => {
         }
     }
 
-    // console.log("The data of product is here :- ", productData)
-    // console.log("items: ", productData?.items)
-
     useEffect(() => {
         getProductData(); 
     }, [])
@@ -105,7 +115,8 @@ export const AppContextProvider = ({children}) => {
         loading,
         ordersLength,
         setOrdersLength,
-        authLoading
+        authLoading,
+        prepTime
     }
 
     return (

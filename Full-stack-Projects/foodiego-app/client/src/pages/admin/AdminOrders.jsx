@@ -89,7 +89,7 @@ export const AdminOrders = () => {
 
 
   return (
-    <div className="bg-white dark:bg-slate-950 p-4 md:p-8 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900/50 transition-colors">
+    <div className="bg-white dark:bg-zinc-950 p-4 md:p-8 font-sans selection:bg-indigo-100 dark:selection:bg-indigo-900/50 transition-colors">
       <div className="max-w-7xl mx-auto">
         
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
@@ -97,24 +97,24 @@ export const AdminOrders = () => {
             <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight flex items-center">
               Order Management
             </h1>
-            <p className="text-gray-500 dark:text-slate-400 text-sm mt-2 max-w-md">Update order status, manage customer logistics, and track revenues.</p>
+            <p className="text-gray-500 dark:text-zinc-400 text-sm mt-2 max-w-md">Update order status, manage customer logistics, and track revenues.</p>
           </div>
           
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <button onClick={fetchOrders} className="p-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+            <button onClick={fetchOrders} className="p-2.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer">
               <RefreshCcw className={`w-4 h-4 text-gray-500 ${loading ? 'animate-spin' : ''}`} />
             </button>
             <div className="relative group">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input 
                 type="text" placeholder="Search orders..." 
-                className="pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/50 dark:text-white sm:w-64"
+                className="pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/50 dark:text-white sm:w-64"
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             <div className="relative">
               <select 
-                className="pl-4 pr-10 py-2.5 bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl text-sm font-bold appearance-none dark:text-white"
+                className="pl-4 pr-10 py-2.5 cursor-pointer bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl text-sm font-bold appearance-none dark:text-white"
                 value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
               >
                 <option value="all">View: All Status</option>
@@ -133,12 +133,12 @@ export const AdminOrders = () => {
             { label: 'Active Tasks', val: orders.filter(o => o.status !== 'delivered').length, icon: Clock },
             { label: 'Coverage', val: new Set(orders.map(o => o.orderInfo.city)).size + ' Cities', icon: MapPin },
           ].map((s, i) => (
-            <div key={i} className="bg-gray-50 dark:bg-slate-900/50 p-4 md:p-6 rounded-2xl border border-gray-100 dark:border-slate-800 flex items-center gap-4">
-              <div className="p-2 bg-white dark:bg-slate-800 rounded-xl shadow-sm">
+            <div key={i} className="bg-gray-50 dark:bg-zinc-900/50 p-4 md:p-6 rounded-2xl border border-gray-100 dark:border-zinc-800 flex items-center gap-4">
+              <div className="p-2 bg-white dark:bg-zinc-800 rounded-xl shadow-sm">
                 <s.icon className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
               </div>
               <div>
-                <p className="text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-widest">{s.label}</p>
+                <p className="text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-widest">{s.label}</p>
                 <p className="text-xl font-black text-gray-900 dark:text-white">{s.val}</p>
               </div>
             </div>
@@ -155,25 +155,25 @@ export const AdminOrders = () => {
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
             <h3 className="text-red-900 dark:text-red-400 font-bold">API Connection Failed</h3>
             <p className="text-red-600/80 text-sm mt-2">{error}</p>
-            <button onClick={fetchOrders} className="mt-6 px-6 py-2 bg-red-600 text-white rounded-full text-sm font-bold shadow-lg shadow-red-600/20">Retry Connection</button>
+            <button onClick={fetchOrders} className="mt-6 px-6 py-2 bg-red-600 text-white rounded-full text-sm font-bold shadow-lg shadow-red-600/20 cursor-pointer">Retry Connection</button>
           </div>
         ) : (
-          <div className="bg-white dark:bg-slate-950 rounded-3xl border border-gray-200 dark:border-slate-800 shadow-2xl overflow-hidden mb-12">
+          <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-gray-200 dark:border-zinc-800 shadow-2xl overflow-hidden mb-12">
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="bg-gray-50/80 dark:bg-slate-900/80 backdrop-blur border-b border-gray-100 dark:border-slate-800">
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em] w-10"></th>
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em]">Reference</th>
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em]">Customer</th>
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em]">Grand Total</th>
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em]">Live Status</th>
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em]">Payment</th>
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em]">Created</th>
-                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-[0.2em]">Delete</th>
+                  <tr className="bg-gray-50/80 dark:bg-zinc-900/80 backdrop-blur border-b border-gray-100 dark:border-zinc-800">
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em] w-10"></th>
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Reference</th>
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Customer</th>
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Grand Total</th>
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Live Status</th>
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Payment</th>
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Created</th>
+                    <th className="px-6 py-5 text-[10px] font-black text-gray-400 dark:text-zinc-500 uppercase tracking-[0.2em]">Delete</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50 dark:divide-slate-900">
+                <tbody className="divide-y divide-gray-50 dark:divide-zinc-900">
                   {filteredOrders.map((order) => (
                     <OrderRow key={order._id} order={order} onStatusUpdate={updateOrderStatusOnBackend} fetchOrders={fetchOrders} />
                   ))}
