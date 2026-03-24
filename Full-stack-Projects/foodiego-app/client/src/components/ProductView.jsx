@@ -23,21 +23,17 @@ export const ProductView = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [activeTab, setActiveTab] = useState('description');
 
-  const { productData, setProductData } = useContext(AppContext)
+  const { productData, setProductData, prepTime } = useContext(AppContext)
   const { addToCart } = useContext(CartContext)
 
   const productItems = productData?.items
 
   const { id } = useParams(); // get id from URL
-  // const product = productItems?.find((item) => item._id === parseInt(id));
   const product = productItems?.find((item) => item._id === id);
-  // console.log("Prodcut view product data ---- ", parseInt(id))
 
-  
   const recommendedProducts = productItems?.filter((item) => item?.category.toLowerCase() === product.category.toLowerCase());
 
   const navigate = useNavigate()
-
   
   const handleQuantity = (type) => {
     if (type === 'inc') setQuantity(prev => prev + 1);
@@ -53,7 +49,6 @@ export const ProductView = () => {
       behavior: "smooth"
     });
   }
-
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
@@ -98,7 +93,7 @@ export const ProductView = () => {
                   key={idx}
                   onClick={() => setSelectedImage(idx)}
                   className={`relative flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all ${
-                    selectedImage === idx ? 'border-orange-500 scale-95 shadow-lg' : 'border-transparent opacity-70 hover:opacity-100'
+                    selectedImage === idx ? 'border-orange-500 scale-95 shadow-lg' : 'border-transparent opacity-70 hover:opacity-100 cursor-pointer'
                   }`}
                 >
                   <img src={img.url} alt="thumbnail" className="w-full h-full object-cover" />
@@ -136,7 +131,8 @@ export const ProductView = () => {
                 <div className="h-4 w-px bg-slate-300 dark:bg-slate-700" />
                 <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
                   <Clock className="w-4 h-4" />
-                  <span className="text-sm font-medium">{product?.prepTime || "15-20 min"}</span>
+                  {/* <span className="text-sm font-medium">{product?.prepTime || "15-20 min"}</span> */}
+                  <span className="text-sm font-medium">{product && prepTime(product)}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
                   <Flame className="w-4 h-4 text-orange-500" />
@@ -155,7 +151,7 @@ export const ProductView = () => {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`pb-4 px-4 text-sm font-bold uppercase tracking-wider transition-all relative ${
+                    className={`pb-4 px-4 text-sm font-bold cursor-pointer uppercase tracking-wider transition-all relative ${
                       activeTab === tab ? 'text-orange-500' : 'text-slate-500'
                     }`}
                   >
@@ -202,7 +198,7 @@ export const ProductView = () => {
                 <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl border border-slate-200 dark:border-slate-700">
                   <button 
                     onClick={() => handleQuantity('dec')}
-                    className="p-2 hover:bg-white dark:hover:bg-slate-700 rounded-xl transition-all"
+                    className="p-2 hover:bg-white dark:hover:bg-slate-700 rounded-xl transition-all cursor-pointer"
                   >
                     <Minus className="w-5 h-5" />
                   </button>
@@ -211,7 +207,7 @@ export const ProductView = () => {
 
                   <button 
                     onClick={() => handleQuantity('inc')}
-                    className="p-2 hover:bg-white dark:hover:bg-slate-700 rounded-xl transition-all"
+                    className="p-2 cursor-pointer hover:bg-white dark:hover:bg-slate-700 rounded-xl transition-all"
                   >
                     <Plus className="w-5 h-5" />
                   </button>
