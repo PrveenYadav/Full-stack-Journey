@@ -84,6 +84,11 @@ export const OrderRow = ({ order, onStatusUpdate, fetchOrders }) => {
 
   // delete order
   const deleteOrder = async (id) => {
+    // Confirmation before deleting
+    if (!window.confirm("Are you sure you want to delete this order? This action cannot be undone.")) {
+      return;
+    }
+
     axios.defaults.withCredentials = true;
 
     try {
@@ -104,7 +109,7 @@ export const OrderRow = ({ order, onStatusUpdate, fetchOrders }) => {
     <React.Fragment>
       <tr className={`hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors border-b border-zinc-100 dark:border-zinc-800 ${isExpanded ? 'bg-indigo-50/30 dark:bg-indigo-900/10' : ''}`}>
         <td className="px-6 py-4 whitespace-nowrap">
-          <button onClick={() => setIsExpanded(!isExpanded)} className={`p-1.5 rounded-lg transition-all ${isExpanded ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-600' : 'hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400'}`}>
+          <button onClick={() => setIsExpanded(!isExpanded)} className={`p-1.5 cursor-pointer rounded-lg transition-all ${isExpanded ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-600' : 'hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400'}`}>
             {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
         </td>
@@ -211,7 +216,7 @@ export const OrderRow = ({ order, onStatusUpdate, fetchOrders }) => {
                           <p className="text-sm font-bold text-zinc-900 dark:text-white">{order.orderInfo.name}</p>
                           <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mt-1">{fullAddress}</p>
                         </div>
-                        <button onClick={() => handleCopy(fullAddress)} className="text-[10px] flex items-center gap-1 font-bold text-indigo-600 px-2 py-1 rounded bg-indigo-50 dark:bg-indigo-900/40 transition-colors">
+                        <button onClick={() => handleCopy(fullAddress)} className="text-[10px] flex items-center gap-1 font-bold text-indigo-600 px-2 py-1 rounded bg-indigo-50 dark:bg-indigo-900/40 transition-colors cursor-pointer">
                           <Copy className="w-3 h-3" /> {copyStatus}
                         </button>
                       </div>
