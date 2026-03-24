@@ -47,8 +47,8 @@ const Footer = () => {
                 <h1 className='text-xl font-bold'>Connect with us</h1>
                 <p className='opacity-75'>Subscribe to get updates of new products with great offers.</p>
                 <form onSubmit={handleSubmit} className='flex mt-5'>
-                    <input className='outline-none bg-gray-100 dark:bg-gray-800 dark:text-white rounded-l-lg px-3 py-2' type="text" placeholder='Enter your email...' />
-                    <button className='bg-gray-100 dark:bg-gray-800 border-none rounded-r-lg py-1 px-2 cursor-pointer'><Mail className='h-8 text-black dark:text-gray-100' /></button>
+                    <input className='outline-none bg-zinc-100 dark:bg-zinc-800 dark:text-white rounded-l-lg px-3 py-2' type="text" placeholder='Enter your email...' />
+                    <button className='bg-zinc-100 dark:bg-zinc-800 border-none rounded-r-lg py-1 px-2 cursor-pointer'><Mail className='h-8 text-black dark:text-zinc-100' /></button>
                 </form>
             </div>
         </div>

@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import Card from '../components/Card.jsx'
+import Hero from '../components/Hero.jsx'
 
 const Home = () => {
 
   return (
-    <Card/>
+    <Hero/>
   )
 }
 
