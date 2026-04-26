@@ -14,7 +14,7 @@ const Footer = () => {
         <div className='w-[93%] sm:flex sm:justify-between gap-5 sm:pb-5 flex-wrap'>
 
             <div className='md:w-[25%] flex flex-col gap-2 mb-7 sm:mb-auto'>
-                <a href='#' className='text-2xl font-bold'>Foodie<span className="text-orange-500">Go</span></a>
+                <a href='/' className='text-2xl font-bold'>Foodie<span className="text-orange-500">Go</span></a>
                 <p className='opacity-65 text-sm'>The most trusted fast food resturant. Get what you wish, eat what you need and order what you see.</p>
                 <div className='flex gap-4 mt-2'>
                                         <a className='h-6 w-6' href="https://www.facebook.com"><Facebook className='h-5 w-5 hover:h-6 transition-all duration-200 ease-in-out' /></a>
@@ -28,7 +28,7 @@ const Footer = () => {
                 <div className='flex flex-col'>
                     <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/">Home</a>
                     <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/about">About</a>
-                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/faq">FAQ</a>
+                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/">FAQ</a>
                     <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/contact-us">Contact Us</a>
                 </div>
             </div>
@@ -36,10 +36,10 @@ const Footer = () => {
             <div className='hidden md:inline-block'>
                 <h1 className='text-xl font-bold'>Categories</h1>
                 <div className='flex flex-col'>
-                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/fast-food">Fast food</a>
-                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/veg">Veg</a>
-                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/non-veg">Non-Veg</a>
-                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/cheese">cheese</a>
+                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/products">Fast food</a>
+                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/products">Veg</a>
+                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/products">Non-Veg</a>
+                    <a className='opacity-65 hover:opacity-100 transition-all duration-100' href="/products">cheese</a>
                 </div>
             </div>
 

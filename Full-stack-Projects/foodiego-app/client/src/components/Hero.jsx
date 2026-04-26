@@ -173,7 +173,8 @@ export default function Hero() {
             return matchesText || matchesPrice;
         });
 
-        return finalFiltered;
+        // return finalFiltered;
+        return finalFiltered?.slice(0, 8);
     }, [category, searchQuery, productItems]);
 
     useEffect(() => {
@@ -225,7 +226,7 @@ export default function Hero() {
                 {HERO_IMAGES[heroIndex].subtitle}
               </p>
               <div className="flex items-center gap-3 md:gap-4 pt-2 md:pt-4">
-                <button onClick={()=>navigate('/cart')} className="px-6 py-3 md:px-10 md:py-5 bg-orange-500 hover:bg-orange-600 text-white text-sm md:text-base font-black rounded-[1.5rem] md:rounded-[2rem] transition-all hover:scale-105 shadow-2xl shadow-orange-500/40 cursor-pointer">
+                <button onClick={()=>navigate('/products')} className="px-6 py-3 md:px-10 md:py-5 bg-orange-500 hover:bg-orange-600 text-white text-sm md:text-base font-black rounded-[1.5rem] md:rounded-[2rem] transition-all hover:scale-105 shadow-2xl shadow-orange-500/40 cursor-pointer">
                   Order Now
                 </button>
                 <button onClick={() => setView("categories")} className="px-6 py-3 md:px-10 md:py-5 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white text-sm md:text-base font-black rounded-[1.5rem] md:rounded-[2rem] border border-white/20 transition-all cursor-pointer">
@@ -464,6 +465,15 @@ export default function Hero() {
                     </div>
                 ))}
             </div>
+          </div>
+
+          <div className='flex justify-center text-center items-center pt-20'>
+            <button 
+              onClick={() => navigate('/products')}
+              className="flex items-center gap-1 text-sm font-bold text-orange-500 hover:text-orange-600 transition-colors cursor-pointer"
+            >
+              View All Products <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </main>
 

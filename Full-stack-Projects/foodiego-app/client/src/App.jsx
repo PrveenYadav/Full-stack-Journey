@@ -18,6 +18,7 @@ import { ProductView } from './components/ProductView.jsx'
 import { AdminContext } from './context/AdminContext.jsx'
 import ScrollManager from './components/ScrollManager.js'
 import { UserLogin, VerifyEmail } from './pages/LoginUser.jsx'
+import Products from './components/Products.jsx'
 
 
 const App = () => {
@@ -89,6 +90,7 @@ const App = () => {
           <Route element={<PublicLayout />}>
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
+            <Route path='/products' element={<Products />} />
             <Route path='/product-view/:id' element={<ProductView/>} />
             <Route path='/contact-us' element={<ContactUs />} />
             <Route path='/cart' element={<Cart />} />

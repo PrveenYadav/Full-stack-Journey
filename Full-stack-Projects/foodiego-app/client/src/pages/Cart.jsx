@@ -64,7 +64,7 @@ export default function Cart() {
                 <ShoppingCart className="h-15 w-15" />
                 <p className='font-bold text-xl'>Your cart is empty</p>
                 <p className='opacity-60'>Add some delicious items to get started!</p>
-                <button onClick={() => navigate('/')} className='bg-orange-500 hover:bg-orange-500/95 mt-3 p-2 px-3 rounded-md text-white font-semibold cursor-pointer'>Start Shopping</button>
+                <button onClick={() => navigate('/products')} className='bg-orange-500 hover:bg-orange-500/95 mt-3 p-2 px-3 rounded-md text-white font-semibold cursor-pointer'>Start Shopping</button>
               </div>
             ) : (
               cartItems.map((item) => (

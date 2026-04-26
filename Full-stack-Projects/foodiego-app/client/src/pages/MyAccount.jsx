@@ -554,7 +554,7 @@ const MyAccount = () => {
                       </p>
 
                       <button
-                        onClick={() => navigate('/')}
+                        onClick={() => navigate('/products')}
                         className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl transition cursor-pointer"
                       >
                         Browse Food
