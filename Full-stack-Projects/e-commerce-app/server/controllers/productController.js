@@ -13,6 +13,71 @@ export const getAllProducts = async (req, res) => {
     }
 }
 
+const escapeRegex = (str = "") =>
+  str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+export const getProducts = async (req, res) => {
+  try {
+    let { page = 1, limit = 6, category, subCategory, search } = req.query;
+
+    // Normalize pagination
+    page = Math.max(1, parseInt(page) || 1);
+    limit = Math.max(1, Math.min(50, parseInt(limit) || 6));
+
+    const query = {};
+
+    // Category filter
+    if (category && category !== "All") {
+      query.category = category;
+    }
+
+    // Subcategory filter (case-insensitive exact match)
+    if (subCategory && subCategory !== "All") {
+      query.subCategory = {
+        $regex: `^${escapeRegex(subCategory)}$`,
+        $options: "i"
+      };
+    }
+
+    // Search filter
+    if (search) {
+      const safeSearch = escapeRegex(search);
+
+      query.$or = [
+        { name: { $regex: safeSearch, $options: "i" } },
+        { category: { $regex: safeSearch, $options: "i" } },
+        { subCategory: { $regex: safeSearch, $options: "i" } }
+      ];
+    }
+
+    const skip = (page - 1) * limit;
+
+    const [products, total] = await Promise.all([
+      Product.find(query)
+        .sort({ createdAt: -1 }) // always newest first
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Product.countDocuments(query)
+    ]);
+
+    res.json({
+      success: true,
+      products,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit)
+    });
+
+  } catch (error) {
+    console.error("Get Products Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
 export const getProductDetails = async (req, res) => {
   const { id } = req.params;
 
