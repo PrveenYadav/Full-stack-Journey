@@ -1,21 +1,67 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo, useContext, useState, useEffect } from 'react';
 import { Search, Heart, } from 'lucide-react';
 import { CartContext } from '../context/CartContext.js';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext.jsx';
 import ProductSkeleton from '../components/ProductSkeleton.jsx';
+import axios from "axios";
 
 const CATEGORIES = {
   Men: ['All', 'T-Shirts', 'Shirts', 'Cargos', 'Jeans', 'Hoodies', 'Jackets', 'Shorts'],
   Women: ['All', 'T-Shirts', 'Shirts', 'Dresses', 'Jeans', 'Skirts', 'Accessories']
 };
 
+const ProductSearch = ({ onSearch }) => {
+  const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  // debounce (prevents too many API calls)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  // trigger search when debounced value updates
+  useEffect(() => {
+    onSearch(debouncedQuery);
+  }, [debouncedQuery, onSearch]);
+
+  return (
+    <div className="w-full max-w-xl mx-auto mt-6 mb-6">
+      <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 shadow-sm focus-within:ring-2 focus-within:ring-zinc-300 dark:focus-within:ring-zinc-700 transition">
+
+        <span className="text-zinc-400 dark:text-zinc-500 text-lg">
+          <Search size={20} className='cursor-pointer'/>
+        </span>
+
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full bg-transparent outline-none text-sm text-zinc-800 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 font-bold tracking-tight"
+        />
+
+        {query && (
+          <button
+            onClick={() => setQuery("")}
+            className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 text-sm cursor-pointer"
+          >
+            ✕
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export const ShopPage = () => {
 
   const { 
     toggleWishlist,
-    searchQuery,
-    setSearchQuery,
     categoryFilter,
     setCategoryFilter, 
     subFilter,
@@ -24,26 +70,87 @@ export const ShopPage = () => {
     formatPrice,
   } = useContext(CartContext);
 
-  const { productData, loading } = useContext(AppContext);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [products, setProducts] = useState();
+  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { productData, backendUrl } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const filtered = useMemo(() => {
-    return productData?.items?.filter((p) => {
-      const matchCat = categoryFilter === "All" || p.category === categoryFilter;
-      const matchSub = subFilter === "All" || p.subCategory.slice(0,3) === subFilter.slice(0, 3);
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     setLoading(true);
 
-      const query = searchQuery.toLowerCase().trim();
-      const matchSearch =
-        !query ||
-        p.name.toLowerCase().includes(query) ||
-        p.subCategory.toLowerCase().includes(query) ||
-        p.category.toLowerCase().includes(query);
-      return matchCat && matchSub && matchSearch;
-    });
-  }, [categoryFilter, subFilter, searchQuery]);
+  //     try {
+  //       const res = await fetch(
+  //         `${backendUrl}/api/product?page=${page}&limit=6&category=${categoryFilter}&subCategory=${subFilter}&search=${encodeURIComponent(searchQuery)}`
+  //       );
+
+  //       if (!res.ok) throw new Error("Failed to fetch");
+
+  //       const data = await res.json();
+
+  //       setProducts(data.products || []);
+  //       setTotalPages(data.totalPages || 1);
+  //     } catch (err) {
+  //       console.error("Fetch error:", err);
+  //       setProducts([]);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, [page, categoryFilter, subFilter, searchQuery]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+
+      try {
+        const res = await axios.get(`${backendUrl}/api/product`, {
+          params: {
+            page,
+            limit: 6,
+            category: categoryFilter,
+            subCategory: subFilter,
+            search: searchQuery,
+          },
+        });
+
+        const data = res.data;
+
+        setProducts(data.products || []);
+        setTotalPages(data.totalPages || 1);
+      } catch (err) {
+        console.error("Fetch error:", err.response?.data || err.message);
+        setProducts([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [page, categoryFilter, subFilter, searchQuery]);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const handlePageChange = (newPage) => {
+    setLoading(true);
+    setProducts([]); // clear old data
+    setPage(newPage);
+  };
+
+  console.log("Product data: ", products)
 
   return (
     <div className="pt-28 sm:pt-32 pb-24 px-4 max-w-7xl mx-auto min-h-screen">
+      <ProductSearch onSearch={handleSearch} />
+
       <div className="flex flex-col lg:flex-row gap-12">
         <aside className="lg:w-1/5 space-y-10 lg:sticky lg:top-32 h-fit">
           <div>
@@ -96,34 +203,34 @@ export const ShopPage = () => {
                   : subFilter}
             </h2>
             <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest whitespace-nowrap">
-              {filtered?.length} Items
+              {products?.length} Items
             </p>
           </div>
 
-          {loading && (
+          {!loading && products?.length === 0 && (
+            <div className="py-24 text-center bg-zinc-50 dark:bg-zinc-900 rounded-[2.5rem]">
+              <Search size={48} className="mx-auto text-zinc-200 mb-6" />
+              <p className="text-zinc-400 font-bold uppercase tracking-widest text-xs">
+                Nothing matches
+              </p>
+              <button
+                onClick={() => setSubFilter("All")}
+                className="mt-6 text-black cursor-pointer dark:text-white underline font-black text-[10px] uppercase"
+              >
+                Clear
+              </button>
+            </div>
+          )}
+
+          {loading ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 md:p-10">
               {[...Array(6)].map((_, i) => (
                 <ProductSkeleton key={i} />
               ))}
             </div>
-          )}
-
-          {filtered?.length === 0 ? (
-            <div className="py-24 text-center bg-zinc-50 dark:bg-zinc-900 rounded-[2.5rem]">
-              <Search size={48} className="mx-auto text-zinc-200 mb-6" />
-              <p className="text-zinc-400 font-bold uppercase tracking-widest text-xs">
-                Nothing matches your search
-              </p>
-              <button
-                onClick={() => setSearchQuery("")}
-                className="mt-6 text-black dark:text-white underline font-black text-[10px] uppercase"
-              >
-                Clear
-              </button>
-            </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-4 sm:gap-x-8">
-              {filtered?.map((product) => (
+              {products?.map((product) => (
                 <div key={product._id} className="group relative">
                   <div className="aspect-[3/4] overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 mb-4 sm:mb-6 relative">
                     <img
@@ -166,7 +273,48 @@ export const ShopPage = () => {
             </div>
           )}
         </div>
+
       </div>
+
+      {!loading && (
+        <div className="flex items-center justify-center mt-16">
+          <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2">
+
+            <button
+              disabled={page === 1}
+              onClick={() => handlePageChange(page - 1)}
+              // onClick={() => setPage((p) => p - 1)}
+              className={`px-3 py-1.5 rounded-lg dark:text-zinc-100 text-sm font-medium transition-all
+                ${page === 1
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-zinc-100 dark:text-zinc-100 cursor-pointer dark:hover:bg-zinc-800 active:scale-95"
+                }`}
+            >
+              ← Prev
+            </button>
+
+            <span className="px-3 text-sm font-medium text-zinc-600 dark:text-zinc-300">
+              Page <span className="text-zinc-900 dark:text-white font-semibold">{page}</span> of{" "}
+              <span className="font-semibold">{totalPages}</span>
+            </span>
+
+            <button
+              disabled={page === totalPages}
+              onClick={() => handlePageChange(page + 1)}
+              // onClick={() => setPage((p) => p + 1)}
+              className={`px-3 py-1.5 rounded-lg dark:text-zinc-100 text-sm font-medium transition-all
+                ${page === totalPages
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:bg-zinc-100 dark:text-zinc-100 cursor-pointer dark:hover:bg-zinc-800 active:scale-95"
+                }`}
+            >
+              Next →
+            </button>
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
