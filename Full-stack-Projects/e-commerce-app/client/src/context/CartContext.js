@@ -11,7 +11,6 @@ export function CartProvider({ children }) {
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [subFilter, setSubFilter] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   // const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -191,8 +190,6 @@ export function CartProvider({ children }) {
     toggleWishlist,
     removeFromCart,
     handleCheckout,
-    searchQuery,
-    setSearchQuery,
     categoryFilter,
     setCategoryFilter, 
     subFilter,
