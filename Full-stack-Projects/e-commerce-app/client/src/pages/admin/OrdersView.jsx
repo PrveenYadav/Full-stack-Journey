@@ -218,7 +218,7 @@ export const OrdersView = () => {
           <button 
             key={t} 
             onClick={() => setActiveTab(t)}
-            className={`px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === t ? 'bg-black text-white dark:bg-white dark:text-black shadow-xl scale-105' : 'bg-white dark:bg-zinc-900 text-zinc-400 border border-zinc-100 dark:border-zinc-800 hover:text-black dark:hover:text-white'}`}
+            className={`px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === t ? 'bg-black text-white dark:bg-white dark:text-black shadow-xl scale-105' : 'bg-white dark:bg-zinc-900 text-zinc-400 border border-zinc-100 cursor-pointer dark:border-zinc-800 hover:text-black dark:hover:text-white'}`}
           >
             {t}
           </button>
@@ -226,7 +226,7 @@ export const OrdersView = () => {
       </div>
 
       {/* Orders list */}
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-4 max-h-screen overflow-y-scroll">
         {filteredOrders.map(o => (
           <Card key={o._id} className="relative group border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 transition-all">
             <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-6">
@@ -275,11 +275,11 @@ export const OrdersView = () => {
               </div>
 
               <div className="flex items-center justify-end gap-2">
-                <button onClick={() => setSelectedOrder(o)} className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl text-zinc-400 hover:text-black dark:hover:text-white transition-colors"><Eye size={18}/></button>
+                <button onClick={() => setSelectedOrder(o)} className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl text-zinc-400 hover:text-black dark:hover:text-white transition-colors cursor-pointer"><Eye size={18}/></button>
                 
                 <button 
                   onClick={() => deleteOrder(o.orderId)} 
-                  className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all"
+                  className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all cursor-pointer"
                 >
                   <Trash2 size={18}/>
                 </button>
