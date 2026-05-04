@@ -107,7 +107,7 @@ export const AdminReviews = () => {
           <p className="text-gray-500 dark:text-gray-500 mt-2 uppercase tracking-tighter">When customers leave reviews, they will appear here.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-4 max-h-screen overflow-y-scroll">
           {reviewData.reviews.map((review) => (
             <div 
               key={review.reviewId} 
@@ -181,16 +181,6 @@ export const AdminReviews = () => {
               </div>
             </div>
           ))}
-        </div>
-      )}
-
-      {reviewData?.totalPages > 1 && (
-        <div className="flex justify-center pt-4">
-            <nav className="flex items-center gap-2">
-                <button className="px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 disabled:opacity-50">Prev</button>
-                <span className="text-sm text-gray-500">Page {reviewData.currentPage} of {reviewData.totalPages}</span>
-                <button className="px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 disabled:opacity-50">Next</button>
-            </nav>
         </div>
       )}
     </div>
