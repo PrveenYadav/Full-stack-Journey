@@ -68,43 +68,68 @@ const ProductForm = ({ initialData, onSubmit }) => {
   const [previews, setPreviews] = useState([]);
   const [existingImages, setExistingImages] = useState(initialData?.raw?.images || []);
 
+  // Groups by color, allowing individual size selection per color
+  const [variantGroups, setVariantGroups] = useState(() => {
+    if (initialData?.raw?.variants?.length) {
+      const groups = {};
+      initialData.raw.variants.forEach(v => {
+        if (!groups[v.color]) groups[v.color] = { color: v.color, selectedSizes: [], stock: v.stock || 10 };
+        groups[v.color].selectedSizes.push(v.size);
+      });
+      return Object.values(groups);
+    }
+    return [{ color: '', selectedSizes: [], stock: 10 }];
+  });
+
+  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     setNewImages(prev => [...prev, ...files]);
     setPreviews(prev => [...prev, ...files.map(f => URL.createObjectURL(f))]);
   };
 
-  const removeNewImage = (index) => {
-    setNewImages(newImages.filter((_, i) => i !== index));
-    setPreviews(previews.filter((_, i) => i !== index));
+  // Variant Group Logic
+  const addColorGroup = () => setVariantGroups([...variantGroups, { color: '', selectedSizes: [], stock: 10 }]);
+  
+  const removeColorGroup = (index) => setVariantGroups(variantGroups.filter((_, i) => i !== index));
+
+  const updateGroup = (index, field, value) => {
+    const copy = [...variantGroups];
+    copy[index][field] = value;
+    setVariantGroups(copy);
   };
 
-  const removeExistingImage = (index) => {
-    setExistingImages(existingImages.filter((_, i) => i !== index));
+  const toggleSize = (groupIndex, size) => {
+    const copy = [...variantGroups];
+    const currentSizes = copy[groupIndex].selectedSizes;
+    if (currentSizes.includes(size)) {
+      copy[groupIndex].selectedSizes = currentSizes.filter(s => s !== size);
+    } else {
+      copy[groupIndex].selectedSizes = [...currentSizes, size];
+    }
+    setVariantGroups(copy);
   };
-
-  const [variants, setVariants] = useState(
-    initialData?.raw?.variants?.length
-      ? initialData.raw.variants
-      : [{ color: '', size: '', stock: '' }]
-  );
-
-  const updateVariant = (i, field, value) => {
-    const copy = [...variants];
-    copy[i][field] = value;
-    setVariants(copy);
-  };
-
-  const addVariantRow = () => setVariants([...variants, { color: '', size: '', stock: '' }]);
-  const removeVariant = (i) => setVariants(variants.filter((_, idx) => idx !== i));
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // form validation
+    if (!form.name || !form.price || !form.sub) {
+      return toast.error("Please fill in basic product details");
+    }
+    if (existingImages.length === 0 && newImages.length === 0) {
+      return toast.error("Please upload at least one image");
+    }
+    
+    // Check if any color group is empty or has no sizes
+    const invalidGroup = variantGroups.find(g => !g.color || g.selectedSizes.length === 0);
+    if (invalidGroup) {
+      return toast.error("Each variant must have a color and at least one size selected");
+    }
+
     try {
       setLoading(true);
-
       const fd = new FormData();
       fd.append("name", form.name);
       fd.append("description", form.desc);
@@ -113,29 +138,26 @@ const ProductForm = ({ initialData, onSubmit }) => {
       fd.append("subCategory", form.sub);
       fd.append("isNewArrival", form.isNewArrival);
 
-      const finalVariants = variants.map((v) => ({
-        color: v.color,
-        size: v.size,
-        stock: Number(v.stock),
-        imageIndex: 0,
-      }));
+      // Transform checkboxes to individual variants
+      const finalVariants = [];
+      variantGroups.forEach(group => {
+        group.selectedSizes.forEach(size => {
+          finalVariants.push({
+            color: group.color,
+            size: size,
+            stock: Number(group.stock),
+            imageIndex: 0,
+          });
+        });
+      });
 
       fd.append("variants", JSON.stringify(finalVariants));
-
-      if (initialData) {
-        fd.append("existingImages", JSON.stringify(existingImages));
-      }
-
+      if (initialData) fd.append("existingImages", JSON.stringify(existingImages));
       newImages.forEach((img) => fd.append("images", img));
 
-      if (existingImages.length > 6) {
-        toast.error("You can add only six images");
-      }
-      if (newImages.length > 6) {
-        toast.error("You can add only six images");
-      }
-
       await onSubmit(fd);
+    } catch (err) {
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -144,248 +166,137 @@ const ProductForm = ({ initialData, onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-          Product Images
-        </label>
-
+        <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Product Images</label>
         <div className="grid grid-cols-4 gap-4">
-          {/* Existing images (edit mode) */}
           {existingImages.map((img, idx) => (
-            <div
-              key={idx}
-              className="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 group"
-            >
-              <img
-                src={img.url}
-                className="w-full h-full object-cover"
-                alt=""
-              />
-              <button
-                type="button"
-                onClick={() => removeExistingImage(idx)}
-                className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100"
-              >
-                <X size={12} />
-              </button>
+            <div key={idx} className="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 group">
+              <img src={img.url} className="w-full h-full object-cover" alt="" />
+              <button type="button" onClick={() => setExistingImages(prev => prev.filter((_, i) => i !== idx))} className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 hover:text-red-500 cursor-pointer"><X size={12} /></button>
             </div>
           ))}
-
-          {/* New previews */}
           {previews.map((img, idx) => (
-            <div
-              key={idx}
-              className="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 group"
-            >
+            <div key={idx} className="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 group">
               <img src={img} className="w-full h-full object-cover" alt="" />
-              <button
-                type="button"
-                onClick={() => removeNewImage(idx)}
-                className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100"
-              >
-                <X size={12} />
-              </button>
+              <button type="button" onClick={() => {
+                setNewImages(newImages.filter((_, i) => i !== idx));
+                setPreviews(previews.filter((_, i) => i !== idx));
+              }} className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 cursor-pointer hover:text-red-500"><X size={12} /></button>
             </div>
           ))}
-
-          {/* Upload box */}
           <label className="aspect-square rounded-xl border-2 border-dashed border-zinc-200 dark:border-zinc-700 flex flex-col items-center justify-center cursor-pointer hover:border-black dark:hover:border-white transition-colors">
             <Upload size={20} className="text-zinc-400 mb-2" />
-            <span className="text-[9px] font-black uppercase text-zinc-400 text-center">
-              Add Img
-            </span>
-            <input
-              type="file"
-              multiple
-              accept="image/*"
-              className="hidden"
-              onChange={handleImageUpload}
-            />
+            <span className="text-[9px] font-black uppercase text-zinc-400">Add Img</span>
+            <input type="file" multiple accept="image/*" className="hidden" onChange={handleImageUpload} />
           </label>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1">
-          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-            Name
-          </label>
-          <input
-            name="name"
-            placeholder="Product Name"
-            value={form.name}
-            onChange={handleChange}
-            className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm"
-          />
+          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Name</label>
+          <input required name="name" value={form.name} onChange={handleChange} className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm" />
         </div>
-
         <div className="space-y-1">
-          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-            Sub-Category
-          </label>
-          <input
-            name="sub"
-            placeholder="e.g. Hoodie"
-            value={form.sub}
-            onChange={handleChange}
-            className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm"
-          />
+          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Sub-Category</label>
+          <input required name="sub" value={form.sub} onChange={handleChange} className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm" />
         </div>
-
       </div>
 
       <div className="grid grid-cols-3 gap-4">
         <div className="space-y-1">
-          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-            Price (INR)
-          </label>
-          <input
-            name="price"
-            type="number"
-            value={form.price}
-            onChange={handleChange}
-            className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm"
-          />
+          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Price (INR)</label>
+          <input required name="price" type="number" value={form.price} onChange={handleChange} className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm" />
         </div>
-
         <div className="space-y-1">
-          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-            Category
-          </label>
-          <select
-            name="category"
-            value={form.category}
-            onChange={handleChange}
-            className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm"
-          >
+          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Category</label>
+          <select name="category" value={form.category} onChange={handleChange} className="w-full p-4 bg-zinc-50 cursor-pointer dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm">
             <option value="Men">Men</option>
             <option value="Women">Women</option>
-            {/* <option value="Accessories">Accessories</option> */}
           </select>
         </div>
-
         <div className="space-y-1">
-          <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-            Status
-          </label>
-          <div className="flex items-center space-x-3 w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl">
-            <input
-              type="checkbox"
-              name="isNewArrival"
-              id="isNewArrival"
-              checked={form.isNewArrival}
-              // onChange={handleChange}
-              onChange={(e) => setForm({ ...form, isNewArrival: e.target.checked })}
-              className="w-5 h-5 rounded border-none bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white accent-zinc-900 dark:accent-zinc-100 cursor-pointer"
-            />
-            <label 
-              htmlFor="isNewArrival" 
-              className="text-sm font-bold text-zinc-900 dark:text-white cursor-pointer select-none"
-            >
-              New Arrival
-            </label>
-          </div>
+            <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Status</label>
+            <div className="flex items-center space-x-3 w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl h-[52px]">
+                <input type="checkbox" id="isNewArrival" checked={form.isNewArrival} onChange={(e) => setForm({ ...form, isNewArrival: e.target.checked })} className="w-5 h-5 rounded accent-zinc-900 cursor-pointer" />
+                <label htmlFor="isNewArrival" className="text-sm font-bold text-zinc-900 dark:text-white cursor-pointer select-none">New Arrival</label>
+            </div>
         </div>
       </div>
 
       <div className="space-y-1">
-        <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-          Description
-        </label>
-        <textarea
-          name="desc"
-          rows="3"
-          value={form.desc}
-          onChange={handleChange}
-          className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm resize-none"
-        />
+        <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Description</label>
+        <textarea name="desc" rows="3" value={form.desc} onChange={handleChange} className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl outline-none font-bold text-sm resize-none" />
       </div>
-
-      <div className="space-y-3 space-x-2">
-        <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">
-          Variants
-        </label>
-
-        {variants.map((v, i) => (
-          <div key={i} className="grid grid-cols-4 gap-3 items-center">
         
-            <div className="relative">
-              <input
-                list={`colors-${i}`}
-                placeholder="Color"
-                value={v.color}
-                onChange={(e) => updateVariant(i, "color", e.target.value)}
-                className="w-full p-3 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl font-bold text-sm"
-              />
-              <datalist id={`colors-${i}`}>
-                {/* This is the magic line: it only shows options if the user has started typing */}
-                {v.color.length > 0 && 
-                  COLOR_OPTIONS.filter(c => c.toLowerCase().includes(v.color.toLowerCase()))
-                    .map(color => <option key={color} value={color} />)
-                }
-              </datalist>
+      {/* Variants section */}
+      <div className="space-y-4">
+        <label className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Variants</label>
+        
+        {variantGroups.map((group, i) => (
+          <div key={i} className="p-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100 dark:border-zinc-800 space-y-4">
+            <div className="flex items-center gap-4">
+              <div className="flex-1">
+                <input
+                  list={`colors-${i}`}
+                  placeholder="Color Name (e.g. Blue)"
+                  value={group.color}
+                  onChange={(e) => updateGroup(i, "color", e.target.value)}
+                  className="w-full p-3 bg-white dark:bg-zinc-800 dark:text-white rounded-xl font-bold text-sm outline-none"
+                />
+                <datalist id={`colors-${i}`}>
+                  {COLOR_OPTIONS.map(c => <option key={c} value={c} />)}
+                </datalist>
+              </div>
+
+              <div className="w-24">
+                <input
+                  type="number"
+                  placeholder="Qty"
+                  value={group.stock}
+                  onChange={(e) => updateGroup(i, "stock", e.target.value)}
+                  className="w-full p-3 bg-white dark:bg-zinc-800 dark:text-white rounded-xl font-bold text-sm outline-none"
+                />
+              </div>
+
+              <button type="button" onClick={() => removeColorGroup(i)} className="text-zinc-400 hover:text-red-500 cursor-pointer">
+                <X size={18} />
+              </button>
             </div>
 
-            <select
-              value={v.size}
-              onChange={(e) => updateVariant(i, "size", e.target.value)}
-              className="p-3 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl font-bold text-sm outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
-            >
-              <option value="" disabled>Size</option>
-              {SIZE_OPTIONS.map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-
-            <input
-              type="number"
-              placeholder="Stock"
-              value={v.stock}
-              onChange={(e) => updateVariant(i, "stock", e.target.value)}
-              className="p-3 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-xl font-bold text-sm outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
-            <button 
-              type="button" 
-              onClick={() => removeVariant(i)} 
-              className='text-black dark:text-white font-bold hover:text-red-500 cursor-pointer w-fit'
-            >
-              <X size={16} />
-            </button>
+            <div className="flex flex-wrap gap-2">
+              {SIZE_OPTIONS.map(size => {
+                const isSelected = group.selectedSizes.includes(size);
+                return (
+                  <button
+                    key={size}
+                    type="button"
+                    onClick={() => toggleSize(i, size)}
+                    className={`px-4 py-2 rounded-lg text-xs font-black transition-all border-2 ${
+                      isSelected 
+                        ? 'bg-zinc-900 dark:bg-white text-white dark:text-black border-transparent' 
+                        : 'bg-transparent cursor-pointer text-zinc-400 border-zinc-200 dark:border-zinc-800'
+                    }`}
+                  >
+                    {size}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         ))}
 
-        <button
-          type="button"
-          onClick={addVariantRow}
-          className="text-xs font-black text-blue-500 cursor-pointer"
-        >
-          + Add Variant
+        <button type="button" onClick={addColorGroup} className="cursor-pointer text-xs font-black text-blue-500 uppercase tracking-tighter">
+          + Add Color Group
         </button>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-black uppercase tracking-widest rounded-2xl shadow-xl hover:scale-[1.02] transition-transform disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3 cursor-pointer"
-      >
-        {loading && (
-          <div className="w-5 h-5 border-2 border-white dark:border-black border-t-transparent rounded-full animate-spin" />
-        )}
-
-        {loading
-          ? initialData
-            ? "Saving..."
-            : "Publishing..."
-          : initialData
-            ? "Save Changes"
-            : "Publish Product"}
+      <button type="submit" disabled={loading} className="cursor-pointer w-full py-4 bg-black dark:bg-white text-white dark:text-black font-black uppercase tracking-widest rounded-2xl shadow-xl hover:scale-[1.01] active:scale-95 transition-all disabled:opacity-60 flex items-center justify-center gap-3">
+        {loading && <div className="w-5 h-5 border-2 border-white dark:border-black border-t-transparent rounded-full animate-spin" />}
+        {loading ? "Processing..." : initialData ? "Save Changes" : "Publish Product"}
       </button>
     </form>
   );
 };
-
 
 export const InventoryView = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -489,7 +400,7 @@ export const InventoryView = () => {
           <h2 className="text-3xl font-black dark:text-white uppercase tracking-tighter">Product Catalog</h2>
           <p className="text-zinc-500 font-bold text-sm uppercase tracking-widest mt-1">Manage variants and inventory levels</p>
         </div>
-        <button onClick={() => { setEditingProduct(null); setIsModalOpen(true); }} className="flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-black uppercase text-[10px] tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-transform"><Plus size={18}/> New Product</button>
+        <button onClick={() => { setEditingProduct(null); setIsModalOpen(true); }} className="flex items-center gap-3 px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-black uppercase text-[10px] tracking-widest rounded-2xl shadow-2xl hover:scale-105 transition-transform cursor-pointer"><Plus size={18}/> New Product</button>
       </header>
 
       <div className="flex flex-col lg:flex-row gap-4">
@@ -529,9 +440,9 @@ export const InventoryView = () => {
       </div>
 
       <Card className="overflow-hidden border-none p-0">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto max-h-screen overflow-y-scroll">
           <table className="w-full">
-            <thead className="bg-zinc-50 dark:bg-zinc-800/50">
+            <thead className="bg-zinc-50 dark:bg-zinc-800/50 sticky top-0 backdrop-brightness-0 z-10">
               <tr className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.2em]">
                 <th className="text-left px-8 py-5">Product Info</th>
                 <th className="text-left px-8 py-5">Category</th>
