@@ -7,7 +7,9 @@ export const getAllProducts = async (req, res) => {
         if (!items) {
             return res.status(404).json({message: "Product not found"});
         }
-        res.status(200).json({success: true, count: items.length, items});
+
+        const sortedItems = [...items].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        res.status(200).json({success: true, count: items.length, items: sortedItems });
     } catch (error) {
         res.status(500).json({success: false, message: error.message})
     }
